@@ -4,20 +4,20 @@
 #include <QSqlQueryModel>
 #include <QDate>
 
-class Cellule
+class Cellules
 {
 public:
-    Cellule();
-    Cellule(int,int,int,int);
-    int getid();
-    int getnbre_det();
-    int getnbre_det_max();
-    int getnbre_lit();
+    Cellules();
+    Cellules(int,int,int,int);
+    int getidcel();
+    int getnombre_det();
+    int getnombre_det_max();
+    int getnombre_lit();
 
-    void setid(int);
-    void setnbre_det(int);
-    void setnbre_det_max(int);
-    void setnbre_lit(int);
+    void setidcel(int);
+    void setnombre_det(int);
+    void setnombre_det_max(int);
+    void setnombre_lit(int);
 
     bool ajouter();
     QSqlQueryModel*afficher();
@@ -25,7 +25,7 @@ public:
      bool modifier(int);
 
 private:
-    int id,nbre_det,nbre_det_max,nbre_lit ;
+    int idcel,nombre_lit,nombre_det,nombre_det_max ;
 
 };
 

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <cellule.h>
+#include <detention.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -14,34 +15,28 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
-
-    void on_pushButton_10_clicked();
-
-    void on_pushButton_17_clicked();
-
-    void on_pushButton_13_clicked();
-
-    void on_pushButton_2_clicked();
-
-
-    void on_pushButton_ajouter_clicked();
-
     void on_pushButton_supp1_clicked();
 
     void on_pushButton_ajouter1_clicked();
 
     void on_pushButton_modifier1_clicked();
 
+    void on_pushButton_ajouter2_clicked();
+
+    void on_pushButton_modifier2_clicked();
+
+    void on_pushButton_supprimer2_clicked();
+
 private:
     Ui::MainWindow *ui;
-    Cellule C ;
-    Cellule C1 ;
-
+    Cellules C ;
+    Cellules C1 ;
+    detentions D ;
+    detentions D1;
 
 };
 #endif // MAINWINDOW_H

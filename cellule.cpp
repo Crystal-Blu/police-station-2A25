@@ -6,63 +6,63 @@
 #include <QSqlQueryModel>
 
 
-Cellule::Cellule()
+Cellules::Cellules()
 {
- id = 0; nbre_det =0 ; nbre_det_max =0 ; nbre_lit = 0 ;
+ idcel = 0; nombre_det =0 ; nombre_det_max =0 ; nombre_lit = 0 ;
 
 }
 
 
-Cellule::Cellule(int id ,int nbre_det ,int nbre_det_max,int nbre_lit)
+Cellules::Cellules(int idcel ,int nombre_det ,int nombre_det_max,int nombre_lit)
 {
-    this->id=id;
-    this->nbre_det=nbre_det;
-    this->nbre_det_max=nbre_det_max;
-    this->nbre_lit=nbre_lit;
+    this->idcel=idcel;
+    this->nombre_det=nombre_det;
+    this->nombre_det_max=nombre_det_max;
+    this->nombre_lit=nombre_lit;
 }
 
-int Cellule::getid()
+int Cellules::getidcel()
 {
-    return id ;
+    return idcel ;
 }
 
-int Cellule::getnbre_det()
+int Cellules::getnombre_det()
 {
-    return nbre_det;
+    return nombre_det;
 }
 
-int Cellule::getnbre_det_max()
+int Cellules::getnombre_det_max()
 {
-    return nbre_det_max;
+    return nombre_det_max;
 }
 
-int Cellule::getnbre_lit()
+int Cellules::getnombre_lit()
 {
-    return nbre_lit;
+    return nombre_lit;
 }
 
-void Cellule::setid(int id) {this->id=id;}
-void Cellule::setnbre_det(int nbre_det) {this->nbre_det=nbre_det;}
-void Cellule::setnbre_det_max(int nbre_det_max){this->nbre_det_max=nbre_det_max;}
-void Cellule::setnbre_lit(int nbre_lit){this->nbre_lit=nbre_lit;}
+void Cellules::setidcel(int idcel) {this->idcel=idcel;}
+void Cellules::setnombre_det(int nombre_det) {this->nombre_det=nombre_det;}
+void Cellules::setnombre_det_max(int nombre_det_max){this->nombre_det_max=nombre_det_max;}
+void Cellules::setnombre_lit(int nombre_lit){this->nombre_lit=nombre_lit;}
 
-bool Cellule::ajouter()
+bool Cellules::ajouter()
 
 {
 
 
     QSqlQuery query;
-    QString id_string =   QString::number(id);
-    QString nbre_det_string =   QString::number(nbre_det);
-    QString nbre_det_max_string =   QString::number(nbre_det_max);
-    QString nbre_lit_string =   QString::number(nbre_lit);
+    QString idcel_string = QString::number(idcel);
+    QString nombre_det_string = QString::number(nombre_det);
+    QString nombre_det_max_string = QString::number(nombre_det_max);
+    QString nombre_lit_string = QString::number(nombre_lit);
 
-    query.prepare("INSERT INTO cellule (id, nbre_det, nbre_det_max , nbre_lit) "
-                  "VALUES (:id, :nbre_det, :nbre_det_max , :nbre_lit)");
-    query.bindValue(":id", id_string);
-    query.bindValue(":nbre_det", nbre_det_string);
-    query.bindValue(":nbre_det_max", nbre_det_max_string);
-    query.bindValue(":nbre_lit", nbre_lit_string);
+    query.prepare("INSERT INTO cellules (idcel, nombre_lit, nombre_det, nombre_det_max) "
+                  "VALUES (:idcel,:nombre_lit, :nombre_det, :nombre_det_max )");
+    query.bindValue(":idcel", idcel_string);
+    query.bindValue(":nombre_det", nombre_det_string);
+    query.bindValue(":nombre_det_max", nombre_det_max_string);
+    query.bindValue(":nombre_lit", nombre_lit_string);
 
 
     return query.exec();
@@ -71,28 +71,29 @@ bool Cellule::ajouter()
 }
 
 
-QSqlQueryModel * Cellule::afficher() {
+QSqlQueryModel * Cellules::afficher() {
     QSqlQueryModel * model = new QSqlQueryModel ();
 
 
-         model->setQuery("SELECT * FROM CELLULE");
-         model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-         model->setHeaderData(1, Qt::Horizontal, QObject::tr("NBRE_DET"));
-         model->setHeaderData(2, Qt::Horizontal, QObject::tr("NBRE_DET_MAX"));
-         model->setHeaderData(3, Qt::Horizontal, QObject::tr("NBRE_LIT"));
+         model->setQuery("SELECT * FROM CELLULES");
+         model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDCEL"));
+         model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOMBRE_LIT"));
+         model->setHeaderData(2, Qt::Horizontal, QObject::tr("NOMBRE_DET"));
+         model->setHeaderData(3, Qt::Horizontal, QObject::tr("NOMBRE_DET_MAX"));
+
 
 
     return model;
 }
 
 
-bool Cellule::supprimer(int id){
+bool Cellules::supprimer(int idcel){
      QSqlQuery query;
 
-     QString id_string =   QString::number(id);
-    query.prepare("delete from cellule where id = :id ");
+     QString idcel_string =   QString::number(idcel);
+    query.prepare("delete from cellules where idcel = :idcel");
 
-    query.bindValue(":id", id_string);
+    query.bindValue(":idcel", idcel_string);
 
 
     return query.exec();
@@ -101,24 +102,24 @@ bool Cellule::supprimer(int id){
 
 }
 
-bool Cellule::modifier(int id)
+bool Cellules::modifier(int idcel)
 
 
 {
 
 
     QSqlQuery query;
-    QString id_string =   QString::number(id);
-    QString nbre_det_string =   QString::number(nbre_det);
-    QString nbre_det_max_string =   QString::number(nbre_det_max);
-    QString nbre_lit_string =   QString::number(nbre_lit);
+    QString idcel_string =   QString::number(idcel);
+    QString nombre_det_string =   QString::number(nombre_det);
+    QString nombre_det_max_string =   QString::number(nombre_det_max);
+    QString nombre_lit_string =   QString::number(nombre_lit);
 
-    query.prepare("UPDATE cellule SET nbre_det=:nbre_det, nbre_det_max=:nbre_det_max,nbre_lit=:nbre_lit,id=:id   WHERE id=:id" );
+    query.prepare("UPDATE cellules SET nombre_det=:nombre_det, nombre_det_max=:nombre_det_max,nombre_lit=:nombre_lit,idcel=:idcel   WHERE idcel=:idcel" );
 
-    query.bindValue(":id", id_string);
-    query.bindValue(":nbre_det", nbre_det_string);
-    query.bindValue(":nbre_det_max", nbre_det_max_string);
-    query.bindValue(":nbre_lit", nbre_lit_string);
+    query.bindValue(":idcel", idcel_string);
+    query.bindValue(":nombre_det", nombre_det_string);
+    query.bindValue(":nombre_det_max", nombre_det_max_string);
+    query.bindValue(":nombre_lit", nombre_lit_string);
 
 
 

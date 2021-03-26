@@ -11,12 +11,14 @@ CONFIG += c++11
 SOURCES += \
     cellule.cpp \
     connection.cpp \
+    detention.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     cellule.h \
     connection.h \
+    detention.h \
     mainwindow.h
 
 FORMS += \
@@ -26,3 +28,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+QT += sql
+CONFIG += console
