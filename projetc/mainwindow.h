@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "policier.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -24,10 +24,6 @@ private slots:
 
     void on_pushButton_8_clicked();
 
-    void on_pushButton_9_clicked();
-
-    void on_pushButton_15_clicked();
-
     void on_pushButton_16_clicked();
 
     void on_pushButton_17_clicked();
@@ -40,7 +36,14 @@ private slots:
 
     void on_pushButton_20_clicked();
 
+    void on_pb_addpolice_clicked();
+
+    void on_tableViewpolice_activated(const QModelIndex &index);
+
+    void on_pb_modifiepolice_clicked();
+
 private:
     Ui::MainWindow *ui;
+    policier police;
 };
 #endif // MAINWINDOW_H
