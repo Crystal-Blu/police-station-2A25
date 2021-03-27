@@ -12,15 +12,18 @@ SOURCES += \
     connection.cpp \
     main.cpp \
     mainwindow.cpp \
-    vehicule.cpp
+    vehicule.cpp \
+    vehicule_modifier_window.cpp
 
 HEADERS += \
     connection.h \
     mainwindow.h \
-    vehicule.h
+    vehicule.h \
+    vehicule_modifier_window.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    vehicule_modifier_window.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
