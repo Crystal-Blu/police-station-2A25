@@ -38,6 +38,7 @@ public:
     bool ajouter();
     QSqlQueryModel * afficher();
     bool supprimer(int);
+
 };
 
 #endif // POLICIER_H

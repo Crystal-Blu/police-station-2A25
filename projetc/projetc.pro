@@ -12,11 +12,13 @@ SOURCES += \
     connection.cpp \
     main.cpp \
     mainwindow.cpp \
+    missions.cpp \
     policier.cpp
 
 HEADERS += \
     connection.h \
     mainwindow.h \
+    missions.h \
     policier.h
 
 FORMS += \

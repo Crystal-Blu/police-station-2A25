@@ -52,10 +52,16 @@ void policier::setprenom(QString prenom )
 {
      this->prenom=prenom;
 }
+void policier::setgrade(QString grade)
+{
+    this->grade=grade;
+}
 void policier::setidpchef(int idpchef)
 {
     this->idpchef=idpchef;
 }
+
+
 QSqlQueryModel * policier::afficher()
 {
     QSqlQueryModel * model=new QSqlQueryModel();
@@ -96,5 +102,6 @@ bool policier::supprimer(int idp)
 
     return query.exec();
 }
+
 
 

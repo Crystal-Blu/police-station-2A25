@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include "policier.h"
+#include "missions.h"
 #include <QSqlQuery>
 
 
@@ -11,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tableViewpolice->setModel(police.afficher());
+    ui->tableViewmissions->setModel(mission.afficher());
 
 }
 
@@ -34,6 +36,8 @@ void MainWindow::on_pushButton_3_clicked()
          {
         QMessageBox::information(nullptr, QObject::tr("OK"), QObject::tr("supprimer successful.\n""Click Cancel to exit."), QMessageBox::Cancel);
         ui->tableViewpolice->setModel(police.afficher());
+        ui->tableViewmissions->setModel(mission.afficher());
+
         ui->le_chefidafficher->clear();
         ui->le_gradeafficher->clear();
         ui->le_nompoliceafficher->clear();
@@ -72,8 +76,6 @@ void MainWindow::on_pushButton_4_clicked()
             ui->le_chefidmodifier->setText(qry.value(4).toString());
             ui->le_grademodifier->setText(qry.value(3).toString());
             ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
-
-
     }
 
     }
@@ -82,10 +84,6 @@ void MainWindow::on_pushButton_4_clicked()
       QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("selection non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 
     }
-
-
-
-
 }
 
 void MainWindow::on_pushButton_8_clicked()
@@ -120,15 +118,35 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_19_clicked()
 {
+    int idm = ui->le_missionidadd->text().toInt();
+    QString nom=ui->le_missionnameadd->text();
+    QString type=ui->le_missiontypeadd->text();
+    QDate date_mission = ui->de_missiondateadd->date();
+    int idp = ui->le_missionpoliceidadd->text().toInt();
+
+    missions m(idm , nom , type , date_mission,idp);
+    bool test=m.ajouter();
+    if(test)
+    {
+
+        QMessageBox::information(nullptr, QObject::tr("OK"), QObject::tr("Ajout effectué\n" "Click Cancel to exit"), QMessageBox::Cancel );
+         ui->tableViewmissions->setModel(mission.afficher());
+         ui->le_missionidadd->clear();
+         ui->le_missionnameadd->clear();
+         ui->le_missiontypeadd->clear();
+
+    }
+    else
+           QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+
+
+
     ui->tabWidget_3->setCurrentIndex(ui->tabWidget_3->count()-3);
 
 }
 
-void MainWindow::on_pushButton_20_clicked()
-{
-    ui->tabWidget_3->setCurrentIndex(ui->tabWidget_3->count()-3);
 
-}
 
 void MainWindow::on_pb_addpolice_clicked()
 {
@@ -164,7 +182,7 @@ void MainWindow::on_tableViewpolice_activated(const QModelIndex &index)
 {
     QString val=ui->tableViewpolice->model()->data(index).toString();
     QSqlQuery qry;
-    qry.prepare( " select * from POLICIER where grade ='"+val+"' or nom='"+val+"' or prenom='"+val+"'  "   );
+    qry.prepare( " select * from POLICIER where idp ='"+val+"'   "   );
     if(qry.exec( ))
     {
         while(qry.next())
@@ -175,10 +193,6 @@ void MainWindow::on_tableViewpolice_activated(const QModelIndex &index)
             ui->le_prenompoliceafficher->setText(qry.value(2).toString());
             ui->le_chefidafficher->setText(qry.value(4).toString());
             ui->le_gradeafficher->setText(qry.value(3).toString());
-
-
-
-
     }
 
     }
@@ -202,7 +216,7 @@ void MainWindow::on_pb_modifiepolice_clicked()
     QString res=QString::number(idp);
     QString resss=QString::number(idpchef);
     QSqlQuery query;
-    query.prepare("update  POLICIER set idp='"+res+"' , nom= '"+nom+"', prenom='"+prenom+"', grade='"+grade+"'  , idpchef= '"+resss+"' where idp= :idp ");
+    query.prepare("update  POLICIER set  nom= '"+nom+"', prenom='"+prenom+"', grade='"+grade+"'  , idpchef= '"+resss+"' where idp= :idp ");
     query.bindValue(":idp", res);
     query.bindValue(":idpchef", resss);
 
@@ -228,3 +242,166 @@ void MainWindow::on_pb_modifiepolice_clicked()
 }
 
 
+
+void MainWindow::on_tableViewmissions_activated(const QModelIndex &index)
+{
+    QString val=ui->tableViewmissions->model()->data(index).toString();
+    QSqlQuery qry;
+
+    qry.prepare( " select * from MISSIONS where  idm='"+val+"'  "   );
+
+    if(qry.exec( ) )
+    {
+        while( qry.next()  )
+    {
+            ui->le_missionid->setText(qry.value(0).toString());
+            ui->le_missionname->setText(qry.value(1).toString());
+            ui->le_missiontype->setText(qry.value(2).toString());
+            //ui->le_missionshowdate->setText(qry.value(3).toString());
+            ui->de_missiondate->setDate(qry.value(3).toDate());
+
+            //ui->le_missionspolicename->setText(qry.value(4).toString());
+            ui->le_missionpoliceid->setText(qry.value(4).toString());
+
+            int idp = ui->le_missionpoliceid->text().toInt();
+            QSqlQuery query;
+            QString res=QString::number(idp);
+            query.prepare("select nom,prenom from POLICIER where idp= :idp ");
+            query.bindValue(":idp",res);
+            if(query.exec( ))
+            {
+                while(query.next())
+
+            {
+                    ui->le_missionspolicename->setText(query.value(0).toString());
+                    ui->le_missionspoliceprenom->setText(query.value(1).toString());
+
+
+
+            }
+
+            }
+
+    }
+
+    }
+    else
+    {
+      QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("selection non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+    }
+
+
+
+}
+
+void MainWindow::on_pb_missionsdelete_clicked()
+{
+    int idm =ui->le_missionid->text().toInt();
+    bool test=mission.supprimer(idm);
+    if(test)
+         {
+        QMessageBox::information(nullptr, QObject::tr("OK"), QObject::tr("supprimer successful.\n""Click Cancel to exit."), QMessageBox::Cancel);
+        ui->tableViewmissions->setModel(mission.afficher());
+        ui->le_missionid->clear();
+        ui->le_missionname->clear();
+        ui->le_missiontype->clear();
+        ui->de_missiondate->clear();
+        ui->le_missionpoliceid->clear();
+        ui->le_missionspolicename->clear();
+        ui->le_missionspoliceprenom->clear();
+
+    }
+    else
+       {
+
+        QMessageBox::information(nullptr, QObject::tr("NOT OK"), QObject::tr("supprimer NOT successful.\n""Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_pb_missionsmodifier_clicked()
+{
+    ui->tabWidget_3->setCurrentIndex(ui->tabWidget_3->count()-1);
+
+    int idm=ui->le_missionid->text().toInt();
+    QString res=QString::number(idm);
+    QSqlQuery qry;
+    qry.prepare( " select * from MISSIONS where idm= '"+res+"'  " );
+    if(qry.exec( ))
+    {
+        while(qry.next())
+
+    {
+            ui->le_missionidmodifier->setText(qry.value(0).toString());
+            ui->le_missionidmodifier->setReadOnly(true);
+            QPalette *palette = new QPalette();
+            palette->setColor(QPalette::Base,Qt::gray);
+            palette->setColor(QPalette::Text,Qt::darkGray);
+            ui->le_missionidmodifier->setPalette(*palette);
+
+            ui->le_missionnamemodifier->setText(qry.value(1).toString());
+            ui->le_missiontypemodifier->setText(qry.value(2).toString());
+            ui->le_missionpoliceidmodifier->setText(qry.value(4).toString());
+            ui->le_missionnamemodifier->setText(qry.value(1).toString());
+            ui->de_missiondatemodifier->setDate(qry.value(3).toDate());
+
+
+
+    }
+
+    }
+    else
+    {
+      QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("selection non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+    }
+}
+
+
+
+void MainWindow::on_pb_mission_clicked()
+{
+    int idm = ui->le_missionidmodifier->text().toInt();
+    QString nom=ui->le_missionnamemodifier->text();
+    QString type=ui->le_missiontypemodifier->text();
+    QDate date_mission=ui->de_missiondatemodifier->date();
+    int idp = ui->le_missionpoliceidmodifier->text().toInt();
+
+    QString res=QString::number(idm);
+    QString resss=QString::number(idp);
+    QSqlQuery query;
+    query.prepare("update  MISSIONS set  nom= '"+nom+"', type='"+type+"', date_mission= :date_mission , idp= '"+resss+"' where idm= :idm ");
+    query.bindValue(":idm", res);
+    query.bindValue(":idp", resss);
+    query.bindValue(":date_mission", date_mission);
+
+
+    if(query.exec())
+    {
+        QMessageBox::information(nullptr, QObject::tr("OK"), QObject::tr("modifier effectué\n" "Click Cancel to exit"), QMessageBox::Cancel );
+         ui->tableViewmissions->setModel(mission.afficher());
+
+         ui->le_missionidmodifier->clear();
+         ui->le_missionnamemodifier->clear();
+         ui->le_missiontypemodifier->clear();
+         ui->le_missionpoliceidmodifier->clear();
+         ui->le_missionid->clear();
+         ui->le_missionname->clear();
+         ui->le_missiontype->clear();
+         ui->le_missionpoliceid->clear();
+         ui->le_missionspolicename->clear();
+         ui->le_missionspoliceprenom->clear();
+
+
+
+
+
+
+         ui->tabWidget_3->setCurrentIndex(ui->tabWidget_3->count()-3);
+    }
+    else
+           QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("modifier non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+
+
+}
