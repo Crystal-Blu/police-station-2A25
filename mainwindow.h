@@ -21,6 +21,7 @@ public:
     vehicule_modifier_window WM;
 
 
+
 private slots:
     void on_pushButton_clicked();
 
@@ -37,9 +38,12 @@ private slots:
 
 
 
+    void on_pushButton_21_clicked();
+
+    void on_pushButton_22_clicked();
+
 private:
     Ui::MainWindow *ui;
     vehicule V;
-
 };
 #endif // MAINWINDOW_H

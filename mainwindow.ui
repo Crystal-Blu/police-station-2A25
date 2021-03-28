@@ -705,10 +705,10 @@ background-color: rgb(85, 0, 255);</string>
        <widget class="QLabel" name="label_13">
         <property name="geometry">
          <rect>
-          <x>660</x>
+          <x>640</x>
           <y>30</y>
-          <width>71</width>
-          <height>16</height>
+          <width>121</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="text">
@@ -718,7 +718,7 @@ background-color: rgb(85, 0, 255);</string>
        <widget class="QPushButton" name="pushButton_21">
         <property name="geometry">
          <rect>
-          <x>740</x>
+          <x>770</x>
           <y>30</y>
           <width>80</width>
           <height>22</height>
@@ -731,10 +731,10 @@ background-color: rgb(85, 0, 255);</string>
        <widget class="QLabel" name="label_14">
         <property name="geometry">
          <rect>
-          <x>660</x>
+          <x>640</x>
           <y>150</y>
-          <width>71</width>
-          <height>16</height>
+          <width>131</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="text">
@@ -744,7 +744,7 @@ background-color: rgb(85, 0, 255);</string>
        <widget class="QPushButton" name="pushButton_22">
         <property name="geometry">
          <rect>
-          <x>740</x>
+          <x>770</x>
           <y>150</y>
           <width>80</width>
           <height>22</height>

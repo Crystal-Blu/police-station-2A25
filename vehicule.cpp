@@ -2,6 +2,7 @@
 #include "connection.h"
 #include <QSqlQuery>
 #include <QDebug>
+#include <QSqlRecord>
 vehicule::vehicule()
 {
 
@@ -53,3 +54,26 @@ bool vehicule::modifier_vehicule()
     query.exec();
     qDebug() << query.lastError();
 };
+
+bool vehicule::verify_Police_id(int id)
+{
+    QSqlQuery qry;
+    qry.prepare( " select count(*) from policier where idp="+ QString::number(id) +" ");
+    qry.exec();
+    while (qry.next()) {
+           if (qry.value(0).toInt()==1)
+           return true;
+           else return false;
+       }
+}
+bool vehicule::verify_matricule(int mat)
+{
+    QSqlQuery qry;
+    qry.prepare( " select count(*) from vehicules where matricule="+ QString::number(mat) +" ");
+    qry.exec();
+    while (qry.next()) {
+           if (qry.value(0).toInt()==1)
+           return true;
+           else return false;
+       }
+}

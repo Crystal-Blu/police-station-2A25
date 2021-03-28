@@ -35,6 +35,8 @@ public:
     QSqlQueryModel * afficher_vehicules();
     bool modifier_vehicule();
     bool delete_vehicule(int matricule);
+    bool verify_Police_id(int id);
+    bool verify_matricule(int mat);
 
 };
 

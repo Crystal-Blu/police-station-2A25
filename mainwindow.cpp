@@ -120,6 +120,38 @@ void MainWindow::on_Modif_btton_clicked()
     QString i = QString::number(WM.vehicule_M.getidp());
     WM.remplir(s,i,WM.vehicule_M.getdate(),WM.vehicule_M.getmarque());
     WM.show();
+}
 
 
+
+
+
+
+void MainWindow::on_pushButton_21_clicked()
+{
+    if(V.verify_matricule(ui->MatriculeEdit->text().toInt()))
+    {
+        ui->label_13->setText("Matricule Existante");
+        ui->label_13->setStyleSheet("QLabel {color : red; }");
+    }
+    else
+    {
+        ui->label_13->setText("Matricule Disponible");
+        ui->label_13->setStyleSheet("QLabel {color : green; }");
+    }
+}
+
+void MainWindow::on_pushButton_22_clicked()
+{
+    if(V.verify_Police_id(ui->idpedit->text().toInt()))
+    {
+        ui->label_14->setText("Police Id Existant");
+        ui->label_14->setStyleSheet("QLabel {color : green; }");
+
+    }
+    else
+    {
+        ui->label_14->setText("Police Id non Existant");
+        ui->label_14->setStyleSheet("QLabel {color : red; }");
+    }
 }

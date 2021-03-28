@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     connection.cpp \
+    equipements.cpp \
     main.cpp \
     mainwindow.cpp \
     vehicule.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     connection.h \
+    equipements.h \
     mainwindow.h \
     vehicule.h \
     vehicule_modifier_window.h
