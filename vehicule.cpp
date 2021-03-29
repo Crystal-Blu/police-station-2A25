@@ -17,7 +17,7 @@ vehicule::vehicule(int Matricule,QString Marque,QDate date_achat,int idP)
 bool vehicule::ajouter_vehicule()
 {
     QSqlQuery query;
-    query.prepare ("insert into vehicules values(:nom_marque , :date_achat, :idp) where matricule = :matricule");
+    query.prepare ("insert into vehicules values(:nom_marque ,:matricule, :date_achat, :idp) ");
     query.bindValue(":nom_marque",this->nom_marque);
     query.bindValue(":matricule",this->Matricule);
     query.bindValue(":date_achat",this->date_achat);

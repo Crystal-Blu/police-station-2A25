@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include "reparations.h"
 
 
 class vehicule

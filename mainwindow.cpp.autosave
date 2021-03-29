@@ -210,10 +210,6 @@ int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
         }
 }
 
-
-
-
-
 void MainWindow::on_pushButton_11_clicked()
 {
     int id=ui->lineEdit_6->text().toInt();
@@ -239,4 +235,37 @@ void MainWindow::on_pushButton_10_clicked()
     {
         QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
     }
+}
+
+void MainWindow::on_Assign_Police_clicked()
+{
+    ui->tabWidget_3->setFocus();
+    QString mat=ui->matslected->text();
+    ui->Matricule_eq_edit->setText(mat); 
+}
+
+void MainWindow::on_Demande_rep_clicked()
+{
+    QSqlQuery qry;
+    int matricule=ui->matslected->text().toInt();
+
+    qry.prepare( " select * from vehicules where matricule ='"+ui->matslected->text()+"'  "   );
+    if(qry.exec( ))
+    {
+        while(qry.next())
+
+    {
+            WM.vehicule_M.SetMatricule(qry.value(1).toInt());
+            WM.vehicule_M.Setnom_marque(qry.value(0).toString());
+            WM.vehicule_M.SetidP(qry.value(3).toInt());
+            WM.vehicule_M.SetDate(qry.value(2).toDate());
+            //qDebug ()<<WM.vehicule_M.getmarque();
+            //qDebug ()<<qry.value(0).toString();
+    }
+    }
+    int mat=WM.vehicule_M.getmatricule();
+    QString s = QString::number(mat);
+    QString i = QString::number(WM.vehicule_M.getidp());
+    WM.remplir(s,i,WM.vehicule_M.getdate(),WM.vehicule_M.getmarque());
+    WM.show();
 }

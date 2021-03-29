@@ -6,7 +6,7 @@
 #include "vehicule.h"
 #include "vehicule_modifier_window.h"
 #include "equipements.h"
-
+#include "reparations.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -53,6 +53,10 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+    void on_Assign_Police_clicked();
+    
+    void on_Demande_rep_clicked();
+    
 private:
     Ui::MainWindow *ui;
     vehicule V;

@@ -8,6 +8,8 @@
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QString>
+#include "vehicule.h"
+#include "reparations.h"
 #ifndef EQUIPEMENTS_H
 #define EQUIPEMENTS_H
 
@@ -31,6 +33,12 @@ public:
     int get_matricule (){return this->matricule;};
     QString get_type() {return this->type_eq;};
     //functions
+    bool ajouter_Equipements();
+    QSqlQueryModel * afficher_equipments();
+    bool delete_Equipments(int id);
+    bool modifier_Equipments();
+    //variables
+    vehicule V();
 
 
 };
