@@ -2,25 +2,29 @@
 #include <QSqlQuery>
 #include <QtDebug>
 #include<QObject>
+#include<QImage>
+
 
 Citoyen::Citoyen()
 {
- CIN = 0; nom =" "; prenom ="  "; adresse = " " ;
+ CIN = 0; nom =" "; prenom ="  "; adresse = " ";
 
 }
 
-Citoyen::Citoyen(int CIN ,QString nom ,QString prenom,QString adresse,QDate date)
-{this->CIN=CIN;this->nom=nom;this->prenom=prenom;this->adresse=adresse;this->date=date; }
+Citoyen::Citoyen(int CIN ,QString nom ,QString prenom,QString adresse/*,QByteArray photo*/,QDate DATE_NAISSANCE)
+{this->CIN=CIN;this->nom=nom;this->prenom=prenom;this->adresse=adresse/*;this->photo=photo*/;this->DATE_NAISSANCE =DATE_NAISSANCE; }
 int Citoyen::getCIN() {return CIN ;}
 QString Citoyen::getnom(){return nom;}
 QString Citoyen::getprenom(){return prenom;}
 QString Citoyen::getadresse(){return adresse;}
-QDate Citoyen::getdate(){return date ;}
+//QByteArray Citoyen::getphoto(){return photo;}
+QDate Citoyen::getdate(){return DATE_NAISSANCE ;}
 void Citoyen::setCIN(int CIN) {this->CIN=CIN;}
 void Citoyen::setnom(QString nom) {this->nom=nom;}
 void Citoyen::setprenom(QString prenom){this->prenom=prenom;}
-void Citoyen::setadresse(QString adresse){this->prenom=adresse;}
-void Citoyen::setdate(QDate date){this->date=date;}
+void Citoyen::setadresse(QString adresse){this->adresse=adresse;}
+//void Citoyen::setphoto(QByteArray photo){this->photo=photo;}
+void Citoyen::setdate(QDate DATE_NAISSANCE){this->DATE_NAISSANCE=DATE_NAISSANCE;}
 bool Citoyen::ajouter()
 
 
@@ -30,12 +34,15 @@ bool Citoyen::ajouter()
     QSqlQuery query;
     QString CIN_string =   QString::number(CIN);
 
-    query.prepare("INSERT INTO citoyen (CIN, nom, prenom , adresse) "
-                  "VALUES (:CIN, :nom, :prenom , :adresse)");
+
+    query.prepare("INSERT INTO CITOYENS (CIN, nom, prenom , adresse, photo ,DATE_NAISSANCE) "
+                  "VALUES (:CIN, :nom, :prenom , :adresse, :photo ,:DATE_NAISSANCE)");
     query.bindValue(":CIN", CIN_string);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
     query.bindValue(":adresse", adresse);
+   // query.bindValue(":photo", photo);
+    query.bindValue(":DATE_NAISSANCE", DATE_NAISSANCE);
 
 
 
@@ -56,12 +63,13 @@ QSqlQueryModel * Citoyen::afficher() {
     QSqlQueryModel * model = new QSqlQueryModel ();
 
 
-         model->setQuery("SELECT * FROM CITOYEN");
+         model->setQuery("SELECT * FROM CITOYENS");
          model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
          model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
          model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
          model->setHeaderData(3, Qt::Horizontal, QObject::tr("ADRESSE"));
-          model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATE_DE_NAISSANCE"));
+         model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATE_NAISSANCE"));
+         model->setHeaderData(4, Qt::Horizontal, QObject::tr("PHOTO"));
 
 
 
@@ -73,7 +81,7 @@ bool Citoyen::supprimer(int CIN){
      QSqlQuery query;
 
      QString CIN_string =   QString::number(CIN);
-    query.prepare("delete from citoyen where CIN = :CIN ");
+    query.prepare("delete from CITOYENS where CIN = :CIN ");
 
     query.bindValue(":CIN", CIN_string);
 
@@ -92,12 +100,14 @@ bool Citoyen::modifier(int CIN)
 
     QSqlQuery query;
     QString CIN_string =   QString::number(CIN);
-    query.prepare("UPDATE citoyen SET prenom=:prenom, nom=:nom,adresse=:adresse,CIN=:CIN   WHERE CIN=:CIN" );
+    query.prepare("UPDATE CITOYENS SET prenom=:prenom, nom=:nom,adresse=:adresse,photo=:photo,DATE_NAISSANCE=:DATE_NAISSANCE,CIN=:CIN   WHERE CIN=:CIN" );
 
     query.bindValue(":CIN", CIN_string);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
     query.bindValue(":adresse", adresse);
+    //query.bindValue(":photo", photo);
+    query.bindValue(":DATE_NAISSANCE", DATE_NAISSANCE);
 
 
 

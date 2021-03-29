@@ -37,6 +37,14 @@ private slots:
 
     void on_pushButton_modifier_2_clicked();
 
+    void on_tableView_activated(const QModelIndex &index);
+
+    void on_tab_demande_2_activated(const QModelIndex &index);
+
+    void on_pushButton_2_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
     Citoyen C ;
