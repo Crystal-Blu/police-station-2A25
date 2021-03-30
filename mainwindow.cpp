@@ -47,7 +47,11 @@ void MainWindow::on_pushButton_ajouter1_clicked()
         if (test){
 
      ui->tableView->setModel(C.afficher());
-     ui->tableView->setModel(C.afficher());
+     ui->idc->clear();
+     ui->nbdet->clear();
+     ui->nbdetmax->clear();
+     ui->nblit->clear();
+
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
                                      QObject::tr("Ajout effectué de la cellule avec succès\n"
@@ -75,6 +79,10 @@ void MainWindow::on_pushButton_modifier1_clicked()
     if (test){
 
  ui->tableView->setModel(C.afficher());
+ ui->lineEdit->clear();
+ ui->lineEdit_2->clear();
+ ui->lineEdit_3>clear();
+ ui->lineEdit_4->clear();
 
 
         QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -98,6 +106,7 @@ void MainWindow::on_pushButton_supp1_clicked()
         if (test){
 
      ui->tableView->setModel(C.afficher());
+     ui->lineEdit_13->clear();
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
                                      QObject::tr("Suppression effectué\n"
@@ -154,6 +163,12 @@ while (query.next()) {
      C.ajout_det(idcel);
      ui->tableView_2->setModel(D.afficher());
      ui->tableView->setModel(C.afficher());
+     ui->lineEdit_5->clear();
+     ui->dateEdit->clear();
+     ui->dateEdit_2->clear();
+     ui->lineEdit_8->clear();
+     ui->lineEdit_10->clear();
+     ui->lineEdit_9->clear();
 
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -183,6 +198,12 @@ void MainWindow::on_pushButton_modifier2_clicked()
            if (test){
 
         ui->tableView_2->setModel(D.afficher());
+        ui->lineEdit_11->clear();
+        ui->dateEdit_3->clear();
+        ui->dateEdit_4->clear();
+        ui->lineEdit_15->clear();
+        ui->lineEdit_17->clear();
+        ui->lineEdit_18->clear();
 
 
                QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -205,6 +226,7 @@ void MainWindow::on_pushButton_supprimer2_clicked()
         if (test){
 
      ui->tableView_2->setModel(D.afficher());
+     ui->lineEdit_12->clear();
 
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -285,4 +307,43 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
             ui->tableView_2->setModel(model);
 
         }
+}
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    ui->tabcellule->setCurrentIndex(ui->tabcellule->count()-3);
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->tabcellule->setCurrentIndex(ui->tabcellule->count()-2);
+}
+
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    ui->tabcellule->setCurrentIndex(ui->tabcellule->count()-1);
+}
+
+
+
+void MainWindow::on_pushButton_13_clicked()
+{
+    ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-3);
+}
+
+
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-2);
+}
+
+
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-1);
 }

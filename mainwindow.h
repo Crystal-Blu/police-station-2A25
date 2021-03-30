@@ -35,6 +35,18 @@ private slots:
 
     void on_le_recherche_textChanged(const QString &arg1);
 
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_13_clicked();
+
+    void on_pushButton_10_clicked();
+
+    void on_pushButton_8_clicked();
+
 private:
     Ui::MainWindow *ui;
     Cellules C ;
