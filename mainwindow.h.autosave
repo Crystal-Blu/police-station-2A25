@@ -20,7 +20,7 @@ public:
     ~MainWindow();
     vehicule_modifier_window create_newwindow(vehicule_modifier_window WM);
     vehicule_modifier_window WM;
-
+    QSqlQueryModel *get_policiers();
 
 
 private slots:
@@ -57,9 +57,22 @@ private slots:
     
     void on_Demande_rep_clicked();
     
+    void on_pushButton_15_clicked();
+
+    void on_tableView_4_activated(const QModelIndex &index);
+
+    void on_ajouter_2_clicked();
+
+    void on_pushButton_18_clicked();
+
+    void on_pushButton_16_clicked();
+
+    void on_lineEdit_3_textChanged(const QString &arg1);
+    
 private:
     Ui::MainWindow *ui;
     vehicule V;
     Equipements E;
+    Reparations R;
 };
 #endif // MAINWINDOW_H

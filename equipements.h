@@ -37,8 +37,7 @@ public:
     QSqlQueryModel * afficher_equipments();
     bool delete_Equipments(int id);
     bool modifier_Equipments();
-    //variables
-    vehicule V();
+
 
 
 };

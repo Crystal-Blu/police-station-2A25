@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->Vehicule_table->setModel(V.afficher_vehicules());
     ui->Equipemen_table->setModel(E.afficher_equipments());
+    ui->tableView_4->setModel(R.Afficher_rep());
 
 }
 
@@ -185,7 +186,7 @@ int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
 {
     QString val=ui->Equipemen_table->model()->data(index).toString();
         QSqlQuery qry;
-        qry.prepare( " select * from Equiments where Ideqp ='"+val+"'  "   );
+        qry.prepare( " select * from Equipements where Ideqp ='"+val+"'  "   );
         if(qry.exec( ))
         {
             while(qry.next())
@@ -210,14 +211,10 @@ int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
         }
 }
 
-
-
-
-
 void MainWindow::on_pushButton_11_clicked()
 {
     int id=ui->lineEdit_6->text().toInt();
-    V.delete_vehicule(id);
+    E.delete_Equipments(id);
      ui->Equipemen_table->setModel(E.afficher_equipments());
 }
 
@@ -239,4 +236,111 @@ void MainWindow::on_pushButton_10_clicked()
     {
         QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
     }
+}
+
+void MainWindow::on_Assign_Police_clicked()
+{
+     ui->tabWidget->setCurrentWidget(ui->tab_7);
+     ui->tabWidget_3->setCurrentWidget(ui->tab_15);
+    QString mat=ui->matslected->text();
+    ui->Matricule_eq_edit->setText(mat); 
+}
+
+
+
+
+QSqlQueryModel *MainWindow::get_policiers()
+{
+
+}
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    ui->tableView_4->setModel(R.Afficher_rep());
+}
+
+void MainWindow::on_tableView_4_activated(const QModelIndex &index)
+{
+    QString val=ui->tableView_4->model()->data(index).toString();
+        QSqlQuery qry;
+        qry.prepare( "select * from demande_reparation where id_demande="+val+"  " );
+        if(qry.exec( ))
+        {
+            while(qry.next())
+
+        {
+                QString Desc=qry.value(3).toString();
+                ui->textBrowser->setText(Desc);
+                ui->lineEdit_5->setText(qry.value(1).toString());
+                ui->pushButton_18->setEnabled(true);
+                return ;
+        }
+
+        }
+        else
+        {
+          QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("clickez sur le ID.\n" "Clic ok to exit."),QMessageBox::Ok);
+
+        }
+}
+void MainWindow::on_Demande_rep_clicked()
+{
+    ui->tabWidget->setCurrentWidget(ui->tab_6);
+    ui->tabWidget_4->setCurrentWidget(ui->tab_19);
+    QString mat=ui->matslected->text();
+    ui->MatriculeEdit_2->setText(mat);
+}
+
+void MainWindow::on_ajouter_2_clicked()
+{
+    bool test;
+    int mat=ui->MatriculeEdit_2->text().toInt();
+    int id=ui->idreparation->text().toInt();
+    QString type=ui->nikrabek->text();
+    QString Desc=ui->textEdit->toPlainText();
+    Reparations repa(id,mat,type,Desc);
+    qDebug()<<repa.get_desc();
+    qDebug()<<repa.get_type();
+    qDebug()<<repa.get_id_rep();
+    qDebug()<<repa.get_matricule();
+    test=repa.ajouter_rep();
+    if (test)
+    {
+         ui->tableView->setModel(V.afficher_vehicules());
+        QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+    }
+    if (!test)
+    {
+        QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
+    }
+}
+
+void MainWindow::on_pushButton_18_clicked()
+{
+    bool test;
+    QMessageBox::StandardButton reply;
+      reply = QMessageBox::question(this, "Alert", "Etes vous sure de votre action ?",
+                                    QMessageBox::Yes|QMessageBox::No);
+      if (reply == QMessageBox::Yes) {
+          qDebug() << "Yes was clicked";
+         test= R.care_repared (ui->lineEdit_5->text().toInt());
+         if (test)
+         {
+              ui->tableView->setModel(V.afficher_vehicules());
+             QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+         }
+         if (!test)
+         {
+             QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
+         }
+        }
+      else {
+          qDebug() << "Yes was *not* clicked";
+        }
+
+}
+
+void MainWindow::on_pushButton_16_clicked()
+{
+    R.delete_rep(ui->lineEdit_5->text().toInt());
 }

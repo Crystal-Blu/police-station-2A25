@@ -6,7 +6,7 @@
 #include "vehicule.h"
 #include "vehicule_modifier_window.h"
 #include "equipements.h"
-
+#include "reparations.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,7 +20,7 @@ public:
     ~MainWindow();
     vehicule_modifier_window create_newwindow(vehicule_modifier_window WM);
     vehicule_modifier_window WM;
-
+    QSqlQueryModel *get_policiers();
 
 
 private slots:
@@ -53,9 +53,24 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+    void on_Assign_Police_clicked();
+    
+    void on_Demande_rep_clicked();
+    
+    void on_pushButton_15_clicked();
+
+    void on_tableView_4_activated(const QModelIndex &index);
+
+    void on_ajouter_2_clicked();
+
+    void on_pushButton_18_clicked();
+
+    void on_pushButton_16_clicked();
+
 private:
     Ui::MainWindow *ui;
     vehicule V;
     Equipements E;
+    Reparations R;
 };
 #endif // MAINWINDOW_H

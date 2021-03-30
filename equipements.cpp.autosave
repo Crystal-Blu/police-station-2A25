@@ -22,7 +22,7 @@ bool Equipements::ajouter_Equipements()
     return query.exec();
 }
 
-QSqlQueryModel * Equipements::afficher_equipments()
+QSqlQueryModel * Equipements::afficher_equipments(QString queryM)
 {
     QSqlQueryModel * modele=new QSqlQueryModel();
     modele->setQuery("select * from equipements");

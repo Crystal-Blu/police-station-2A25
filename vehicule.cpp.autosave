@@ -27,7 +27,7 @@ bool vehicule::ajouter_vehicule()
 QSqlQueryModel * vehicule::afficher_vehicules()
 {
     QSqlQueryModel * modele=new QSqlQueryModel();
-    modele->setQuery("select * from Vehicules");
+    modele->setQuery("select * from Policiers");
     modele->setHeaderData(0,Qt::Horizontal,QObject::tr("Nom Marque"));
     modele->setHeaderData(1,Qt::Horizontal,QObject::tr("Matricule"));
     modele->setHeaderData(2,Qt::Horizontal,QObject::tr("Date D'achat"));
