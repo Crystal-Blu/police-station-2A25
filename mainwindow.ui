@@ -424,7 +424,7 @@ background-color: rgb(255, 0, 0);</string>
          </rect>
         </property>
         <property name="text">
-         <string>Rechercher</string>
+         <string>Cancel</string>
         </property>
        </widget>
        <widget class="QRadioButton" name="radioButton_22">
@@ -531,7 +531,7 @@ background-color: rgb(85, 0, 255);</string>
          <string>Trier Par Modéle DSC</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_2">
+       <widget class="QComboBox" name="recherche">
         <property name="geometry">
          <rect>
           <x>650</x>
@@ -1066,7 +1066,7 @@ background-color: rgb(85, 0, 255);</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_14">
        <attribute name="title">

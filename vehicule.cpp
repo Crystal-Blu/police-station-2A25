@@ -24,10 +24,10 @@ bool vehicule::ajouter_vehicule()
     query.bindValue(":idp",this->idP);
     query.exec();
 };
-QSqlQueryModel * vehicule::afficher_vehicules()
+QSqlQueryModel * vehicule::afficher_vehicules(QString queryF)
 {
     QSqlQueryModel * modele=new QSqlQueryModel();
-    modele->setQuery("select * from Vehicules");
+    modele->setQuery(queryF);
     modele->setHeaderData(0,Qt::Horizontal,QObject::tr("Nom Marque"));
     modele->setHeaderData(1,Qt::Horizontal,QObject::tr("Matricule"));
     modele->setHeaderData(2,Qt::Horizontal,QObject::tr("Date D'achat"));

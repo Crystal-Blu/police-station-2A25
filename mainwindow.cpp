@@ -9,14 +9,14 @@
 #include <QSqlQueryModel>
 #include "vehicule_modifier_window.h"
 
-
+QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->Vehicule_table->setModel(V.afficher_vehicules());
+    ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
     ui->Equipemen_table->setModel(E.afficher_equipments());
     ui->tableView_4->setModel(R.Afficher_rep());
 
@@ -46,7 +46,7 @@ void MainWindow::on_ajouter_clicked()
     test=Veh.ajouter_vehicule();
     if (test)
     {
-         ui->tableView->setModel(V.afficher_vehicules());
+         ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
         QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
     }
     if (!test)
@@ -58,7 +58,7 @@ void MainWindow::on_ajouter_clicked()
 
 void MainWindow::on_Refresh_clicked()
 {
-    ui->Vehicule_table->setModel(V.afficher_vehicules());
+    ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
 }
 
 int MainWindow::on_Vehicule_table_activated(const QModelIndex &index)
@@ -95,7 +95,7 @@ void MainWindow::on_Delete_button_clicked()
 {
     int matricule=ui->matslected->text().toInt();
     V.delete_vehicule(matricule);
-     ui->Vehicule_table->setModel(V.afficher_vehicules());
+     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
 }
 
 void MainWindow::on_Modif_btton_clicked()
@@ -168,7 +168,7 @@ void MainWindow::on_pushButton_9_clicked()
     test=EQ.ajouter_Equipements();
     if (test)
     {
-         ui->tableView->setModel(V.afficher_vehicules());
+         ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
         QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
     }
     if (!test)
@@ -229,7 +229,7 @@ void MainWindow::on_pushButton_10_clicked()
     test=EQ.modifier_Equipments();
     if (test)
     {
-         ui->tableView->setModel(V.afficher_vehicules());
+         ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
         QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
     }
     if (!test)
@@ -306,7 +306,7 @@ void MainWindow::on_ajouter_2_clicked()
     test=repa.ajouter_rep();
     if (test)
     {
-         ui->tableView->setModel(V.afficher_vehicules());
+         ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
         QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
     }
     if (!test)
@@ -326,7 +326,7 @@ void MainWindow::on_pushButton_18_clicked()
          test= R.care_repared (ui->lineEdit_5->text().toInt());
          if (test)
          {
-              ui->tableView->setModel(V.afficher_vehicules());
+              ui->tableView->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
              QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
          }
          if (!test)
@@ -343,4 +343,154 @@ void MainWindow::on_pushButton_18_clicked()
 void MainWindow::on_pushButton_16_clicked()
 {
     R.delete_rep(ui->lineEdit_5->text().toInt());
+}
+
+
+
+void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
+{
+
+    if (ui->recherche->currentIndex()==0)
+    {
+        Affichagevehicule_Query="select * from vehicules where matricule LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    if (ui->recherche->currentIndex()==1)
+    {
+        Affichagevehicule_Query="select * from vehicules where NOM_MARQUE LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    if (ui->recherche->currentIndex()==2)
+    {
+        Affichagevehicule_Query="select * from vehicules where IDP LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    updateaffichagevehicule();
+
+
+
+}
+void MainWindow::updateaffichagevehicule()
+{
+
+    if (ui->radioButton_15->isChecked())
+    {
+         groupebyvehi="ORDER BY matricule ASC ";
+    }
+    if (ui->radioButton_18->isChecked())
+    {
+         groupebyvehi="ORDER BY matricule DESC ";
+    }
+    if (ui->radioButton_17->isChecked())
+    {
+        groupebyvehi="ORDER BY NOM_MARQUE ASC ";
+    }
+    if (ui->radioButton_16->isChecked())
+    {
+         groupebyvehi="ORDER BY NOM_MARQUE DESC ";
+    }
+    if (ui->radioButton_13->isChecked())
+    {
+         groupebyvehi="ORDER BY DATE_ACHAT ASC ";
+    }
+    if (ui->radioButton_14->isChecked())
+    {
+         groupebyvehi="ORDER BY DATE_ACHAT DESC ";
+    }
+    if (ui->radioButton_21->isChecked())
+    {
+         groupebyvehi="ORDER BY IDP ASC ";
+    }
+    if (ui->radioButton_22->isChecked())
+    {
+         groupebyvehi="ORDER BY IDP DESC ";
+    }
+    if (ui->radioButton_9->isChecked())
+    {
+        groupebyvehi="";
+    }
+    Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
+     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
+    qDebug()<<Affichagevehicule_Query_f;
+}
+
+
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    ui->lineEdit_3->clear();
+    Affichagevehicule_Query_f="select * from vehicules ";
+}
+
+void MainWindow::on_radioButton_15_clicked()
+{
+   if(ui->lineEdit_3->text()=="")
+    Affichagevehicule_Query="select * from vehicules ";
+
+    updateaffichagevehicule();
+}
+
+
+void MainWindow::on_radioButton_18_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_17_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_16_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_13_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_14_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_21_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_22_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_9_clicked()
+{
+    if(ui->lineEdit_3->text()=="")
+     Affichagevehicule_Query="select * from vehicules ";
+
+     updateaffichagevehicule();
 }

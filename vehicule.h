@@ -33,7 +33,7 @@ public:
     vehicule(int Matricule,QString Marque,QDate date_achat,int idP);
     //fucntions
     bool ajouter_vehicule();
-    QSqlQueryModel * afficher_vehicules();
+    QSqlQueryModel * afficher_vehicules(QString queryF);
     bool modifier_vehicule();
     bool delete_vehicule(int matricule);
     bool verify_Police_id(int id);
