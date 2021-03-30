@@ -22,6 +22,7 @@ public:
     vehicule_modifier_window WM;
     QSqlQueryModel *get_policiers();
     void updateaffichagevehicule();
+    void updateaffichageeq();
 
 
 private slots:
@@ -91,6 +92,18 @@ private slots:
     void on_radioButton_22_clicked();
 
     void on_radioButton_9_clicked();
+
+    void on_radioButton_7_clicked();
+
+    void on_radioButton_10_clicked();
+
+    void on_radioButton_8_clicked();
+
+    void on_radioButton_11_clicked();
+
+
+
+    void on_lineEdit_2_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

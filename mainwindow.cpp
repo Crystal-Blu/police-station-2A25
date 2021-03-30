@@ -10,14 +10,14 @@
 #include "vehicule_modifier_window.h"
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
-
+QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
-    ui->Equipemen_table->setModel(E.afficher_equipments());
+    ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
     ui->tableView_4->setModel(R.Afficher_rep());
 
 }
@@ -179,7 +179,7 @@ void MainWindow::on_pushButton_9_clicked()
 
 void MainWindow::on_pushButton_13_clicked()
 {
-    ui->Equipemen_table->setModel(E.afficher_equipments());
+    ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
 }
 
 int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
@@ -215,7 +215,7 @@ void MainWindow::on_pushButton_11_clicked()
 {
     int id=ui->lineEdit_6->text().toInt();
     E.delete_Equipments(id);
-     ui->Equipemen_table->setModel(E.afficher_equipments());
+     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
 }
 
 
@@ -493,4 +493,75 @@ void MainWindow::on_radioButton_9_clicked()
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
+}
+
+void MainWindow::on_radioButton_7_clicked()
+{
+    if(ui->lineEdit_2->text()=="")
+     AffichageEq_Query="select * from Equipements ";
+
+     updateaffichageeq();
+}
+
+void MainWindow::on_radioButton_10_clicked()
+{
+    if(ui->lineEdit_2->text()=="")
+     AffichageEq_Query="select * from Equipements ";
+
+     updateaffichageeq();
+}
+
+void MainWindow::on_radioButton_8_clicked()
+{
+    if(ui->lineEdit_2->text()=="")
+     AffichageEq_Query="select * from Equipements ";
+
+     updateaffichageeq();
+}
+
+void MainWindow::on_radioButton_11_clicked()
+{
+    if(ui->lineEdit_2->text()=="")
+     AffichageEq_Query="select * from Equipements ";
+
+     updateaffichageeq();
+}
+
+
+
+void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
+{
+    if (ui->comboBox->currentIndex()==0)
+    {
+        AffichageEq_Query="select * from Equipements where matricule LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    if (ui->comboBox->currentIndex()==1)
+    {
+        AffichageEq_Query="select * from Equipements where type LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    updateaffichageeq();
+}
+void MainWindow::updateaffichageeq()
+{
+    if (ui->radioButton_7->isChecked())
+    {
+         groupbyeq="ORDER BY matricule ASC ";
+    }
+    if (ui->radioButton_10->isChecked())
+    {
+         groupbyeq="ORDER BY matricule DESC ";
+    }
+    if (ui->radioButton_8->isChecked())
+    {
+         groupbyeq="ORDER BY type ASC ";
+    }
+    if (ui->radioButton_11->isChecked())
+    {
+         groupbyeq="ORDER BY type DESC ";
+    }
+    Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
+     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
+    qDebug()<<Affichageeq_Query_f;
 }

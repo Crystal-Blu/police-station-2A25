@@ -34,7 +34,7 @@ public:
     QString get_type() {return this->type_eq;};
     //functions
     bool ajouter_Equipements();
-    QSqlQueryModel * afficher_equipments();
+    QSqlQueryModel * afficher_equipments(QString);
     bool delete_Equipments(int id);
     bool modifier_Equipments();
 

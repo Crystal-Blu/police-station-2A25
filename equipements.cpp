@@ -22,10 +22,10 @@ bool Equipements::ajouter_Equipements()
     return query.exec();
 }
 
-QSqlQueryModel * Equipements::afficher_equipments()
+QSqlQueryModel * Equipements::afficher_equipments(QString Queryl)
 {
     QSqlQueryModel * modele=new QSqlQueryModel();
-    modele->setQuery("select * from equipements");
+    modele->setQuery(Queryl);
     modele->setHeaderData(0,Qt::Horizontal,QObject::tr("ID Equipement"));
     modele->setHeaderData(1,Qt::Horizontal,QObject::tr("Matricule"));
     modele->setHeaderData(2,Qt::Horizontal,QObject::tr("Type"));
