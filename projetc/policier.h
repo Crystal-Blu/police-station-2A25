@@ -38,6 +38,8 @@ public:
     bool ajouter();
     QSqlQueryModel * afficher();
     bool supprimer(int);
+    //QSqlQueryModel * afficherparnom(QString q);
+
 
 };
 

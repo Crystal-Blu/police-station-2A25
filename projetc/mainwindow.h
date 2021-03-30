@@ -17,23 +17,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
-
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_4_clicked();
-
-    void on_pushButton_8_clicked();
-
-    void on_pushButton_16_clicked();
-
-    void on_pushButton_17_clicked();
-
-    void on_pushButton_18_clicked();
-
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_19_clicked();
 
     void on_pb_addpolice_clicked();
 
@@ -47,9 +30,21 @@ private slots:
 
     void on_pb_missionsmodifier_clicked();
 
-    void on_pb_missionmodifier_clicked();
-
     void on_pb_mission_clicked();
+
+    void on_le_searchplice_textChanged(const QString &arg1);
+
+    void on_pb_policetaketomodifier_clicked();
+
+    void on_pb_policesupprimer_clicked();
+
+    void on_pb_policetaketoadd_clicked();
+
+    void on_pb_missionstaketoadd_clicked();
+
+    void on_pb_missionadd_clicked();
+
+    void on_pb_missioninfoprint_clicked();
 
 private:
     Ui::MainWindow *ui;
