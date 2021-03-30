@@ -1,5 +1,6 @@
-QT       += core gui
+QT       += core gui multimedia
 QT       += sql
+QT += charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -10,16 +11,24 @@ CONFIG += c++11
 
 SOURCES += \
     Connection.cpp \
+    chart.cpp \
+    charttype.cpp \
+    criminels.cpp \
     delits.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Connection.h \
+    chart.h \
+    charttype.h \
+    criminels.h \
     delits.h \
     mainwindow.h
 
 FORMS += \
+    chart.ui \
+    charttype.ui \
     mainwindow.ui
 
 # Default rules for deployment.

@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    a.setStyle("fusion");
     Connection c; //une seule instance de la classe connexion
     bool test=c.createconnection();//etablir la connexion
     MainWindow w;
