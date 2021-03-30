@@ -144,6 +144,7 @@ void MainWindow::on_tableViewmissions_activated(const QModelIndex &index)
             ui->le_missionpoliceid->setText(qry.value(4).toString());
 
             int idp = ui->le_missionpoliceid->text().toInt();
+
             QSqlQuery query;
             QString res=QString::number(idp);
             query.prepare("select nom,prenom from POLICIER where idp= :idp ");
@@ -155,15 +156,10 @@ void MainWindow::on_tableViewmissions_activated(const QModelIndex &index)
             {
                     ui->le_missionspolicename->setText(query.value(0).toString());
                     ui->le_missionspoliceprenom->setText(query.value(1).toString());
-
-
-
             }
 
             }
-
     }
-
     }
     else
     {
@@ -415,6 +411,59 @@ void MainWindow::on_pb_missionadd_clicked()
          ui->le_missionnameadd->clear();
          ui->le_missiontypeadd->clear();
 
+         QSqlQuery qry;
+         qry.prepare( " SELECT COUNT( * ) as numberofmissions FROM MISSIONS WHERE idp=:idp " );
+         qry.bindValue(":idp", idp);
+         qry.exec();
+         qry.next();
+         int nombredemisisons=qry.value(0).toInt();
+
+
+
+         if(nombredemisisons<5)
+         {
+             QSqlQuery query;
+             QString grade="workingman";
+             query.prepare("update  POLICIER set   grade='"+grade+"'   where idp= :idp ");
+             query.bindValue(":idp", idp);
+
+             if(query.exec())
+             {
+                 //QMessageBox::information(nullptr, QObject::tr("OK"), QObject::tr("modifier effectué\n" "Click Cancel to exit"), QMessageBox::Cancel );
+                  ui->tableViewpolice->setModel(police.afficher());
+             }
+             else
+                    QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("modifier non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+
+
+         }
+
+         if(nombredemisisons>=5)
+         {
+             QSqlQuery query;
+             QString grade="chef";
+             query.prepare("update  POLICIER set   grade='"+grade+"'   where idp= :idp ");
+             query.bindValue(":idp", idp);
+
+             if(query.exec())
+             {
+                // QMessageBox::information(nullptr, QObject::tr("OK"), QObject::tr("modifier effectué\n" "Click Cancel to exit"), QMessageBox::Cancel );
+                  ui->tableViewpolice->setModel(police.afficher());
+             }
+             else
+                    QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("modifier non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+
+
+         }
+
+
+
+
+
+
+
     }
     else
            QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
@@ -463,18 +512,7 @@ void MainWindow::on_pb_missioninfoprint_clicked()
 
     ui->tableViewmissions->setFixedSize(471, 321);
 
-
-
 }
-
-
-
-
-
-
-
-
-
 
 
 

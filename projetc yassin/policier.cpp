@@ -78,19 +78,7 @@ QSqlQueryModel * policier::afficher()
 
 
 }
-/*
-   QSqlQueryModel *policier::afficherparnom(QString q)
- {
-     QSqlQueryModel * model=new QSqlQueryModel();
-     model->setQuery(" SELECT * FROM POLICIER WHERE nom LIKE '% :q %' ");
-     model->setHeaderData(0,Qt::Horizontal,QObject::tr("idp"));
-     model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
-     model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
-     model->setHeaderData(3,Qt::Horizontal,QObject::tr("grade"));
-     model->setHeaderData(4,Qt::Horizontal,QObject::tr("idpchef"));
-     return model;
- }
-*/
+
 bool policier::ajouter()
 {
     QSqlQuery query;
