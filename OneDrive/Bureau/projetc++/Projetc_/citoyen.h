@@ -10,19 +10,19 @@ class Citoyen
 {
 public:
     Citoyen();
-    Citoyen(int,QString,QString,QString/*,  QByteArray */,QDate);
+    Citoyen(int,QString,QString,QString,  QByteArray ,QDate);
     int getCIN();
     QString getnom();
     QString getprenom();
     QString getadresse();
-    // QByteArray getphoto();
+     QByteArray getphoto();
     QDate getdate();
 
     void setCIN(int);
     void setnom(QString);
     void setprenom(QString);
     void setadresse(QString);
-   // void setphoto(QByteArray);
+  void setphoto(QByteArray);
     void setdate(QDate);
 
     bool ajouter();
@@ -34,7 +34,11 @@ private:
     int CIN ;
     QString nom,prenom,adresse ;
     QDate DATE_NAISSANCE;
-  //  QByteArray photo ;
+    QByteArray inByteArray ;
 };
+
+
+
+
 
 #endif // CITOYEN_H

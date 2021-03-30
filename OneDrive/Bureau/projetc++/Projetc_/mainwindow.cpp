@@ -14,6 +14,15 @@
 #include<QFile>
 #include<QImage>
 #include <QDebug>
+#include <QBuffer>
+#include <QVariant>
+#include <QPrinter>
+#include <QPrintDialog>
+#include<QTextDocument>
+#include<QPainter>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QPdfWriter>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -26,11 +35,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->le_supp->setValidator ( new QIntValidator(0, 99999999, this));
     ui->le_supp_2->setValidator ( new QIntValidator(0, 99999999, this));
     ui->le_id->setValidator ( new QIntValidator(0, 99999999, this));
+
     ui->tab_citoyen->setModel(C.afficher());
+     ui->comboBox->setModel(d.afficher_combo());
+      ui->comboBox_cin->setModel(d.afficher_combo_2());
+    ui->tab_citoyen_modifier->setModel(C.afficher());
     ui->tab_citoyen_2->setModel(C.afficher());
     ui->tab_demande->setModel(d.afficher());
      ui->tab_demande_2->setModel(d.afficher());
       ui->tableView->setModel(d.afficher());
+
+
 
 
 }
@@ -47,6 +62,40 @@ MainWindow::~MainWindow()
 
 //}
 
+void MainWindow::on_pushButton_2_clicked()
+{
+
+    QString filename = QFileDialog::getOpenFileName(this,tr("choose"),"",tr("Images Files (*.png *.jpg *.jpeg *.bmp)"));
+    if (QString::compare(filename,QString()) != 0)
+    {
+
+        QImage pic ;
+
+    bool valid = pic.load(filename);
+    if (valid)
+    {
+        pic = pic.scaledToHeight(ui->label_21->height(),Qt::SmoothTransformation);
+        ui->label_21->setPixmap(QPixmap::fromImage(pic));
+
+
+
+
+        QByteArray inByteArray;
+           QBuffer inBuffer( &inByteArray );
+           inBuffer.open( QIODevice::WriteOnly );
+           pic.save( &inBuffer, "JPG" );
+
+   }
+
+
+    else {
+        //Error handling
+    }
+}
+}
+
+
+
 
 
 void MainWindow::on_pushButton_Ajouter_clicked()
@@ -56,15 +105,16 @@ void MainWindow::on_pushButton_Ajouter_clicked()
     QString nom=ui->le_nom->text();
     QString prenom=ui->lineEdit_16->text();
     QString adresse=ui->le_adresse->text();
-  //QByteArray photo  = ui->label_21-> ;
+  QByteArray inByteArray /* = ui->label_21->pixmap()-> */;
 
    QDate DATE_NAISSANCE=ui->dateEdit->date() ;
 
-    Citoyen C(CIN,nom,prenom,adresse/*,photo*/,DATE_NAISSANCE);
+    Citoyen C(CIN,nom,prenom,adresse,inByteArray,DATE_NAISSANCE);
     bool test = C.ajouter();
 
     if (test){
 
+ui->tab_citoyen_modifier->setModel(C.afficher());
  ui->tab_citoyen->setModel(C.afficher());
  ui->tab_citoyen_2->setModel(C.afficher());
 
@@ -90,6 +140,7 @@ void MainWindow::on_supp_button_clicked()
 
     if (test){
 
+ui->tab_citoyen_modifier->setModel(C.afficher());
  ui->tab_citoyen->setModel(C.afficher());
  ui->tab_citoyen_2->setModel(C.afficher());
 
@@ -107,12 +158,12 @@ void MainWindow::on_supp_button_clicked()
 void MainWindow::on_update_button_clicked()
 {
 
-        int CIN=ui->le_cin->text().toInt();
-        QString nom=ui->le_nom->text();
-        QString prenom=ui->lineEdit_16->text();
-        QString adresse=ui->le_adresse->text();
-     //QByteArray photo =ui->label_21->setPixmap;
-         QDate DATE_NAISSANCE=ui->dateEdit->date();
+        int CIN=ui->le_cin_modif->text().toInt();
+        QString nom=ui->le_nom_modif->text();
+        QString prenom=ui->le_prenom_modif->text();
+        QString adresse=ui->le_adresse_modif->text();
+     QByteArray inByteArray/* =ui->label_21->setPixmap */;
+         QDate DATE_NAISSANCE=ui->dateN_modif->date();
 
 
 
@@ -120,11 +171,12 @@ void MainWindow::on_update_button_clicked()
 
 
 
-        Citoyen C(CIN,nom,prenom,adresse/*,photo*/,DATE_NAISSANCE);
+        Citoyen C(CIN,nom,prenom,adresse,inByteArray,DATE_NAISSANCE);
         bool test = C.modifier(CIN);
 
         if (test){
 
+    ui->tab_citoyen_modifier->setModel(C.afficher());
      ui->tab_citoyen->setModel(C.afficher());
      ui->tab_citoyen_2->setModel(C.afficher());
 
@@ -145,11 +197,17 @@ void MainWindow::on_update_button_clicked()
 void MainWindow::on_pushButton_Ajouter_2_clicked()
 {
     int id=ui->le_id->text().toInt();
+
+
+     int idp=ui->comboBox->currentText().toInt();
+qDebug()<<idp ;
+
+    int cin=ui->comboBox_cin->currentText().toInt();
     QString nom=ui->le_nom_2->text();
     QString type=ui->le_type->text();
-    QDateTime DATE_CREATION=ui->dateTimeEdit_D_1->dateTime().currentDateTime();
+    QDate DATE_CREATION=ui->dateEdit_2->date();
 
-     demandes_administratives d(id,nom,type,DATE_CREATION);
+     demandes_administratives d(id,idp,cin,nom,type,DATE_CREATION);
     bool test = d.ajouter_2();
 
     if (test){
@@ -177,6 +235,7 @@ void MainWindow::on_pushButton_supp_2_clicked()
 {
 
     int id  = ui->le_supp_2->text().toInt();
+
     bool test = d1.supprimer(id);
 
     if (test ){
@@ -200,12 +259,16 @@ ui->tab_demande->setModel(d.afficher());
 void MainWindow::on_pushButton_modifier_2_clicked()
 {
     int id=ui->le_id_2->text().toInt();
+
+ int idp=ui->lineEdit_15->text().toInt();
+
+ int cin=ui->lineEdit_14->text().toInt();
     QString nom=ui->le_id_3->text();
     QString type=ui->le_id_4->text();
-    QDateTime DATE_CREATION=ui->dateTimeEdit-> dateTime().currentDateTime();
+    QDate DATE_CREATION=ui->dateTimeEdit-> date();
 
 
-    demandes_administratives d(id,nom,type,DATE_CREATION);
+    demandes_administratives d(id,idp,cin,nom,type,DATE_CREATION);
     bool test = d.modifier(id);
 
     if (test){
@@ -245,7 +308,7 @@ void  MainWindow::on_tableView_activated(const QModelIndex &index)
 
 conn.createconnection();*/
     QSqlQuery qry;
-    qry.prepare("select * from DEMANDES_ADMINISTRATIVES where iddem ='" +val+"' or nom ='" +val+"' or type ='" +val+"'");
+    qry.prepare("select * from DEMANDES_ADMINISTRATIVES where iddem ='" +val+"' or nom ='" +val+"' or type ='" +val+"' or idp ='" +val+"'or cin ='" +val+"'  or DATE_CREATION ='" +val+"'    ");
 
     if (qry.exec())
     {
@@ -254,7 +317,9 @@ conn.createconnection();*/
             ui->le_id_2->setText(qry.value(0).toString());
             ui->le_id_3->setText(qry.value(1).toString());
             ui->le_id_4->setText(qry.value(2).toString());
-            //ui->dateEdit_3->setDate(qry.value(3).toDate());
+            ui->lineEdit_15->setText(qry.value(3).toString());
+            ui->lineEdit_14->setText(qry.value(4).toString());
+            ui->dateTimeEdit->setDate(qry.value(3).toDate());
 
 
 
@@ -291,25 +356,139 @@ void MainWindow::on_tab_demande_2_activated(const QModelIndex &index)
 }
 
 
-void MainWindow::on_pushButton_2_clicked()
+
+
+
+
+//void MainWindow::on_comboBox_currentIndexChanged(int index)
+/*{
+     int name = ui->comboBox->currentData().toInt;
+}
+*/
+
+void MainWindow::on_tab_citoyen_2_activated(const QModelIndex &index)
+{
+    QString val=ui->tab_citoyen_2->model()->data(index).toString();
+
+
+    QSqlQuery qry;
+    qry.prepare("select * from CITOYENS where cin ='" +val+"' or nom ='" +val+"' or prenom ='" +val+"'");
+
+    if (qry.exec())
+    {
+        while (qry.next())
+        {
+            ui->le_supp->setText(qry.value(0).toString());
+
+
+
+        }
+
+    }
+    else
+    { QMessageBox::critical(this,tr("error::"),qry.lastError().text());}
+
+}
+
+void MainWindow::on_tab_citoyen_modifier_activated(const QModelIndex &index)
 {
 
-    QString filename = QFileDialog::getOpenFileName(this,tr("choose"),"",tr("Images Files (*.png *.jpg *.jpeg *.bmp)"));
-    if (QString::compare(filename,QString()) != 0)
+
+     QString val=ui->tab_citoyen_modifier->model()->data(index).toString();
+
+    QSqlQuery qry;
+    qry.prepare("select * from CITOYENS where cin ='" +val+"' or nom ='" +val+"' or prenom ='" +val+"' or adresse  ='" +val+"'   ");
+
+    if (qry.exec())
     {
+        while (qry.next())
+        {
+            ui->le_cin_modif->setText(qry.value(0).toString());
+            ui->le_nom_modif->setText(qry.value(1).toString());
+            ui->le_prenom_modif->setText(qry.value(2).toString());
+            ui->le_adresse_modif->setText(qry.value(3).toString());
 
-        QImage pic ;
-
-    bool valid = pic.load(filename);
-    if (valid)
-    {
-        pic = pic.scaledToHeight(ui->label_21->height(),Qt::SmoothTransformation);
-        ui->label_21->setPixmap(QPixmap::fromImage(pic));
-   }
+            ui->dateN_modif->setDate(qry.value(5).toDate());
 
 
-    else {
-        //Error handling
+
+        }
+       // conn.closeconnection();
     }
+    else
+    { QMessageBox::critical(this,tr("error::"),qry.lastError().text());}
+
 }
+
+void MainWindow::on_lineEdit_17_textChanged(const QString &arg1)
+{
+    if(ui->rb_cin->isChecked())
+        {
+            QSqlQuery query;
+            QSqlQueryModel * model=new QSqlQueryModel();
+            query.prepare("SELECT * FROM CITOYENS WHERE cin LIKE :surname");
+            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.exec();
+            model->setQuery(query);
+            ui->tab_citoyen_modifier->setModel(model);
+            qDebug() <<(model->rowCount());
+        }
+
+
+    if(ui->rb_nom->isChecked())
+        {
+            QSqlQuery query;
+            QSqlQueryModel * model=new QSqlQueryModel();
+            query.prepare("SELECT * FROM CITOYENS WHERE nom LIKE :surname");
+            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.exec();
+            model->setQuery(query);
+            ui->tab_citoyen_modifier->setModel(model);
+            qDebug() <<(model->rowCount());
+        }
+
+
+    if(ui->rb_date_naissance->isChecked())
+        {
+            QSqlQuery query;
+            QSqlQueryModel * model=new QSqlQueryModel();
+            query.prepare("SELECT * FROM CITOYENS WHERE DATE_NAISSANCE LIKE :surname");
+            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.exec();
+            model->setQuery(query);
+            ui->tab_citoyen_modifier->setModel(model);
+            qDebug() <<(model->rowCount());
+        }
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    int width = 0;
+        int height = 0;
+
+      ui->tab_demande->resizeColumnsToContents();
+        ui->tab_demande->resizeRowsToContents();
+
+        const int columnCnt = ui->tab_demande->model()->columnCount();
+        for( int i = 0; i < columnCnt; ++i )
+        {
+            width += ui->tab_demande->columnWidth(i) ;
+        }
+       width=width*2;
+
+        const int rowCnt = ui->tab_demande->model()->rowCount();
+        for( int i = 0; i < rowCnt; ++i )
+        {
+            height += ui->tab_demande->rowHeight(i)  ;
+        }
+        height=height*2;
+
+        ui->tab_demande->setFixedSize(width, height);
+
+        QPrinter printer;
+
+        ui->tab_demande->render(&printer);
+
+        ui->tab_demande->setFixedSize(631, 281);
 }

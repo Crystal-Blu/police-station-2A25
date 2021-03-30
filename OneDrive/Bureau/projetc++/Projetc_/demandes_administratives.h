@@ -9,22 +9,29 @@ class demandes_administratives
 {
 public:
     demandes_administratives();
-     demandes_administratives(int,QString,QString,QDateTime);
+     demandes_administratives(int,int,int,QString,QString,QDate);
 
      int getid();
+    int getidp();
+    int getcin();
      QString getnom();
      QString gettype();
-     QDateTime getDATE_CREATION();
+     QDate getDATE_CREATION();
 
 
      void setid(int);
+     void setidp(int);
+     void setcin(int);
      void setnom(QString);
      void settype(QString);
-     void setDATE_CREATION( QDateTime);
+     void setDATE_CREATION( QDate);
 
       bool ajouter_2();
 
       QSqlQueryModel*afficher();
+
+       QSqlQueryModel*afficher_combo();
+        QSqlQueryModel*afficher_combo_2();
 
       bool supprimer(int);
 
@@ -32,8 +39,10 @@ public:
 
 private:
     int iddem ;
+    int idp ;
+    int cin ;
     QString nom,type;
-     QDateTime DATE_CREATION;
+     QDate DATE_CREATION;
 
 };
 

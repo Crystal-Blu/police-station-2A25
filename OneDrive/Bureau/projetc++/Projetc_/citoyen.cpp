@@ -3,6 +3,7 @@
 #include <QtDebug>
 #include<QObject>
 #include<QImage>
+#include "mainwindow.h"
 
 
 Citoyen::Citoyen()
@@ -11,19 +12,19 @@ Citoyen::Citoyen()
 
 }
 
-Citoyen::Citoyen(int CIN ,QString nom ,QString prenom,QString adresse/*,QByteArray photo*/,QDate DATE_NAISSANCE)
-{this->CIN=CIN;this->nom=nom;this->prenom=prenom;this->adresse=adresse/*;this->photo=photo*/;this->DATE_NAISSANCE =DATE_NAISSANCE; }
+Citoyen::Citoyen(int CIN ,QString nom ,QString prenom,QString adresse,QByteArray inByteArray,QDate DATE_NAISSANCE)
+{this->CIN=CIN;this->nom=nom;this->prenom=prenom;this->adresse=adresse;this->inByteArray=inByteArray;this->DATE_NAISSANCE =DATE_NAISSANCE; }
 int Citoyen::getCIN() {return CIN ;}
 QString Citoyen::getnom(){return nom;}
 QString Citoyen::getprenom(){return prenom;}
 QString Citoyen::getadresse(){return adresse;}
-//QByteArray Citoyen::getphoto(){return photo;}
+QByteArray Citoyen::getphoto(){return inByteArray;}
 QDate Citoyen::getdate(){return DATE_NAISSANCE ;}
 void Citoyen::setCIN(int CIN) {this->CIN=CIN;}
 void Citoyen::setnom(QString nom) {this->nom=nom;}
 void Citoyen::setprenom(QString prenom){this->prenom=prenom;}
 void Citoyen::setadresse(QString adresse){this->adresse=adresse;}
-//void Citoyen::setphoto(QByteArray photo){this->photo=photo;}
+void Citoyen::setphoto(QByteArray inByteArray){this->inByteArray=inByteArray;}
 void Citoyen::setdate(QDate DATE_NAISSANCE){this->DATE_NAISSANCE=DATE_NAISSANCE;}
 bool Citoyen::ajouter()
 
@@ -41,7 +42,7 @@ bool Citoyen::ajouter()
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
     query.bindValue(":adresse", adresse);
-   // query.bindValue(":photo", photo);
+   query.bindValue(":photo", inByteArray);
     query.bindValue(":DATE_NAISSANCE", DATE_NAISSANCE);
 
 

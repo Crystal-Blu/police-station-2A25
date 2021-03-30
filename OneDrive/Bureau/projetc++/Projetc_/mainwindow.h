@@ -5,6 +5,7 @@
 #include <citoyen.h>
 #include<demandes_administratives.h>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -45,8 +46,23 @@ private slots:
 
 
 
+
+
+
+
+
+
+    void on_tab_citoyen_2_activated(const QModelIndex &index);
+
+    void on_tab_citoyen_modifier_activated(const QModelIndex &index);
+
+    void on_lineEdit_17_textChanged(const QString &arg1);
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
+
     Citoyen C ;
     Citoyen c1;
     demandes_administratives d;
