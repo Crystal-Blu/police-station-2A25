@@ -24,6 +24,8 @@ public:
     bool supprimer(int);
      bool modifier(int);
 
+     void ajout_det(int);
+
 private:
     int idcel,nombre_lit,nombre_det,nombre_det_max ;
 

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -608,7 +608,7 @@ background-color: rgb(255, 0, 0);</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ADD&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_18">
        <attribute name="title">
@@ -690,11 +690,95 @@ background-color: rgb(255, 0, 0);</string>
          <string>Modifier</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>950</x>
+          <y>150</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Imprimer PDF</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rb_idp">
+        <property name="geometry">
+         <rect>
+          <x>950</x>
+          <y>270</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Par Id du policier</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rb_idcel">
+        <property name="geometry">
+         <rect>
+          <x>950</x>
+          <y>310</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Par Id de la cellule</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rb_raison">
+        <property name="geometry">
+         <rect>
+          <x>950</x>
+          <y>350</y>
+          <width>95</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Par Raison</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="le_recherche">
+        <property name="geometry">
+         <rect>
+          <x>950</x>
+          <y>230</y>
+          <width>113</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>870</x>
+          <y>230</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Rechercher:</string>
+        </property>
+       </widget>
        <zorder>tableView_2</zorder>
        <zorder>label_9</zorder>
        <zorder>pushButton_13</zorder>
        <zorder>pushButton_8</zorder>
        <zorder>pushButton_10</zorder>
+       <zorder>pushButton</zorder>
+       <zorder>rb_idp</zorder>
+       <zorder>rb_idcel</zorder>
+       <zorder>rb_raison</zorder>
+       <zorder>le_recherche</zorder>
+       <zorder>label</zorder>
       </widget>
       <widget class="QWidget" name="tab_19">
        <attribute name="title">

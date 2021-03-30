@@ -147,7 +147,7 @@ bool detentions::modifier(int iddet)
     QString iddet_string =   QString::number(iddet);
     QString idcel_string =   QString::number(idcel);
     QString idp_string =   QString::number(idp);
-    query.prepare("UPDATE detentions SET raison=:raison, date_entree=:date_entree, date_sortie=:date_sortie,iddet=:iddet, idcel:=idcel, idp:=idp  WHERE iddet=:iddet" );
+    query.prepare("UPDATE detentions SET raison=:raison, date_entree=:date_entree, date_sortie=:date_sortie,iddet=:iddet, idcel=:idcel, idp=:idp  WHERE iddet=:iddet" );
 
     query.bindValue(":iddet", iddet_string);
     query.bindValue(":date_entree", date_entree);

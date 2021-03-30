@@ -4,6 +4,14 @@
 #include "cellule.h"
 #include<QIntValidator>
 #include "detention.h"
+#include <QPrinter>
+#include <QPrintDialog>
+#include<QTextDocument>
+#include<QPainter>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QPdfWriter>
+#include <QSqlQuery>
 
 
 
@@ -111,17 +119,41 @@ void MainWindow::on_pushButton_ajouter2_clicked()
     QDate date_entree=ui->dateEdit->date();
     QDate date_sortie=ui->dateEdit_2->date();
     QString raison=ui->lineEdit_8->text();
-    int idcel=ui->lineEdit_9->text().toInt();
-    int idp=ui->lineEdit_10->text().toInt();
+    int idcel=ui->lineEdit_10->text().toInt();
+    int idp=ui->lineEdit_9->text().toInt();
 
 
 
         detentions D(iddet,date_entree,date_sortie,raison,idcel,idp);
+
+            QSqlQuery query;
+
+            QString idcel_string =   QString::number(idcel);
+           query.prepare("select nombre_det,nombre_det_max from cellules where idcel = :idcel");
+
+           query.bindValue(":idcel", idcel_string);
+          if  (query.exec()) {
+while (query.next()) {
+    ui->nbdetmax->setText(query.value(0).toString());
+    ui->nbdet->setText(query.value(1).toString());
+}
+}
+
+           int nombre_det=ui->nbdet->text().toInt();
+           int nombre_max=ui->nbdetmax->text().toInt();
+
+
+        //bool test1=C.test_cmax(idcel);
+              if(nombre_max!=nombre_det){
+
+
         bool test = D.ajouter();
 
         if (test){
 
+     C.ajout_det(idcel);
      ui->tableView_2->setModel(D.afficher());
+     ui->tableView->setModel(C.afficher());
 
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -133,15 +165,17 @@ void MainWindow::on_pushButton_ajouter2_clicked()
         else
             QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 }
-
+               else
+                   QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Nombre max atteint.Veuillez ajouter dans une autre cellule.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+}
 void MainWindow::on_pushButton_modifier2_clicked()
 {
     int iddet=ui->lineEdit_11->text().toInt();
     QDate date_entree=ui->dateEdit_3->date();
     QDate date_sortie=ui->dateEdit_4->date();
     QString raison=ui->lineEdit_15->text();
-    int idcel=ui->lineEdit_17->text().toInt();
-    int idp=ui->lineEdit_18->text().toInt();
+    int idcel=ui->lineEdit_18->text().toInt();
+    int idp=ui->lineEdit_17->text().toInt();
 
            detentions D(iddet,date_entree,date_sortie,raison,idcel,idp);
            bool test = D.modifier(iddet);
@@ -181,4 +215,74 @@ void MainWindow::on_pushButton_supprimer2_clicked()
         }
         else
             QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Suppression de la detention non effectuée.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+         int width = 0;
+           int height = 0;
+
+         ui->tableView_2->resizeColumnsToContents();
+           ui->tableView_2->resizeRowsToContents();
+
+           const int columnCnt = ui->tableView_2->model()->columnCount();
+           for( int i = 0; i < columnCnt; ++i )
+           {
+               width += ui->tableView_2->columnWidth(i) ;
+           }
+          width=width*2;
+
+           const int rowCnt = ui->tableView_2->model()->rowCount();
+           for( int i = 0; i < rowCnt; ++i )
+           {
+               height += ui->tableView_2->rowHeight(i)  ;
+           }
+           height=height*2;
+
+           ui->tableView_2->setFixedSize(width, height);
+
+           QPrinter printer;
+
+           ui->tableView_2->render(&printer);
+
+           ui->tableView_2->setFixedSize(721, 411);
+}
+
+void MainWindow::on_le_recherche_textChanged(const QString &arg1)
+{
+    if(ui->rb_idp->isChecked())
+        {
+            QSqlQuery query;
+            QSqlQueryModel * model=new QSqlQueryModel();
+            query.prepare("SELECT * FROM DETENTIONS WHERE idp LIKE :surname");
+            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.exec();
+            model->setQuery(query);
+            ui->tableView_2->setModel(model);
+
+        }
+
+    if(ui->rb_idcel->isChecked())
+        {
+            QSqlQuery query;
+            QSqlQueryModel * model=new QSqlQueryModel();
+            query.prepare("SELECT * FROM DETENTIONS WHERE idcel LIKE :surname");
+            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.exec();
+            model->setQuery(query);
+            ui->tableView_2->setModel(model);
+
+        }
+    if(ui->rb_raison->isChecked())
+        {
+            QSqlQuery query;
+            QSqlQueryModel * model=new QSqlQueryModel();
+            query.prepare("SELECT * FROM DETENTIONS WHERE raison LIKE :surname");
+            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.exec();
+            model->setQuery(query);
+            ui->tableView_2->setModel(model);
+
+        }
 }

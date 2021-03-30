@@ -129,3 +129,19 @@ bool Cellules::modifier(int idcel)
 
 }
 
+
+
+
+void Cellules::ajout_det(int idcel)
+{
+    QSqlQuery query;
+    QString idcel_string =   QString::number(idcel);
+
+
+    query.prepare("UPDATE cellules SET nombre_det=nombre_det+1  WHERE idcel=:idcel" );
+
+    query.bindValue(":idcel", idcel_string);
+    query.exec();
+
+
+}
