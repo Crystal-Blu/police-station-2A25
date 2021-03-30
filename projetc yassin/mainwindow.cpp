@@ -434,7 +434,7 @@ void MainWindow::on_pb_missioninfoprint_clicked()
     QPrintDialog dialog(&printer,this);
     if(dialog.exec()== QDialog::Rejected ) return;
 */
-   /*
+
     int width = 0;
     int height = 0;
 
@@ -451,9 +451,7 @@ void MainWindow::on_pb_missioninfoprint_clicked()
     const int rowCnt = ui->tableViewmissions->model()->rowCount();
     for( int i = 0; i < rowCnt; ++i )
     {
-
         height += ui->tableViewmissions->rowHeight(i)  ;
-
     }
     height=height*2;
 
@@ -461,10 +459,12 @@ void MainWindow::on_pb_missioninfoprint_clicked()
 
     QPrinter printer;
 
-    // ... printer settings ...
-
     ui->tableViewmissions->render(&printer);
-     */
+
+    ui->tableViewmissions->setFixedSize(471, 321);
+
+
+
 }
 
 
