@@ -1,4 +1,4 @@
-QT       += core gui multimedia
+QT       += core gui multimedia printsupport
 QT       += sql
 QT += charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

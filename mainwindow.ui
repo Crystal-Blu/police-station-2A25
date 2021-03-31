@@ -29,7 +29,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="criminels">
      <attribute name="title">
@@ -40,12 +40,12 @@
        <rect>
         <x>-10</x>
         <y>0</y>
-        <width>881</width>
-        <height>591</height>
+        <width>941</width>
+        <height>611</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
@@ -485,20 +485,20 @@
        <widget class="QTableView" name="tab_criminel1">
         <property name="geometry">
          <rect>
-          <x>55</x>
+          <x>45</x>
           <y>31</y>
-          <width>771</width>
-          <height>401</height>
+          <width>441</width>
+          <height>411</height>
          </rect>
         </property>
        </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>420</x>
-          <y>480</y>
-          <width>411</width>
-          <height>51</height>
+          <x>500</x>
+          <y>150</y>
+          <width>371</width>
+          <height>61</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -514,18 +514,31 @@
          </item>
         </layout>
        </widget>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QWidget" name="">
         <property name="geometry">
          <rect>
-          <x>40</x>
-          <y>460</y>
-          <width>331</width>
-          <height>81</height>
+          <x>510</x>
+          <y>220</y>
+          <width>381</width>
+          <height>181</height>
          </rect>
         </property>
-        <property name="text">
-         <string>Affichage d'une charte graphique</string>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="text">
+            <string>Affichage d'une charte graphique</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="text">
+            <string>Exporter PDF</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
      </widget>
@@ -544,7 +557,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_12">
        <attribute name="title">
@@ -704,7 +717,7 @@
          <string>Liste des delits</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>620</x>
@@ -769,23 +782,13 @@
        <attribute name="title">
         <string>Supprimer</string>
        </attribute>
-       <widget class="QTableView" name="tableView">
-        <property name="geometry">
-         <rect>
-          <x>25</x>
-          <y>141</y>
-          <width>831</width>
-          <height>401</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QSplitter" name="splitter_9">
         <property name="geometry">
          <rect>
           <x>20</x>
           <y>40</y>
-          <width>841</width>
-          <height>81</height>
+          <width>871</width>
+          <height>141</height>
          </rect>
         </property>
         <property name="orientation">
@@ -1006,7 +1009,7 @@
        <number>0</number>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1051,13 +1054,13 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>70</x>
         <y>340</y>
         <width>441</width>
-        <height>31</height>
+        <height>35</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_12">

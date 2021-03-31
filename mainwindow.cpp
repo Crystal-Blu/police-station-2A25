@@ -10,6 +10,13 @@
 #include<QFileDialog>
 #include<QComboBox>
 #include"charttype.h"
+#include <QPrinter>
+#include <QPrintDialog>
+#include<QTextDocument>
+#include<QPainter>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QPdfWriter>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -391,5 +398,46 @@ void MainWindow::on_pushButton_trier_2_clicked()
 {    charttype charttype;
      charttype.setModal(true);
      charttype.exec();
+
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+
+
+
+        int width = 0;
+        int height = 0;
+
+      ui->tab_criminel1->resizeColumnsToContents();
+        ui->tab_criminel1->resizeRowsToContents();
+
+        const int columnCnt = ui->tab_criminel1->model()->columnCount();
+        for( int i = 0; i < columnCnt; ++i )
+        {
+            width += ui->tab_criminel1->columnWidth(i) ;
+        }
+       width=width*2;
+
+        const int rowCnt = ui->tab_criminel1->model()->rowCount();
+        for( int i = 0; i < rowCnt; ++i )
+        {
+            height += ui->tab_criminel1->rowHeight(i)  ;
+        }
+        height=height*2;
+
+        ui->tab_criminel1->setFixedSize(width, height);
+
+        QPrinter printer;
+
+        ui->tab_criminel1->render(&printer);
+
+        ui->tab_criminel1->setFixedSize(471, 321);
+
+
+
+
+
 
 }

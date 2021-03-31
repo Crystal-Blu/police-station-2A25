@@ -62,6 +62,8 @@ private slots:
 
     void on_pushButton_trier_2_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
     Delits D1 ;
