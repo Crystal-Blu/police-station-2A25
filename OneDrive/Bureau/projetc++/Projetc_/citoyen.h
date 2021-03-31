@@ -8,9 +8,10 @@
 
 class Citoyen
 {
+
 public:
     Citoyen();
-    Citoyen(int,QString,QString,QString,  QByteArray ,QDate);
+    Citoyen(int,QString,QString,QString,  QByteArray ,QDate,QString);
     int getCIN();
     QString getnom();
     QString getprenom();
@@ -29,10 +30,12 @@ public:
     QSqlQueryModel*afficher();
     bool supprimer(int);
      bool modifier(int);
+     void set_path(QString path){path_image=path;};
+     QString get_path(){return path_image;};
 
 private:
     int CIN ;
-    QString nom,prenom,adresse ;
+    QString nom,prenom,adresse,path_image;
     QDate DATE_NAISSANCE;
     QByteArray inByteArray ;
 };

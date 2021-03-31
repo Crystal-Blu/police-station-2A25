@@ -12,8 +12,8 @@ Citoyen::Citoyen()
 
 }
 
-Citoyen::Citoyen(int CIN ,QString nom ,QString prenom,QString adresse,QByteArray inByteArray,QDate DATE_NAISSANCE)
-{this->CIN=CIN;this->nom=nom;this->prenom=prenom;this->adresse=adresse;this->inByteArray=inByteArray;this->DATE_NAISSANCE =DATE_NAISSANCE; }
+Citoyen::Citoyen(int CIN ,QString nom ,QString prenom,QString adresse,QByteArray inByteArray,QDate DATE_NAISSANCE,QString path)
+{this->CIN=CIN;this->nom=nom;this->prenom=prenom;this->adresse=adresse;this->inByteArray=inByteArray;this->DATE_NAISSANCE =DATE_NAISSANCE;this->path_image=path;}
 int Citoyen::getCIN() {return CIN ;}
 QString Citoyen::getnom(){return nom;}
 QString Citoyen::getprenom(){return prenom;}
@@ -42,17 +42,8 @@ bool Citoyen::ajouter()
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
     query.bindValue(":adresse", adresse);
-   query.bindValue(":photo", inByteArray);
+    query.bindValue(":photo", path_image);
     query.bindValue(":DATE_NAISSANCE", DATE_NAISSANCE);
-
-
-
-
-
-
-
-
-
     return query.exec();
 
 
@@ -69,7 +60,7 @@ QSqlQueryModel * Citoyen::afficher() {
          model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
          model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
          model->setHeaderData(3, Qt::Horizontal, QObject::tr("ADRESSE"));
-         model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATE_NAISSANCE"));
+         model->setHeaderData(5, Qt::Horizontal, QObject::tr("DATE_NAISSANCE"));
          model->setHeaderData(4, Qt::Horizontal, QObject::tr("PHOTO"));
 
 
@@ -107,7 +98,7 @@ bool Citoyen::modifier(int CIN)
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
     query.bindValue(":adresse", adresse);
-    //query.bindValue(":photo", photo);
+    query.bindValue(":photo", path_image);
     query.bindValue(":DATE_NAISSANCE", DATE_NAISSANCE);
 
 

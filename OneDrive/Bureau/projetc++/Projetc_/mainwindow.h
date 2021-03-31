@@ -60,6 +60,12 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_tab_citoyen_activated(const QModelIndex &index);
+
+    void on_pushButton_3_clicked();
+
+    void on_lineEdit_18_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 
