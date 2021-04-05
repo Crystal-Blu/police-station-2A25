@@ -81,7 +81,7 @@ void MainWindow::on_pushButton_modifier1_clicked()
  ui->tableView->setModel(C.afficher());
  ui->lineEdit->clear();
  ui->lineEdit_2->clear();
- ui->lineEdit_3>clear();
+ ui->lineEdit_3->clear();
  ui->lineEdit_4->clear();
 
 
@@ -242,33 +242,57 @@ void MainWindow::on_pushButton_supprimer2_clicked()
 void MainWindow::on_pushButton_clicked()
 {
 
-         int width = 0;
-           int height = 0;
+    QPdfWriter pdf("C:/Users/user/desktop/Pdfdetention.pdf");
+                             QPainter painter(&pdf);
+                            int i = 4000;
+                                 painter.setPen(Qt::red);
 
-         ui->tableView_2->resizeColumnsToContents();
-           ui->tableView_2->resizeRowsToContents();
+                                 painter.setFont(QFont("Arial", 30));
+                                 painter.drawText(2100,1200,"Liste Des Detentions");
+                                 painter.setPen(Qt::black);
+                                 painter.setFont(QFont("Arial", 50));
+                                 painter.drawRect(1000,200,6500,2000);
+                                 painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/detention.jpg"));
+                                 painter.drawRect(0,3000,9600,500);
+                                 painter.setFont(QFont("Arial", 9));
+                                 painter.setPen(Qt::blue);
+                                 painter.drawText(300,3300,"ID_DET");
+                                 painter.drawText(2300,3300,"DATE_ENTREE");
+                                 painter.drawText(4300,3300,"DATE_SORTIE");
+                                 painter.drawText(6300,3300,"RAISON");
+                                 painter.drawText(7500,3300,"ID_P");
+                                 painter.drawText(8000,3300,"ID_CEL");
 
-           const int columnCnt = ui->tableView_2->model()->columnCount();
-           for( int i = 0; i < columnCnt; ++i )
-           {
-               width += ui->tableView_2->columnWidth(i) ;
-           }
-          width=width*2;
 
-           const int rowCnt = ui->tableView_2->model()->rowCount();
-           for( int i = 0; i < rowCnt; ++i )
-           {
-               height += ui->tableView_2->rowHeight(i)  ;
-           }
-           height=height*2;
 
-           ui->tableView_2->setFixedSize(width, height);
+                                 QSqlQuery query;
+                                 query.prepare("select * from DETENTIONS");
+                                 query.exec();
+                                 while (query.next())
+                                 {
+                                     painter.drawText(300,i,query.value(0).toString());
+                                     painter.drawText(2300,i,query.value(1).toString());
+                                     painter.drawText(4300,i,query.value(2).toString());
+                                     painter.drawText(6300,i,query.value(3).toString());
+                                     painter.drawText(7500,i,query.value(4).toString());
+                                     painter.drawText(8000,i,query.value(5).toString());
 
-           QPrinter printer;
 
-           ui->tableView_2->render(&printer);
 
-           ui->tableView_2->setFixedSize(721, 411);
+                                    i = i +500;
+                                 }
+                                 int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                     QMessageBox::Yes |  QMessageBox::No);
+                                     if (reponse == QMessageBox::Yes)
+                                     {
+                                         QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/user/desktop/Pdfdetention.pdf"));
+
+                                         painter.end();
+                                     }
+                                     else
+                                     {
+                                          painter.end();
+}
 }
 
 void MainWindow::on_le_recherche_textChanged(const QString &arg1)
