@@ -31,6 +31,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 QT += sql
 CONFIG += console
 RESOURCES += dark/style.qrc \
+    image.qrc \
     res.qrc
 RESOURCES += light/style.qrc
 RESOURCES += darkorange/darkorange.qrc

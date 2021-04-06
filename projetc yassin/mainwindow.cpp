@@ -14,6 +14,7 @@
 #include <QPdfWriter>
 #include <QPageLayout>
 #include <QMediaPlayer>
+#include <QtGui>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->setupUi(this);
+    this->setWindowTitle("Police ++");
+
+    setWindowIcon(QIcon(":/sounds/sound/Police.png"));
+
+
     ui->tableViewpolice->setModel(police.afficher());
     ui->tableViewmissions->setModel(mission.afficher());
     ui->le_missionid->setReadOnly(true);
@@ -538,7 +544,7 @@ void MainWindow::on_pb_policetaketoadd_clicked()
        music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
        music->play();
 
-    // ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-2);
+     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-2);
 }
 
 void MainWindow::on_pb_missionstaketoadd_clicked()
@@ -647,10 +653,10 @@ void MainWindow::on_pb_missioninfoprint_clicked()
 
                                      painter.setFont(QFont("Arial", 30));
                                      painter.drawText(2100,1200,"Liste Des Detentions");
-                                     painter.setPen(Qt::black);
+                                     painter.setPen(Qt::green);
                                      painter.setFont(QFont("Arial", 50));
                                      painter.drawRect(1000,200,6500,2000);
-                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/xDrais/Desktop/dsfsdfsdf.png"));
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/sound/Police.png"));
                                      painter.drawRect(0,3000,9600,500);
                                      painter.setFont(QFont("Arial", 9));
                                      painter.setPen(Qt::blue);
