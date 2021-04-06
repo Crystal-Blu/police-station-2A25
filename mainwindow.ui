@@ -24,11 +24,11 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Home</string>
+      <string>Acceuil</string>
      </attribute>
      <widget class="QPushButton" name="pushButton_5">
       <property name="geometry">
@@ -122,9 +122,9 @@ background-color: rgb(255, 0, 0);</string>
      <widget class="QTabWidget" name="tabcellule">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>100</x>
         <y>0</y>
-        <width>1191</width>
+        <width>1141</width>
         <height>651</height>
        </rect>
       </property>
@@ -236,11 +236,67 @@ background-color: rgb(255, 80, 67);</string>
          <string>Suppimer</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>1000</x>
+          <y>0</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> Mode Sombre</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="geometry">
+         <rect>
+          <x>1000</x>
+          <y>30</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode Clair</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="geometry">
+         <rect>
+          <x>1000</x>
+          <y>60</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode Sombre Orange</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_14">
+        <property name="geometry">
+         <rect>
+          <x>1000</x>
+          <y>90</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode Original</string>
+        </property>
+       </widget>
        <zorder>tableView</zorder>
        <zorder>label_4</zorder>
        <zorder>pushButton_11</zorder>
        <zorder>pushButton_2</zorder>
        <zorder>pushButton_4</zorder>
+       <zorder>pushButton_3</zorder>
+       <zorder>pushButton_9</zorder>
+       <zorder>pushButton_12</zorder>
+       <zorder>pushButton_14</zorder>
       </widget>
       <widget class="QWidget" name="tab_16">
        <attribute name="title">
@@ -626,7 +682,7 @@ background-color: rgb(255, 80, 67);</string>
        </rect>
       </property>
       <property name="text">
-       <string>Exemple</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPlainTextEdit" name="plainTextEdit_9">
@@ -730,9 +786,9 @@ background-color: rgb(106, 213, 158);</string>
        <widget class="QTableView" name="tableView_2">
         <property name="geometry">
          <rect>
-          <x>70</x>
+          <x>20</x>
           <y>140</y>
-          <width>781</width>
+          <width>831</width>
           <height>371</height>
          </rect>
         </property>

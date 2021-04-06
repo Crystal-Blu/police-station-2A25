@@ -12,6 +12,7 @@
 #include <QUrl>
 #include <QPdfWriter>
 #include <QSqlQuery>
+#include <QTextStream>
 
 
 
@@ -20,9 +21,19 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->idc->setValidator ( new QIntValidator(1, 100, this));
+    ui->idc->setValidator ( new QIntValidator(0, 10, this));
+    ui->nblit->setValidator ( new QIntValidator(0, 10, this));
+    ui->lineEdit_5->setValidator ( new QIntValidator(0, 10000, this));
+    ui->lineEdit_8->setMaxLength(20);
+    ui->lineEdit_8->setPlaceholderText("saisir la raison de la detention");
+    ui->lineEdit_15->setMaxLength(20);
+    ui->lineEdit_15->setPlaceholderText("saisir la raison de la detention");
     ui->tableView->setModel(C.afficher());
     ui->tableView_2->setModel(D.afficher());
+
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -285,7 +296,7 @@ void MainWindow::on_pushButton_clicked()
                                                                      QMessageBox::Yes |  QMessageBox::No);
                                      if (reponse == QMessageBox::Yes)
                                      {
-                                         QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/user/desktop/Pdfdetention.pdf"));
+                                         QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/user/Desktop/Pdfdetention.pdf"));
 
                                          painter.end();
                                      }
@@ -370,4 +381,58 @@ void MainWindow::on_pushButton_10_clicked()
 void MainWindow::on_pushButton_8_clicked()
 {
     ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-1);
+}
+
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QFile f("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/dark/style.qss");
+
+       if (!f.exists())   {
+           printf("Unable to set stylesheet, file not found\n");
+       }
+       else   {
+           f.open(QFile::ReadOnly | QFile::Text);
+           QTextStream ts(&f);
+           setStyleSheet(ts.readAll());
+       }
+}
+
+
+
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QFile f("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/light/style.qss");
+
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            setStyleSheet(ts.readAll());
+        }
+}
+
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    QFile f("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/DarkOrange/darkorange/darkorange.qss");
+
+       if (!f.exists())   {
+           printf("Unable to set stylesheet, file not found\n");
+       }
+       else   {
+           f.open(QFile::ReadOnly | QFile::Text);
+           QTextStream ts(&f);
+           setStyleSheet(ts.readAll());
+       }
+}
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    setStyleSheet("");
 }
