@@ -476,33 +476,57 @@ void MainWindow::on_lineEdit_17_textChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    int width = 0;
-        int height = 0;
+    QPdfWriter pdf("C:/Users/asus/OneDrive/Bureau/PdfDEMANDES.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
 
-      ui->tab_demande->resizeColumnsToContents();
-        ui->tab_demande->resizeRowsToContents();
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Demandes");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/asus/OneDrive/Bureau/0.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(200,3300,"IDDEM");
+                                     painter.drawText(1900,3300,"NOM");
+                                     painter.drawText(3000,3300,"TYPE");
+                                     painter.drawText(4000,3300,"DATE_CREATION");
+                                     painter.drawText(6000,3300,"ID_P");
+                                     painter.drawText(7000,3300,"CIN");
 
-        const int columnCnt = ui->tab_demande->model()->columnCount();
-        for( int i = 0; i < columnCnt; ++i )
-        {
-            width += ui->tab_demande->columnWidth(i) ;
-        }
-       width=width*2;
 
-        const int rowCnt = ui->tab_demande->model()->rowCount();
-        for( int i = 0; i < rowCnt; ++i )
-        {
-            height += ui->tab_demande->rowHeight(i)  ;
-        }
-        height=height*2;
 
-        ui->tab_demande->setFixedSize(width, height);
+                                     QSqlQuery query;
+                                     query.prepare("select * from DEMANDES_ADMINISTRATIVES");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(200,i,query.value(0).toString());
+                                         painter.drawText(1900,i,query.value(1).toString());
+                                         painter.drawText(3000,i,query.value(2).toString());
+                                         painter.drawText(4000,i,query.value(5).toString());
+                                         painter.drawText(6000,i,query.value(3).toString());
+                                         painter.drawText(7000,i,query.value(4).toString());
 
-        QPrinter printer;
 
-        ui->tab_demande->render(&printer);
 
-        ui->tab_demande->setFixedSize(631, 281);
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/asus/OneDrive/Bureau/PdfDEMANDES.pdf"));
+
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+    }
 }
 
 void MainWindow::on_tab_citoyen_activated(const QModelIndex &index)

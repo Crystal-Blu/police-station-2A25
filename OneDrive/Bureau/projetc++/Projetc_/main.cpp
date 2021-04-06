@@ -2,11 +2,55 @@
 #include <QApplication>
 #include <QMessageBox>
 #include "connection.h"
+#include <QFile>
+#include <QTranslator>
+#include <QInputDialog>
+
+
+
+
+
+
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    Connection c;
+
+    QTranslator t;
+
+    QStringList languages;
+
+    languages << "français" << "anglais" ;
+
+    QString lang = QInputDialog ::getItem(NULL,"choisir langue","language",languages);
+
+    if (lang == "anglais")
+    {
+        t.load(":/english.qm");
+    }
+     if  (lang != "français")
+
+{
+        a.installTranslator(&t);
+    }
+
+
+
+    QFile stylesheetfile("C:/Users/asus/OneDrive/Bureau/Darkeum.qss");
+    stylesheetfile.open(QFile::ReadOnly);
+    QString stylesheet = QLatin1String(stylesheetfile.readAll());
+    a.setStyleSheet(stylesheet);
+
+
+
+
+
+
+
+
+   { Connection c;
     bool test=c.createconnection();
     MainWindow w;
     if(test)
@@ -23,5 +67,5 @@ int main(int argc, char *argv[])
 
 
 
-    return a.exec();
+    return a.exec();}
 }
