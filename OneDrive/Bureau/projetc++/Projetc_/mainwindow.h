@@ -66,6 +66,12 @@ private slots:
 
     void on_lineEdit_18_textChanged(const QString &arg1);
 
+    void on_pb_darkmode_clicked();
+
+    void on_pb_darkorange_clicked();
+
+    void on_pushButton_9_clicked();
+
 private:
     Ui::MainWindow *ui;
 

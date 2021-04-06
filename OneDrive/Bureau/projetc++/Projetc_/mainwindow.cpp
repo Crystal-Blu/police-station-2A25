@@ -24,6 +24,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QPdfWriter>
+#include <QMediaPlayer>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -67,6 +68,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
+
 
     QString filename = QFileDialog::getOpenFileName(this,tr("choose"),"",tr("Images Files (*.png *.jpg *.jpeg *.bmp)"));
     C.set_path(filename);
@@ -106,6 +112,10 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_Ajouter_clicked()
 
 {
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
     int CIN=ui->le_cin->text().toInt();
     QString nom=ui->le_nom->text();
     QString prenom=ui->lineEdit_16->text();
@@ -142,6 +152,12 @@ qDebug()<<path;
 
 void MainWindow::on_supp_button_clicked()
 {
+
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
+
     int CIN  = ui->le_supp->text().toInt();
     bool test = c1.supprimer(CIN);
 
@@ -164,6 +180,9 @@ ui->tab_citoyen_modifier->setModel(C.afficher());
 
 void MainWindow::on_update_button_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
 
         int CIN=ui->le_cin_modif->text().toInt();
         QString nom=ui->le_nom_modif->text();
@@ -205,6 +224,11 @@ void MainWindow::on_update_button_clicked()
 
 void MainWindow::on_pushButton_Ajouter_2_clicked()
 {
+
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
     int id=ui->le_id->text().toInt();
 
 
@@ -242,6 +266,9 @@ qDebug()<<idp ;
 void MainWindow::on_pushButton_supp_2_clicked()
 
 {
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
 
     int id  = ui->le_supp_2->text().toInt();
 
@@ -266,7 +293,13 @@ ui->tab_demande->setModel(d.afficher());
 }
 
 void MainWindow::on_pushButton_modifier_2_clicked()
+
 {
+
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
     int id=ui->le_id_2->text().toInt();
 
  int idp=ui->lineEdit_15->text().toInt();
@@ -475,7 +508,13 @@ void MainWindow::on_lineEdit_17_textChanged(const QString &arg1)
 
 
 void MainWindow::on_pushButton_4_clicked()
+
 {
+
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
     QPdfWriter pdf("C:/Users/asus/OneDrive/Bureau/PdfDEMANDES.pdf");
                                  QPainter painter(&pdf);
                                 int i = 4000;
@@ -486,7 +525,7 @@ void MainWindow::on_pushButton_4_clicked()
                                      painter.setPen(Qt::black);
                                      painter.setFont(QFont("Arial", 50));
                                      painter.drawRect(1000,200,6500,2000);
-                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/asus/OneDrive/Bureau/0.jpg"));
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/asus/OneDrive/Bureau/projetc++/Projetc_/Police.png"));
                                      painter.drawRect(0,3000,9600,500);
                                      painter.setFont(QFont("Arial", 9));
                                      painter.setPen(Qt::blue);
@@ -619,4 +658,56 @@ void MainWindow::on_lineEdit_18_textChanged(const QString &arg1)
             ui->tab_citoyen->setModel(model);
             qDebug() <<(model->rowCount());
         }
+}
+
+void MainWindow::on_pb_darkmode_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
+    QFile f("C:/Users/asus/OneDrive/Bureau/projetc++/Projetc_/dark/style.qss");
+
+       if (!f.exists())   {
+          qDebug("Unable to set stylesheet, file not found\n");
+       }
+       else   {
+           f.open(QFile::ReadOnly | QFile::Text);
+           QTextStream ts(&f);
+           setStyleSheet(ts.readAll());
+       }
+}
+
+void MainWindow::on_pb_darkorange_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
+    QFile f("C:/Users/asus/OneDrive/Bureau/projetc++/Projetc_/darkorange/darkorange.qss");
+
+      if (!f.exists())   {
+         qDebug("Unable to set stylesheet, file not found\n");
+      }
+      else   {
+          f.open(QFile::ReadOnly | QFile::Text);
+          QTextStream ts(&f);
+          setStyleSheet(ts.readAll());}
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sound/projetc_sound_click.wav"));
+       music->play();
+
+    QFile f("C:/Users/asus/OneDrive/Bureau/projetc++/Projetc_/light/style.qss");
+
+       if (!f.exists())   {
+          qDebug("Unable to set stylesheet, file not found\n");
+       }
+       else   {
+           f.open(QFile::ReadOnly | QFile::Text);
+           QTextStream ts(&f);
+           setStyleSheet(ts.readAll());}
 }

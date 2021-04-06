@@ -2,4 +2,11 @@
     <qresource prefix="/">
         <file>english.qm</file>
     </qresource>
+    <qresource prefix="/sound">
+        <file>projetc_sound_click.wav</file>
+        <file>dark/style.qrc</file>
+        <file>darkorange/darkorange.qrc</file>
+        <file>light/style.qrc</file>
+    </qresource>
+    <qresource prefix="/theme"/>
 </RCC>

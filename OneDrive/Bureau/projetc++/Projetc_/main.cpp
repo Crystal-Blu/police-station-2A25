@@ -38,10 +38,10 @@ int main(int argc, char *argv[])
 
 
 
-    QFile stylesheetfile("C:/Users/asus/OneDrive/Bureau/Darkeum.qss");
-    stylesheetfile.open(QFile::ReadOnly);
-    QString stylesheet = QLatin1String(stylesheetfile.readAll());
-    a.setStyleSheet(stylesheet);
+     QFile stylesheetfile("C:/Users/asus/OneDrive/Bureau/projetc++/Projetc_/darkorange/darkorange.qss");
+     stylesheetfile.open(QFile::ReadOnly);
+     QString stylesheet = QLatin1String(stylesheetfile.readAll());
+     a.setStyleSheet(stylesheet);
 
 
 

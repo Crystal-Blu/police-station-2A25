@@ -63,7 +63,7 @@
         <location filename="mainwindow.ui" line="143"/>
         <location filename="mainwindow.ui" line="1209"/>
         <source>Afficher</source>
-        <translation>Add</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="155"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="mainwindow.ui" line="400"/>
         <source>citoyen</source>
-        <translation>Citizen</translation>
+        <translation>Citizens</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="424"/>
@@ -136,7 +136,7 @@
         <location filename="mainwindow.ui" line="487"/>
         <location filename="mainwindow.ui" line="798"/>
         <source>date de naissance</source>
-        <translation>Date of Birth </translation>
+        <translation>Date of Birth</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="552"/>
@@ -159,7 +159,7 @@
         <location filename="mainwindow.ui" line="591"/>
         <location filename="mainwindow.ui" line="902"/>
         <source>Nom</source>
-        <translation>Name </translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="604"/>
@@ -223,7 +223,7 @@
     <message>
         <location filename="mainwindow.ui" line="1135"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CIN :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>IC :</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1163"/>
@@ -258,7 +258,7 @@
     <message>
         <location filename="mainwindow.ui" line="1193"/>
         <source>Demandes administrative</source>
-        <translation>administrative requests</translation>
+        <translation>Administrative Requests</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1238"/>
@@ -269,24 +269,24 @@
         <location filename="mainwindow.ui" line="1329"/>
         <location filename="mainwindow.ui" line="1640"/>
         <source> ID :</source>
-        <translation type="unfinished"></translation>
+        <translation>ID :</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1342"/>
         <location filename="mainwindow.ui" line="1627"/>
         <source> Nom :</source>
-        <translation>Name :</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1355"/>
         <location filename="mainwindow.ui" line="1584"/>
         <source>Type :</source>
-        <translation>Type :</translation>
+        <translation>TYPE :</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1368"/>
         <source>ID Policier :</source>
-        <translation>Policeman ID :</translation>
+        <translation type="unfinished">ID Policeman :</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1391"/>
@@ -297,7 +297,7 @@
     <message>
         <location filename="mainwindow.ui" line="1405"/>
         <source>Exporter PDF</source>
-        <translation type="unfinished">Export PDF</translation>
+        <translation>Export PDF</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1444"/>
@@ -307,33 +307,33 @@
     <message>
         <location filename="mainwindow.ui" line="1464"/>
         <source>Supprimer demandes </source>
-        <translation>Delete request</translation>
+        <translation>Delete requests</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1493"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;CIN :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>IDreq :</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1571"/>
         <source>Date de creation :  </source>
-        <translation>Creation date :</translation>
+        <translation>Date of Creation</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1673"/>
         <source> ID Policier :</source>
-        <translation>Policeman ID :</translation>
+        <translation>ID Policeman :</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1710"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Requests</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="71"/>
         <location filename="mainwindow.cpp" line="558"/>
         <source>choose</source>
-        <translation>choose</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="71"/>
@@ -358,76 +358,76 @@
         <location filename="demandes_administratives.cpp" line="89"/>
         <location filename="demandes_administratives.cpp" line="114"/>
         <source>CIN</source>
-        <translation type="unfinished"></translation>
+        <translation>IC</translation>
     </message>
     <message>
         <location filename="citoyen.cpp" line="60"/>
         <location filename="demandes_administratives.cpp" line="84"/>
         <source>NOM</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="citoyen.cpp" line="61"/>
         <source>PRENOM</source>
-        <translation type="unfinished"></translation>
+        <translation>First name</translation>
     </message>
     <message>
         <location filename="citoyen.cpp" line="62"/>
         <source>ADRESSE</source>
-        <translation type="unfinished"></translation>
+        <translation>Address</translation>
     </message>
     <message>
         <location filename="citoyen.cpp" line="63"/>
         <source>DATE_NAISSANCE</source>
-        <translation type="unfinished"></translation>
+        <translation>Date of Birth</translation>
     </message>
     <message>
         <location filename="citoyen.cpp" line="64"/>
         <source>PHOTO</source>
-        <translation type="unfinished"></translation>
+        <translation>Picture</translation>
     </message>
     <message>
         <location filename="demandes_administratives.cpp" line="83"/>
         <source>iddem</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">IDreq</translation>
     </message>
     <message>
         <location filename="demandes_administratives.cpp" line="85"/>
         <source>TYPE</source>
-        <translation type="unfinished"></translation>
+        <translation>TYPE</translation>
     </message>
     <message>
         <location filename="demandes_administratives.cpp" line="86"/>
         <location filename="demandes_administratives.cpp" line="103"/>
         <source>IDP</source>
-        <translation type="unfinished"></translation>
+        <translation>IDP</translation>
     </message>
     <message>
         <location filename="demandes_administratives.cpp" line="87"/>
         <source>DATE_CREATION</source>
-        <translation type="unfinished"></translation>
+        <translation>Date of Creation</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="37"/>
+        <location filename="main.cpp" line="58"/>
         <source>database is open</source>
-        <translation type="unfinished"></translation>
+        <translation>Database is open</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="38"/>
+        <location filename="main.cpp" line="59"/>
         <source>connection successful.
 Click Cancel to exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection Successfully.Click to exit</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="43"/>
+        <location filename="main.cpp" line="64"/>
         <source>database is not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Database is not open</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="44"/>
+        <location filename="main.cpp" line="65"/>
         <source>connection failed.
 Click Cancel to exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection failed Click Cancel to exit</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="129"/>
@@ -437,14 +437,14 @@ Click Cancel to exit.</source>
         <location filename="mainwindow.cpp" line="256"/>
         <location filename="mainwindow.cpp" line="289"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="130"/>
         <location filename="mainwindow.cpp" line="229"/>
         <source>Ajout effectué
 Click Cancel to exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Added successfully Click Cancel to exit </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="136"/>
@@ -454,42 +454,42 @@ Click Cancel to exit</source>
         <location filename="mainwindow.cpp" line="263"/>
         <location filename="mainwindow.cpp" line="296"/>
         <source>Not OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Not OK</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="136"/>
         <location filename="mainwindow.cpp" line="235"/>
         <source>Ajout non effectué.
 Clic Cancel to exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Addition not made</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="155"/>
         <location filename="mainwindow.cpp" line="257"/>
         <source>Suppression effectué
 Click Cancel to exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Deleted Successfully</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="161"/>
         <location filename="mainwindow.cpp" line="263"/>
         <source>Suppression  non effectué.
 Clic Cancel to exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deletion not made</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="193"/>
         <location filename="mainwindow.cpp" line="290"/>
         <source>Modification effectué
 Click Cancel to exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Modified Successfully</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="199"/>
         <location filename="mainwindow.cpp" line="296"/>
         <source>Modification non effectué.
 Clic Cancel to exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modification Not made</translation>
     </message>
 </context>
 </TS>
