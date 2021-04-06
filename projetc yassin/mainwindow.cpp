@@ -12,13 +12,102 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QPdfWriter>
+#include <QPageLayout>
+#include <QMediaPlayer>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
+
     ui->setupUi(this);
     ui->tableViewpolice->setModel(police.afficher());
     ui->tableViewmissions->setModel(mission.afficher());
+    ui->le_missionid->setReadOnly(true);
+    ui->le_missionname->setReadOnly(true);
+    ui->le_missiontype->setReadOnly(true);
+    ui->de_missiondate->setReadOnly(true);
+    ui->le_missionpoliceid->setReadOnly(true);
+    ui->le_missionspolicename->setReadOnly(true);
+    ui->le_missionspoliceprenom->setReadOnly(true);
+    ui->le_nompoliceafficher->setReadOnly(true);
+    ui->le_prenompoliceafficher->setReadOnly(true);
+    ui->le_gradeafficher->setReadOnly(true);
+    ui->le_policeidafficher->setReadOnly(true);
+    ui->le_chefidafficher->setReadOnly(true);
+
+
+
+
+
+    if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
+    {
+        ui->pb_missionadd->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_missionadd->setDisabled(0);
+    }
+
+
+
+
+    if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
+    {
+        ui->pb_addpolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_addpolice->setDisabled(0);
+    }
+
+
+
+    //ADD policier
+
+    ui->le_policeid->setValidator ( new QIntValidator(0, 100, this));
+    ui->le_grade->setMaxLength(20);
+    ui->le_prenompolice->setMaxLength(20);
+    ui->le_nompolice->setMaxLength(20);
+    ui->le_chefid->setValidator ( new QIntValidator(0, 100, this));
+
+    //Modifier policier
+
+    ui->le_grademodifier->setMaxLength(20);
+    ui->le_prenommodifier->setMaxLength(20);
+    ui->le_nompolicemodifier->setMaxLength(20);
+    ui->le_chefidmodifier->setValidator ( new QIntValidator(0, 100, this));
+
+    //ADD mission
+    ui->le_missionidadd->setValidator ( new QIntValidator(0, 100, this));
+    ui->le_missionnameadd->setMaxLength(20);
+    ui->le_missiontypeadd->setMaxLength(20);
+    ui->le_missionpoliceidadd->setValidator ( new QIntValidator(0, 100, this));
+
+    //Modifer mission
+    ui->le_missionnamemodifier->setMaxLength(20);
+    ui->le_missiontypemodifier->setMaxLength(20);
+    ui->le_missionpoliceidmodifier->setValidator ( new QIntValidator(0, 100, this));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -30,7 +119,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pb_addpolice_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idp = ui->le_policeid->text().toInt();
+
     QString nom=ui->le_nompolice->text();
     QString prenom=ui->le_prenompolice->text();
     QString grade=ui->le_grade->text();
@@ -87,6 +180,9 @@ void MainWindow::on_tableViewpolice_activated(const QModelIndex &index)
 
 void MainWindow::on_pb_modifiepolice_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idp = ui->le_policeidmodifier->text().toInt();
     QString nom=ui->le_nompolicemodifier->text();
     QString prenom=ui->le_prenommodifier->text();
@@ -135,13 +231,46 @@ void MainWindow::on_tableViewmissions_activated(const QModelIndex &index)
         while( qry.next()  )
     {
             ui->le_missionid->setText(qry.value(0).toString());
+
+            ui->le_missionid->setReadOnly(true);
+            QPalette *palette = new QPalette();
+            palette->setColor(QPalette::Base,Qt::white);
+            palette->setColor(QPalette::Text,Qt::darkGray);
+            ui->le_missionid->setPalette(*palette);
+
             ui->le_missionname->setText(qry.value(1).toString());
+
+            ui->le_missionname->setReadOnly(true);
+            QPalette *palette1 = new QPalette();
+            palette1->setColor(QPalette::Base,Qt::white);
+            palette1->setColor(QPalette::Text,Qt::darkGray);
+            ui->le_missionname->setPalette(*palette);
+
             ui->le_missiontype->setText(qry.value(2).toString());
+
+            ui->le_missiontype->setReadOnly(true);
+            QPalette *palette2 = new QPalette();
+            palette2->setColor(QPalette::Base,Qt::white);
+            palette2->setColor(QPalette::Text,Qt::darkGray);
+            ui->le_missiontype->setPalette(*palette);
+
             //ui->le_missionshowdate->setText(qry.value(3).toString());
             ui->de_missiondate->setDate(qry.value(3).toDate());
 
+            ui->de_missiondate->setReadOnly(true);
+            QPalette *palette3 = new QPalette();
+            palette3->setColor(QPalette::Base,Qt::white);
+            palette3->setColor(QPalette::Text,Qt::darkGray);
+            ui->de_missiondate->setPalette(*palette);
+
             //ui->le_missionspolicename->setText(qry.value(4).toString());
             ui->le_missionpoliceid->setText(qry.value(4).toString());
+
+            ui->le_missionpoliceid->setReadOnly(true);
+            QPalette *palette4 = new QPalette();
+            palette4->setColor(QPalette::Base,Qt::white);
+            palette4->setColor(QPalette::Text,Qt::darkGray);
+            ui->le_missionpoliceid->setPalette(*palette);
 
             int idp = ui->le_missionpoliceid->text().toInt();
 
@@ -155,7 +284,14 @@ void MainWindow::on_tableViewmissions_activated(const QModelIndex &index)
 
             {
                     ui->le_missionspolicename->setText(query.value(0).toString());
+
+                    ui->le_missionspolicename->setReadOnly(true);
+
+
                     ui->le_missionspoliceprenom->setText(query.value(1).toString());
+
+                    ui->le_missionspoliceprenom->setReadOnly(true);
+
             }
 
             }
@@ -173,6 +309,9 @@ void MainWindow::on_tableViewmissions_activated(const QModelIndex &index)
 
 void MainWindow::on_pb_missionsdelete_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idm =ui->le_missionid->text().toInt();
     bool test=mission.supprimer(idm);
     if(test)
@@ -197,6 +336,9 @@ void MainWindow::on_pb_missionsdelete_clicked()
 
 void MainWindow::on_pb_missionsmodifier_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     ui->tabWidget_3->setCurrentIndex(ui->tabWidget_3->count()-1);
 
     int idm=ui->le_missionid->text().toInt();
@@ -237,7 +379,9 @@ void MainWindow::on_pb_missionsmodifier_clicked()
 
 void MainWindow::on_pb_mission_clicked()
 {
-
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idm = ui->le_missionidmodifier->text().toInt();
 
     QString nom=ui->le_missionnamemodifier->text();
@@ -326,6 +470,9 @@ void MainWindow::on_le_searchplice_textChanged(const QString &arg1)
 
 void MainWindow::on_pb_policetaketomodifier_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idp=ui->le_policeidafficher->text().toInt();
     QString res=QString::number(idp);
     QSqlQuery qry;
@@ -360,6 +507,9 @@ void MainWindow::on_pb_policetaketomodifier_clicked()
 
 void MainWindow::on_pb_policesupprimer_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idp =ui->le_policeidafficher->text().toInt();
     bool test=police.supprimer(idp);
     if(test)
@@ -384,16 +534,26 @@ void MainWindow::on_pb_policesupprimer_clicked()
 
 void MainWindow::on_pb_policetaketoadd_clicked()
 {
-     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-2);
+       QMediaPlayer * music = new QMediaPlayer();
+       music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+       music->play();
+
+    // ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-2);
 }
 
 void MainWindow::on_pb_missionstaketoadd_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
      ui->tabWidget_3->setCurrentIndex(ui->tabWidget_3->count()-2);
 }
 
 void MainWindow::on_pb_missionadd_clicked()
 {
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
     int idm = ui->le_missionidadd->text().toInt();
     QString nom=ui->le_missionnameadd->text();
     QString type=ui->le_missiontypeadd->text();
@@ -477,42 +637,369 @@ void MainWindow::on_pb_missionadd_clicked()
 
 void MainWindow::on_pb_missioninfoprint_clicked()
 {
-   /*
-    QPrinter printer;
-    printer.setPrinterName("deired printer name");
-    QPrintDialog dialog(&printer,this);
-    if(dialog.exec()== QDialog::Rejected ) return;
-*/
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
+    QPdfWriter pdf("C:/Users/xDrais/Desktop/Pdfdetention.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
 
-    int width = 0;
-    int height = 0;
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Detentions");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/xDrais/Desktop/dsfsdfsdf.png"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"idm");
+                                     painter.drawText(2300,3300,"nom");
+                                     painter.drawText(4300,3300,"type");
+                                     painter.drawText(6300,3300,"date_mission");
+                                     painter.drawText(8500,3300,"idp");
+                                     //painter.drawText(8000,3300,"ID_CEL");
 
-  ui->tableViewmissions->resizeColumnsToContents();
-    ui->tableViewmissions->resizeRowsToContents();
 
-    const int columnCnt = ui->tableViewmissions->model()->columnCount();
-    for( int i = 0; i < columnCnt; ++i )
-    {
-        width += ui->tableViewmissions->columnWidth(i) ;
+
+                                     QSqlQuery query;
+                                     query.prepare("select * from MISSIONS");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                         painter.drawText(6300,i,query.value(3).toString());
+                                         painter.drawText(8500,i,query.value(4).toString());
+                                      //  painter.drawText(8000,i,query.value(5).toString());
+
+
+
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/xDrais/Desktop/Pdfdetention.pdf"));
+
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
     }
-   width=width*2;
-
-    const int rowCnt = ui->tableViewmissions->model()->rowCount();
-    for( int i = 0; i < rowCnt; ++i )
-    {
-        height += ui->tableViewmissions->rowHeight(i)  ;
-    }
-    height=height*2;
-
-    ui->tableViewmissions->setFixedSize(width, height);
-
-    QPrinter printer;
-
-    ui->tableViewmissions->render(&printer);
-
-    ui->tableViewmissions->setFixedSize(471, 321);
-
 }
 
 
 
+
+
+
+
+void MainWindow::on_pb_darkmode_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
+    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/dark/style.qss");
+
+    if (!f.exists())   {
+       qDebug("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+
+}
+
+void MainWindow::on_pb_lightmode_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
+    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/light/style.qss");
+
+    if (!f.exists())   {
+       qDebug("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+
+}
+
+void MainWindow::on_pb_darkorange_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
+    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/darkorange/darkorange.qss");
+
+    if (!f.exists())   {
+       qDebug("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pb_defaultmode_clicked()
+{
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
+    music->play();
+     setStyleSheet("");
+}
+
+
+
+
+void MainWindow::on_le_grade_textEdited(const QString &arg1)
+{
+    if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
+    {
+        ui->pb_addpolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_addpolice->setDisabled(0);
+    }
+
+}
+
+void MainWindow::on_le_policeid_textEdited(const QString &arg1)
+{
+    if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
+    {
+        ui->pb_addpolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_addpolice->setDisabled(0);
+    }
+
+}
+
+void MainWindow::on_le_prenompolice_textEdited(const QString &arg1)
+{
+    if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
+    {
+        ui->pb_addpolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_addpolice->setDisabled(0);
+    }
+
+}
+
+void MainWindow::on_le_nompolice_textEdited(const QString &arg1)
+{
+    if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
+    {
+        ui->pb_addpolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_addpolice->setDisabled(0);
+    }
+
+}
+
+void MainWindow::on_le_chefid_textEdited(const QString &arg1)
+{
+    if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
+    {
+        ui->pb_addpolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_addpolice->setDisabled(0);
+    }
+
+}
+
+void MainWindow::on_le_grademodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_grademodifier->text().isEmpty() or ui->le_prenommodifier->text().isEmpty() or ui->le_nompolicemodifier->text().isEmpty()  or ui->le_chefidmodifier->text().isEmpty() )
+    {
+        ui->pb_modifiepolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_modifiepolice->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_prenommodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_grademodifier->text().isEmpty() or ui->le_prenommodifier->text().isEmpty() or ui->le_nompolicemodifier->text().isEmpty()  or ui->le_chefidmodifier->text().isEmpty() )
+    {
+        ui->pb_modifiepolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_modifiepolice->setDisabled(0);
+    }
+}
+
+
+
+void MainWindow::on_le_nompolicemodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_grademodifier->text().isEmpty() or ui->le_prenommodifier->text().isEmpty() or ui->le_nompolicemodifier->text().isEmpty()  or ui->le_chefidmodifier->text().isEmpty() )
+    {
+        ui->pb_modifiepolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_modifiepolice->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_chefidmodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_grademodifier->text().isEmpty() or ui->le_prenommodifier->text().isEmpty() or ui->le_nompolicemodifier->text().isEmpty()  or ui->le_chefidmodifier->text().isEmpty() )
+    {
+        ui->pb_modifiepolice->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_modifiepolice->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missionidadd_textEdited(const QString &arg1)
+{
+    if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
+    {
+        ui->pb_missionadd->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_missionadd->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missionnameadd_textEdited(const QString &arg1)
+{
+    if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
+    {
+        ui->pb_missionadd->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_missionadd->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missiontypeadd_textEdited(const QString &arg1)
+{
+    if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
+    {
+        ui->pb_missionadd->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_missionadd->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missionpoliceidadd_textEdited(const QString &arg1)
+{
+    if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
+    {
+        ui->pb_missionadd->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_missionadd->setDisabled(0);
+    }
+}
+
+void MainWindow::on_de_missiondateadd_dateChanged(const QDate &date)
+{
+    if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
+    {
+        ui->pb_missionadd->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_missionadd->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missionnamemodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_missionnamemodifier->text().isEmpty() or ui->le_missiontypemodifier->text().isEmpty() or ui->le_missionpoliceidmodifier->text().isEmpty()  )
+    {
+        ui->pb_mission->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_mission->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missiontypemodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_missionnamemodifier->text().isEmpty() or ui->le_missiontypemodifier->text().isEmpty() or ui->le_missionpoliceidmodifier->text().isEmpty()  )
+    {
+        ui->pb_mission->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_mission->setDisabled(0);
+    }
+}
+
+void MainWindow::on_le_missionpoliceidmodifier_textEdited(const QString &arg1)
+{
+    if(ui->le_missionnamemodifier->text().isEmpty() or ui->le_missiontypemodifier->text().isEmpty() or ui->le_missionpoliceidmodifier->text().isEmpty()  )
+    {
+        ui->pb_mission->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_mission->setDisabled(0);
+    }
+}
+
+void MainWindow::on_de_missiondatemodifier_userDateChanged(const QDate &date)
+{
+    if(ui->le_missionnamemodifier->text().isEmpty() or ui->le_missiontypemodifier->text().isEmpty() or ui->le_missionpoliceidmodifier->text().isEmpty()  )
+    {
+        ui->pb_mission->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_mission->setDisabled(0);
+    }
+}

@@ -1,4 +1,4 @@
-QT       += core gui printsupport
+QT       += core gui printsupport multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,3 +30,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 QT += sql
 CONFIG += console
+RESOURCES += dark/style.qrc \
+    res.qrc
+RESOURCES += light/style.qrc
+RESOURCES += darkorange/darkorange.qrc
+
+

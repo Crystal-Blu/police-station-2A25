@@ -106,6 +106,3 @@ bool policier::supprimer(int idp)
     return query.exec();
 }
 
-
-
-

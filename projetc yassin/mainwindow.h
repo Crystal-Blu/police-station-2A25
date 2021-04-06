@@ -46,6 +46,52 @@ private slots:
 
     void on_pb_missioninfoprint_clicked();
 
+    void on_pb_darkmode_clicked();
+
+    void on_pb_lightmode_clicked();
+
+    void on_pb_darkorange_clicked();
+
+    void on_pb_defaultmode_clicked();
+
+    void on_le_grade_textEdited(const QString &arg1);
+
+    void on_le_policeid_textEdited(const QString &arg1);
+
+    void on_le_prenompolice_textEdited(const QString &arg1);
+
+    void on_le_nompolice_textEdited(const QString &arg1);
+
+    void on_le_chefid_textEdited(const QString &arg1);
+
+
+    void on_le_grademodifier_textEdited(const QString &arg1);
+
+    void on_le_prenommodifier_textEdited(const QString &arg1);
+
+
+    void on_le_nompolicemodifier_textEdited(const QString &arg1);
+
+    void on_le_chefidmodifier_textEdited(const QString &arg1);
+
+    void on_le_missionidadd_textEdited(const QString &arg1);
+
+    void on_le_missionnameadd_textEdited(const QString &arg1);
+
+    void on_le_missiontypeadd_textEdited(const QString &arg1);
+
+    void on_le_missionpoliceidadd_textEdited(const QString &arg1);
+
+    void on_de_missiondateadd_dateChanged(const QDate &date);
+
+    void on_le_missionnamemodifier_textEdited(const QString &arg1);
+
+    void on_le_missiontypemodifier_textEdited(const QString &arg1);
+
+    void on_le_missionpoliceidmodifier_textEdited(const QString &arg1);
+
+    void on_de_missiondatemodifier_userDateChanged(const QDate &date);
+
 private:
     Ui::MainWindow *ui;
     policier police;
