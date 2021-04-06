@@ -3,6 +3,7 @@
 #include<QMessageBox>
 #include<QIntValidator>
 #include <QDateEdit>
+#include <QLineEdit>
 #include"delits.h"
 #include "chart.h"
 #include "criminels.h"
@@ -17,23 +18,53 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QPdfWriter>
+#include<QFile>
+#include<QApplication>
+#include<QSoundEffect>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->tab_delit1->setStyleSheet("gridline-color:red");
-    ui->tab_delit1->horizontalHeader()->setStyleSheet("gridline-color:red");
-    ui->tab_delit1->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
-    ui->tab_delit2->setStyleSheet("gridline-color:red");
-    ui->tab_delit2->horizontalHeader()->setStyleSheet("gridline-color:red");
-    ui->tab_delit2->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
-    ui->tab_criminel1->setStyleSheet("gridline-color:red");
-    ui->tab_criminel1->horizontalHeader()->setStyleSheet("gridline-color:red");
-    ui->tab_criminel1->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
+
+
+    //CONTROLE SAISIE ID CRIMINEL
+
+    QRegExp rx("[0-9]{5}");
+
+
+    QValidator *validator = new QRegExpValidator(rx, this);
+
+    ui->lineEdit_id_c->setValidator(validator);
+    ui->lineEdit_ID_cm->setValidator(validator);
+    ui->lineEdit_18->setValidator(validator);
+    ui->lineEdit_5->setValidator(validator);
+    ui->lineEdit_10->setValidator(validator);
+
+
+
+    //CONTROLE SAISIE ID DELIT
+
+
+
+    QRegExp rx1("[0-9]{4}");
+    QValidator *validator1 = new QRegExpValidator(rx, this);
+    ui->lineEdit_27->setValidator(validator1);
+    ui->lineEdit_26->setValidator(validator1);
+    ui->le_mid->setValidator(validator1);
+    ui->ledelitid->setValidator(validator1);
+
+
+//INITIATION AFFICHAGE
+
     ui->tab_delit1->setModel(D1.afficher());
     ui->tab_delit2->setModel(D1.afficher());
     ui->tab_criminel1->setModel(C1.afficher_c());
+
+    ui->tab_criminel2->setModel(C1.afficher_c());
+
+    //AFFICHAGE NOMBRE CRIMINEL
+
     QSqlQuery query;
        int numRows= 0;
        query.exec("SELECT COUNT(*) FROM CRIMINELS  ");
@@ -43,6 +74,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 ui->lineEdit_17->setText(numRowsstr);
 
+//INITIATION MEDIAPLAYER
+
+
 mMediaPlayer = new QMediaPlayer (this);
 connect(mMediaPlayer,&QMediaPlayer ::positionChanged,[&](qint64 pos){
     ui->avance->setValue(pos);
@@ -50,6 +84,11 @@ connect(mMediaPlayer,&QMediaPlayer ::positionChanged,[&](qint64 pos){
 connect(mMediaPlayer,&QMediaPlayer::durationChanged,[&](qint64 dur) {
     ui->avance->setMaximum(dur);
 });
+
+
+mmMediaPlayer = new QMediaPlayer (this);
+
+
 }
 
 
@@ -59,6 +98,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+//AJOUTER DELIT
 
 void MainWindow::on_pushButton_6_clicked()
 {
@@ -91,7 +132,7 @@ void MainWindow::on_pushButton_6_clicked()
 
 
 
-
+//SUPPRIMER DELIT
 
 void MainWindow::on_supprimerPb_3_clicked()
 {
@@ -112,6 +153,9 @@ void MainWindow::on_supprimerPb_3_clicked()
         else
  QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Suppression  non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 }
+
+
+//MODIFIER  DELIT
 
 void MainWindow::on_pushButton_13_clicked()
 {
@@ -141,7 +185,7 @@ void MainWindow::on_pushButton_13_clicked()
 
 
 }
-
+//AJOUT CRIMINEL
 void MainWindow::on_PB_add_c_clicked()
 {
 
@@ -162,6 +206,7 @@ void MainWindow::on_PB_add_c_clicked()
         ui->lineEdit_17->setText(numRowsstr);
             ui->tab_criminel1->setModel(C1.afficher_c());
 
+            ui->tab_criminel2->setModel(C1.afficher_c());
 
                 QMessageBox::information(nullptr,QObject::tr("OK"),
                                          QObject::tr("Ajout effectué\n"
@@ -173,10 +218,10 @@ void MainWindow::on_PB_add_c_clicked()
                 QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 
 
-
-
-
 }
+
+//SUPPRIMER CRIMINEL
+
 
 void MainWindow::on_PB_DEL_C_clicked()
 {
@@ -193,6 +238,7 @@ void MainWindow::on_PB_DEL_C_clicked()
 
     ui->lineEdit_17->setText(numRowsstr);
      ui->tab_criminel1->setModel(C1.afficher_c());
+     ui->tab_criminel2->setModel(C1.afficher_c());
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
                                      QObject::tr("Suppression effectué\n"
@@ -203,6 +249,10 @@ void MainWindow::on_PB_DEL_C_clicked()
         else
  QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Suppression  non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 }
+
+
+//MODIFIER CRIMINEL
+
 
 void MainWindow::on_PB_mod_c_clicked()
 {
@@ -217,6 +267,7 @@ void MainWindow::on_PB_mod_c_clicked()
     if (test){
 
  ui->tab_criminel1->setModel(C1.afficher_c());
+ ui->tab_criminel2->setModel(C1.afficher_c());
 
         QMessageBox::information(nullptr,QObject::tr("OK"),
                                  QObject::tr("Modification effectué\n"
@@ -232,6 +283,13 @@ void MainWindow::on_PB_mod_c_clicked()
 
 void MainWindow::on_pushButton_12_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
     QSqlQuery query;
     int ID_DELIT=ui->lineEdit_27->text().toInt();
 
@@ -243,15 +301,19 @@ void MainWindow::on_pushButton_12_clicked()
     model->setQuery(query);
 
      QTableView *view =ui->tab_delit2;
-     ui->tab_delit2->setStyleSheet("gridline-color:red");
-     ui->tab_delit2->horizontalHeader()->setStyleSheet("gridline-color:red");
-     ui->tab_delit2->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
 
         view->setModel(model);
         ui->lineEdit_27->setText("");
 }
 void MainWindow::on_pushButton_2_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
     QSqlQuery query;
     int ID_CRIMINEL=ui->lineEdit_5->text().toInt();
 
@@ -263,9 +325,6 @@ void MainWindow::on_pushButton_2_clicked()
     model->setQuery(query);
 
      QTableView *view =ui->tab_criminel2;
-     ui->tab_criminel2->setStyleSheet("gridline-color:red");
-     ui->tab_criminel2->horizontalHeader()->setStyleSheet("gridline-color:red");
-     ui->tab_criminel2->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
 
         view->setModel(model);
         ui->lineEdit_ID_cm->setText("");
@@ -277,6 +336,14 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
+
     QSqlQuery query;
     int ID_CRIMINEL=ui->lineEdit_10->text().toInt();
 
@@ -288,9 +355,6 @@ void MainWindow::on_pushButton_3_clicked()
     model->setQuery(query);
 
      QTableView *view =ui->tableView_3;
-     ui->tableView_3->setStyleSheet("gridline-color:red");
-     ui->tableView_3->horizontalHeader()->setStyleSheet("gridline-color:red");
-     ui->tableView_3->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
 
         view->setModel(model);
         ui->lineEdit_ID_cm->setText("");
@@ -298,6 +362,12 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_trier_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
 
     QSqlQuery query;
     query.exec("SELECT * FROM DELITS ORDER BY TYPE_DELIT");
@@ -305,9 +375,6 @@ void MainWindow::on_pushButton_trier_clicked()
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery(query);
     QTableView *view =ui->tab_delit1;
-    ui->tab_delit1->setStyleSheet("gridline-color:red");
-    ui->tab_delit1->horizontalHeader()->setStyleSheet("gridline-color:red");
-    ui->tab_delit1->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
 
        view->setModel(model);
        ui->lineEdit_ID_cm->setText("");
@@ -318,15 +385,22 @@ void MainWindow::on_pushButton_trier_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
+
+
+
     QSqlQuery query;
     query.exec("SELECT * FROM DELITS ORDER BY DATE_DELIT");
 
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery(query);
     QTableView *view =ui->tab_delit1;
-    ui->tab_delit1->setStyleSheet("gridline-color:red");
-    ui->tab_delit1->horizontalHeader()->setStyleSheet("gridline-color:red");
-    ui->tab_delit1->horizontalHeader()->setStyleSheet("border: 1px solid red;border-left: 1px solid red;font-weight:bold; color: red");
 
        view->setModel(model);
        ui->lineEdit_ID_cm->setText("");
@@ -335,6 +409,13 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_5_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
     chart chart;
     chart.setModal(true);
     chart.exec();
@@ -383,6 +464,13 @@ void MainWindow::on_volume_valueChanged(int value)
 
 void MainWindow::on_PB_load_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
     QSqlQuery query;
     query.exec("SELECT ID_CRIMINEL FROM CRIMINELS");
     QSqlQueryModel *model = new QSqlQueryModel;
@@ -395,7 +483,14 @@ void MainWindow::on_PB_load_clicked()
 }
 
 void MainWindow::on_pushButton_trier_2_clicked()
-{    charttype charttype;
+{       QUrl url ;
+        url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+           mmMediaPlayer->setMedia(url);
+           mmMediaPlayer->setVolume(50);
+           mmMediaPlayer->play();
+
+    charttype charttype;
      charttype.setModal(true);
      charttype.exec();
 
@@ -407,37 +502,93 @@ void MainWindow::on_pushButton_4_clicked()
 
 
 
-        int width = 0;
-        int height = 0;
 
-      ui->tab_criminel1->resizeColumnsToContents();
-        ui->tab_criminel1->resizeRowsToContents();
+    QPdfWriter pdf("C:/Users/Ilyes/Desktop/Pdfcriminel.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
 
-        const int columnCnt = ui->tab_criminel1->model()->columnCount();
-        for( int i = 0; i < columnCnt; ++i )
-        {
-            width += ui->tab_criminel1->columnWidth(i) ;
-        }
-       width=width*2;
-
-        const int rowCnt = ui->tab_criminel1->model()->rowCount();
-        for( int i = 0; i < rowCnt; ++i )
-        {
-            height += ui->tab_criminel1->rowHeight(i)  ;
-        }
-        height=height*2;
-
-        ui->tab_criminel1->setFixedSize(width, height);
-
-        QPrinter printer;
-
-        ui->tab_criminel1->render(&printer);
-
-        ui->tab_criminel1->setFixedSize(471, 321);
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Criminel");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/Ilyes/Desktop/homme.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"ID CRIMINEL");
+                                     painter.drawText(2300,3300,"AGE");
+                                     painter.drawText(4300,3300,"NOM");
+                                     painter.drawText(6300,3300,"PRENOM");
 
 
+                                     QSqlQuery query;
+                                     query.prepare("select * from CRIMINELS");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                         painter.drawText(6300,i,query.value(3).toString());
 
 
+
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/Ilyes/Desktop/Pdfcriminel.pdf"));
+
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+
+
+
+
+
+}
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+
+    if (ui->pushButton_7->isChecked()){
+        ui->label_16->setText("Activé");
+        QFile file("C:/Users/Ilyes/Downloads/Style_Gray.qss");
+
+        file.open(QFile::ReadOnly);
+        QString styleSheet = QString::fromLatin1(file.readAll());
+
+        // Option 1: Set theme for the inner central widget
+        //ui->centralWidget->setStyleSheet(styleSheet);
+
+        // Option 2: Set theme for the entire application
+        this->setStyleSheet(styleSheet);
+    }
+    else{ ui->label_16->setText("Désactivé");
+        QFile file("C:/Users/Ilyes/Downloads/Style_Blue.qss");
+
+        file.open(QFile::ReadOnly);
+        QString styleSheet = QString::fromLatin1(file.readAll());
+
+        // Option 1: Set theme for the inner central widget
+        //ui->centralWidget->setStyleSheet(styleSheet);
+
+        // Option 2: Set theme for the entire application
+        this->setStyleSheet(styleSheet);}
 
 
 }

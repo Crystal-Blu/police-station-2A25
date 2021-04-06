@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>975</width>
-    <height>685</height>
+    <width>1023</width>
+    <height>702</height>
    </rect>
   </property>
   <property name="font">
@@ -16,1072 +16,2116 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Criminel/Delit</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.4 rgb(194, 216, 242),
+                                 stop: 0.4 rgb(194, 216, 242), stop: 1.0 rgb(156, 193, 239));
+  color:rgb(59, 90, 130);
+}
+
+QWidget{
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.4 rgb(194, 216, 242),
+                                 stop: 0.4 rgb(194, 216, 242), stop: 1.0 rgb(156, 193, 239));
+  color:rgb(59, 90, 130);
+}
+
+QDockWidget &gt; QWidget  {
+  border-style:none;
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.4 rgb(194, 216, 242),
+                                 stop: 0.4 rgb(194, 216, 242), stop: 1.0 rgb(156, 193, 239));
+  
+  padding:1px;
+  border-radius: 0px;
+  
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+}
+
+QWidget &gt; QDockWidget  {
+   background:white;
+}
+
+QCalendarWidget &gt; QWidget &gt; QToolButton {
+  border-style:none;
+  color:rgb(59, 90, 130);
+  background:transparent;
+  padding:1px;
+  border-radius: 0px;
+}
+
+QCalendarWidget &gt; QWidget#qt_calendar_navigationbar{
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  background:transparent;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;    
+}
+
+QCalendarWidget &gt; QWidget#qt_calendar_calendarview  {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  background:white;
+  border-radius: 0px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;        
+}
+
+QGroupBox {
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 1ex;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 3px;
+}
+
+QTabWidget::pane {  
+   margin: 1px, 1px, 1px, 1px;
+   border-left: 1px solid rgb(255, 255, 255);
+   border-top: 1px solid rgb(255, 255, 255);
+   border-bottom: 2px solid rgb(136, 163, 205);
+   border-right: 2px solid rgb(136, 163, 205);
+   border-radius: 8px;
+   border-top-left-radius: 0px;
+   padding: 0px;
+}
+
+QTabBar::tab {
+
+  background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.4 rgb(194, 216, 242),
+                                 stop: 0.4 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+  border-left: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(136, 163, 205);
+  border-right: 1px solid rgb(136, 163, 205);
+  border-top-right-radius: 15;
+  border-top-left-radius: 5;    
+  color:rgb(59, 90, 130);
+  padding:5px;
+  min-width: 80px;
+}
+
+
+QTabBar::tab:!selected {
+margin-top: 3px; /* make non-selected tabs look smaller */
+} 
+
+QTabBar::tab:first {
+  background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.4 rgb(194, 216, 242),
+                                 stop: 0.4 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+
+  border-left: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(136, 163, 205);
+  border-right: 1px solid rgb(136, 163, 205);
+  border-top-right-radius: 15;
+  border-top-left-radius: 5;    
+  color:rgb(59, 90, 130);
+  padding:5px;
+}
+
+QTabBar::tab::selected {
+  background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
+                                 stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+  border-left: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(136, 163, 205);
+  border-right: 2px solid rgb(136, 163, 205);
+  border-top-right-radius: 15;
+  border-top-left-radius: 5;    
+  color:rgb(59, 90, 130);
+  padding:5px;
+}
+
+QTabWidget::tab-bar {
+left: 0px; /* move to the right by 5px */
+}
+
+QTabBar::tab:hover {
+background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
+stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+}	
+
+QPushButton:hover, QToolButton:hover,QComboBox:hover, QCheckBox:hover, QRadioButton:hover {
+background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
+stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+}
+
+
+
+
+QComboBox:!editable {
+   min-width: 80px;  
+   min-height: 19px; 
+   background:transparent;
+   border-left: 1px solid rgb(255, 255, 255);
+   border-top: 1px solid rgb(255, 255, 255);
+   border-bottom: 2px solid rgb(136, 163, 205);
+   border-right: 2px solid rgb(136, 163, 205);
+   background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+   padding:3px;
+   border-radius: 8px;
+}
+
+QComboBox:!editable:on {
+   min-width: 80px;  
+   min-height: 19px; 
+   background:transparent;
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+   padding:3px;
+   border-radius: 8px;
+}
+
+QComboBox:editable {
+   min-width: 80px;  
+   min-height: 18px; 
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   background:white;
+   padding:3px;
+   border-radius: 8px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+}
+
+QComboBox::down-arrow {
+    background-color: transparent;
+    border-left: 5px solid none;
+    border-right: 5px solid none; 
+    border-top: 5px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+    
+}
+
+QComboBox QAbstractItemView {
+   border: 1px solid gray;
+}
+
+
+
+QLabel {  
+  background-color:transparent;
+}
+
+QLineEdit, QTextEdit {  
+   background:white;
+   min-width: 80px;  
+   min-height: 16px; 
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   
+   padding:3px;
+   border-radius: 8px;
+}
+
+QRadioButton {  
+   background:transparent;
+   min-width: 80px;  
+   min-height: 20px; 
+   border-left: 1px solid rgb(255, 255, 255);
+   border-top: 1px solid rgb(255, 255, 255);
+   border-bottom: 2px solid rgb(136, 163, 205);
+   border-right: 2px solid rgb(136, 163, 205);
+   background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  
+   padding:3px;
+   border-radius: 8px;
+}
+
+QCheckBox {  
+   background:transparent;
+   min-width: 80px;  
+   min-height: 20px; 
+   border-left: 1px solid rgb(255, 255, 255);
+   border-top: 1px solid rgb(255, 255, 255);
+   border-bottom: 2px solid rgb(136, 163, 205);
+   border-right: 2px solid rgb(136, 163, 205);
+   background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  
+   padding:3px;
+   border-radius: 8px;
+}
+
+QPushButton {
+  border-style:none;
+  min-width: 80px;  
+  min-height: 20px;    
+  border-left: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid rgb(255, 255, 255);
+    
+  border-bottom: 2px solid rgb(136, 163, 205);
+  border-right: 2px solid rgb(136, 163, 205);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  padding:3px;
+  border-radius: 8px;
+}
+
+QPushButton::pressed {
+  border-style:none;   
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+    
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+    
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  padding:3px;
+  border-radius: 8px;
+}
+
+QToolButton {
+  border-style:none;
+  min-width: 80px;  
+  min-height: 16px;     
+  border-left: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid rgb(255, 255, 255);
+    
+  border-bottom: 2px solid rgb(136, 163, 205);
+  border-right: 2px solid rgb(136, 163, 205);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  padding:3px;
+  border-radius: 8px;
+}
+
+QCheckBox:checked, QRadioButton:checked {
+background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
+stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+   border-right: 2px solid rgb(255, 255, 255);
+  border-bottom: 2px solid rgb(255, 255, 255);
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+}
+
+QCheckBox:indeterminate {
+background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
+stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
+  border-right: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(255, 255, 255);
+    
+  border-top: 1px solid rgb(136, 163, 205);
+  border-left: 1px solid rgb(136, 163, 205);
+}
+
+
+QToolButton:pressed {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);  
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  padding:3px;
+  border-radius: 8px;
+}
+
+QMenu{
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  color:rgb(59, 90, 130);
+}
+
+QMenuBar
+{
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  color:rgb(59, 90, 130);
+}
+
+QMenuBar::item
+{
+    background: transparent;
+}
+
+QTableView {
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+    
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 0 8px;
+  color:rgb(59, 90, 130);
+}
+
+QHeaderView {
+    background: transparent;
+}
+QHeaderView::section {
+    background: transparent;
+    border: 1px solid gray;
+    padding: 3px;
+}
+
+QTreeView {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-radius: 8px;
+  show-decoration-selected: 0;
+}
+
+QGroupBox{
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-radius: 8px;
+}
+
+QToolBox {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-radius: 8px;
+}
+
+QListWidget {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-radius: 8px;
+  show-decoration-selected: 1;
+}
+
+QToolBox &gt; QWidget {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-radius: 8px;
+}
+
+QToolBox::tab {
+  border-top: 2px solid rgb(136, 163, 205);
+  border-left: 2px solid rgb(136, 163, 205);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  border-right: 1px solid rgb(255, 255, 255);
+  color:rgb(59, 90, 130);
+  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+  border-radius: 8px;
+}
+
+QSpinBox   {  
+   background:white;
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   
+   padding:3px;
+   border-radius: 8px;
+}
+
+QDoubleSpinBox  {  
+   background:white;
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   
+   padding:3px;
+   border-radius: 8px;
+}
+
+QDateEdit  {  
+   background:white;
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   
+   padding:3px;
+   border-radius: 8px;
+}
+
+QTimeEdit   {  
+   background:white;
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   
+   padding:3px;
+   border-radius: 8px;
+}
+
+QDateTimeEdit   {  
+   background:white;
+   border-right: 1px solid rgb(255, 255, 255);
+   border-bottom: 1px solid rgb(255, 255, 255);
+   border-top: 2px solid rgb(136, 163, 205);
+   border-left: 2px solid rgb(136, 163, 205);
+   
+   padding:3px;
+   border-radius: 8px;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-top: 2px solid rgb(136, 163, 205);
+ } 
+ 
+QDoubleSpinBox::up-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-top: 2px solid rgb(136, 163, 205);
+ } 
+ 
+ QDateEdit::up-button  {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-top: 2px solid rgb(136, 163, 205);
+ } 
+ 
+ QTimeEdit::up-button  {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-top: 2px solid rgb(136, 163, 205);
+ } 
+ 
+QDateTimeEdit::up-button  {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-top: 2px solid rgb(136, 163, 205);
+ } 
+
+QSpinBox::up-arrow{ 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QDoubleSpinBox::up-arrow { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QDateEdit::up-arrow { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QTimeEdit::up-arrow { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QSpinBox::up-button:pressed {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 15px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 3px solid rgb(136, 163, 205);
+ } 
+ 
+QDoubleSpinBox::up-button:pressed {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 15px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 3px solid rgb(136, 163, 205);
+ } 
+ 
+ QDateEdit::up-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 15px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 3px solid rgb(136, 163, 205);
+ } 
+ 
+ QTimeEdit::up-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 15px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 3px solid rgb(136, 163, 205);
+ } 
+ 
+QDateTimeEdit::up-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: top right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-top-right-radius: 8px; 
+    border-width: 1px; 
+    width: 15px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 3px solid rgb(136, 163, 205);
+ } 
+ 
+ QSpinBox::up-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+ QDoubleSpinBox::up-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+ QDateEdit::up-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+ QTimeEdit::up-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-bottom: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+ QSpinBox::down-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-bottom: 0px;
+ } 
+ 
+ QDoubleSpinBox::down-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-bottom: 0px;
+ } 
+ 
+  QDateEdit::down-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-bottom: 0px;
+ } 
+ 
+  QTimeEdit::down-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-bottom: 0px;
+ } 
+
+ QDateTimeEdit::down-button {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 16px; 
+    border-bottom: 0px;
+ } 
+
+QSpinBox::down-arrow  { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QDoubleSpinBox::down-arrow { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QDateEdit::down-arrow { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QTimeEdit::down-arrow { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QSpinBox::down-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 14px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 1px solid #BEBEBE; 
+    border-right: 1px solid #BEBEBE; 
+    border-bottom: 0px;
+ } 
+ 
+QDoubleSpinBox::down-button:pressed {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 14px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 1px solid #BEBEBE; 
+    border-right: 1px solid #BEBEBE; 
+    border-bottom: 0px;
+ } 
+ 
+ QDateEdit::down-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 14px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 1px solid #BEBEBE; 
+    border-right: 1px solid #BEBEBE; 
+    border-bottom: 0px;
+ } 
+ 
+ QTimeEdit::down-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 14px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 1px solid #BEBEBE; 
+    border-right: 1px solid #BEBEBE; 
+    border-bottom: 0px;
+ } 
+ 
+QDateTimeEdit::down-button:pressed  {
+    subcontrol-origin: margin; 
+    subcontrol-position: bottom right; 
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  rgb(217, 231, 247), stop: 0.1 rgb(194, 216, 242),
+                                 stop: 0.5 rgb(194, 216, 242), stop: 1.0 rgb(174, 204, 242));
+    border-bottom-right-radius: 8px; 
+    border-width: 1px; 
+    width: 14px; 
+    border-left: 1px solid #BEBEBE; 
+    border-top: 1px solid #BEBEBE; 
+    border-right: 1px solid #BEBEBE; 
+    border-bottom: 0px;
+ } 
+ 
+QSpinBox::down-arrow:pressed   { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QDoubleSpinBox::down-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+}
+
+QDateEdit::down-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+} 
+ 
+QTimeEdit::down-arrow:pressed { 
+    background-color: transparent;
+    border-left: 3px solid none;
+    border-right: 3px solid none; 
+    border-top: 3px solid #808080; 
+    width: 1px; 
+    height: 1px; 
+} </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>931</width>
-      <height>661</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="criminels">
-     <attribute name="title">
-      <string>Criminels</string>
-     </attribute>
-     <widget class="QTabWidget" name="tabWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>-10</x>
-        <y>0</y>
-        <width>941</width>
-        <height>611</height>
-       </rect>
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="autoFillBackground">
+       <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
-      <widget class="QWidget" name="tab_7">
+      <widget class="QWidget" name="criminels">
        <attribute name="title">
-        <string>Ajouter</string>
+        <string>Criminels</string>
        </attribute>
-       <widget class="QPushButton" name="PB_add_c">
-        <property name="geometry">
-         <rect>
-          <x>590</x>
-          <y>200</y>
-          <width>231</width>
-          <height>161</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>21</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Ajouter</string>
-        </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>541</width>
-          <height>531</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Criminel</string>
-        </property>
-        <widget class="QWidget" name="layoutWidget_6">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>30</y>
-           <width>511</width>
-           <height>481</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <property name="spacing">
-             <number>95</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Identifiant unique</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_id_c">
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <widget class="QTabWidget" name="tabWidget_2">
+          <property name="currentIndex">
+           <number>3</number>
+          </property>
+          <widget class="QWidget" name="tab_7">
+           <attribute name="title">
+            <string>Ajouter</string>
+           </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <property name="spacing">
-             <number>185</number>
-            </property>
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QGroupBox" name="groupBox">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>-1</pointsize>
+                <weight>75</weight>
+                <italic>true</italic>
+                <bold>true</bold>
+                <underline>false</underline>
+                <strikeout>false</strikeout>
                </font>
               </property>
-              <property name="text">
-               <string>Prenom</string>
+              <property name="title">
+               <string>Criminel</string>
               </property>
+              <layout class="QFormLayout" name="formLayout_3">
+               <property name="horizontalSpacing">
+                <number>11</number>
+               </property>
+               <property name="verticalSpacing">
+                <number>82</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Identifiant unique</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="lineEdit_id_c">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_3">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Prenom</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_prenom_c">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_2">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Nom</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_nom_c">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Age</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="lineEdit_age_c">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_prenom_c"/>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <property name="spacing">
-             <number>210</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QPushButton" name="PB_add_c">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>36</pointsize>
+                <weight>75</weight>
+                <italic>false</italic>
+                <bold>true</bold>
+                <strikeout>false</strikeout>
+                <kerning>true</kerning>
                </font>
               </property>
               <property name="text">
-               <string>Nom</string>
+               <string>Ajouter</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_nom_c"/>
-            </item>
            </layout>
-          </item>
-          <item>
+          </widget>
+          <widget class="QWidget" name="tab_8">
+           <attribute name="title">
+            <string>Supprimer</string>
+           </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <property name="spacing">
-             <number>218</number>
-            </property>
             <item>
-             <widget class="QLabel" name="label_4">
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="spacing">
+               <number>193</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="supprimerlbl">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Identifiant Unique</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_18">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="PB_DEL_C">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Age</string>
+               <string>Supprimer</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_age_c"/>
-            </item>
            </layout>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_8">
-       <attribute name="title">
-        <string>Supprimer</string>
-       </attribute>
-       <widget class="QPushButton" name="PB_DEL_C">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>180</y>
-          <width>181</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Supprimer</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>150</y>
-          <width>611</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <property name="spacing">
-          <number>200</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="supprimerlbl">
-           <property name="font">
-            <font>
-             <pointsize>15</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Identifiant Unique</string>
-           </property>
           </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_18">
-           <property name="font">
-            <font>
-             <pointsize>15</pointsize>
-            </font>
-           </property>
+          <widget class="QWidget" name="tab_9">
+           <attribute name="title">
+            <string>Rechercher</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="1">
+             <widget class="QTableView" name="tableView_3"/>
+            </item>
+            <item row="0" column="0">
+             <layout class="QFormLayout" name="formLayout_4">
+              <property name="verticalSpacing">
+               <number>80</number>
+              </property>
+              <property name="topMargin">
+               <number>150</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Identifiant</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_10">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_3">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Rechercher</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_9">
-       <attribute name="title">
-        <string>Rechercher</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>250</y>
-          <width>251</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Rechercher</string>
-        </property>
-       </widget>
-       <widget class="QTableView" name="tableView_3">
-        <property name="geometry">
-         <rect>
-          <x>390</x>
-          <y>30</y>
-          <width>481</width>
-          <height>481</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QSplitter" name="splitter_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>150</y>
-          <width>361</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>Identifiant</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_10"/>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_10">
-       <attribute name="title">
-        <string>Modifier</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>700</x>
-          <y>60</y>
-          <width>151</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Chercher</string>
-        </property>
-       </widget>
-       <widget class="QTableView" name="tab_criminel2">
-        <property name="geometry">
-         <rect>
-          <x>360</x>
-          <y>120</y>
-          <width>501</width>
-          <height>341</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="PB_mod_c">
-        <property name="geometry">
-         <rect>
-          <x>400</x>
-          <y>470</y>
-          <width>431</width>
-          <height>61</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Modifier</string>
-        </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>100</y>
-          <width>341</width>
-          <height>431</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Nouveau données</string>
-        </property>
-        <widget class="QWidget" name="layoutWidget_2">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>60</y>
-           <width>321</width>
-           <height>361</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <property name="spacing">
-             <number>5</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_9">
+          <widget class="QWidget" name="tab_10">
+           <attribute name="title">
+            <string>Modifier</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="2" column="0" rowspan="2">
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string>Nouvelles données  </string>
+              </property>
+              <layout class="QFormLayout" name="formLayout_5">
+               <property name="verticalSpacing">
+                <number>66</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_9">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Identifiant unique</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="lineEdit_ID_cm">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_10">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Prenom</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_prenom_cm">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_7">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Nom</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_nom_cm">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="lineEdit_age_cm">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Age</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="PB_mod_c">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>22</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Identifiant unique</string>
+               <string>Modifier</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_ID_cm">
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-             </widget>
+            <item row="2" column="1" rowspan="3">
+             <widget class="QTableView" name="tab_criminel2"/>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QLabel" name="chercherlbl">
+                <property name="font">
+                 <font>
+                  <pointsize>17</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Identifiant</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_5">
+                <property name="font">
+                 <font>
+                  <pointsize>17</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_2">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Rechercher</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
-            <property name="spacing">
-             <number>95</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_10">
+          </widget>
+          <widget class="QWidget" name="tab_11">
+           <attribute name="title">
+            <string>Afficher</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButton_5">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
-               <string>Prenom</string>
+               <string>Afficher les statistiques descriptives par age</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_prenom_cm"/>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
-            <property name="spacing">
-             <number>122</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_7">
+            <item row="2" column="2">
+             <widget class="QPushButton" name="pushButton_4">
               <property name="font">
                <font>
                 <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Nom</string>
+               <string>Exporter PDF</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_nom_cm">
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_24">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Nombre total de criminels arrêtés</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="lineEdit_17">
               <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+               </font>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Normal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" rowspan="4" colspan="2">
+             <widget class="QTableView" name="tab_criminel1"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="delits">
+       <attribute name="title">
+        <string>Delits</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QTabWidget" name="tabWidget_3">
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tab_12">
+           <attribute name="title">
+            <string>Ajouter</string>
+           </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="font">
+               <font>
+                <pointsize>-1</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="title">
+               <string>Delit</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout_2">
+               <property name="verticalSpacing">
+                <number>57</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_11">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Id délit</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="ledelitid">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="maxLength">
+                  <number>32767</number>
+                 </property>
+                 <property name="readOnly">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_13">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Date de delit</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDateEdit" name="dateEditdelit">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_12">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QComboBox" name="comboBox">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Delit</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Crime</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Contravention</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_14">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Description</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="le_desc_delit">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Id criminel</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QComboBox" name="comboBox_2">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QPushButton" name="PB_load">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>LOAD</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="font">
+               <font>
+                <pointsize>24</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Ajouter</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_16">
+           <attribute name="title">
+            <string>Afficher</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_27">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Liste des delits</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QTableView" name="tab_delit1">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QPushButton" name="pushButton">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <italic>false</italic>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Trier Par Date</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_trier">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                  <strikeout>false</strikeout>
+                  <kerning>true</kerning>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Trier Par Type</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_trier_2">
+                <property name="font">
+                 <font>
+                  <pointsize>11</pointsize>
+                  <weight>50</weight>
+                  <bold>false</bold>
+                  <underline>false</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Afficher les statistiques descriptives par type</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_13">
+           <attribute name="title">
+            <string>Supprimer</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_23">
+              <property name="spacing">
+               <number>84</number>
+              </property>
+              <property name="bottomMargin">
+               <number>250</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="supprimerlbl_3">
+                <property name="font">
+                 <font>
+                  <pointsize>19</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Identifiant de delit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_26">
+                <property name="font">
+                 <font>
+                  <pointsize>19</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="supprimerPb_3">
+                <property name="font">
+                 <font>
+                  <pointsize>19</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Supprimer</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_15">
+           <attribute name="title">
+            <string>Modifier</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0" rowspan="3">
+             <widget class="QGroupBox" name="groupBox_7">
+              <property name="title">
+               <string>Delit</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout">
+               <property name="horizontalSpacing">
+                <number>15</number>
+               </property>
+               <property name="verticalSpacing">
+                <number>99</number>
+               </property>
+               <property name="leftMargin">
+                <number>14</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_33">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Id délit</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="le_mid">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_34">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Date de delit</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDateEdit" name="dateEdit_3">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_35">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QComboBox" name="comboBox_3">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Delit</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Contravention</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Crime</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_36">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Description</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="lineEdit_11">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <property name="spacing">
+               <number>23</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="chercherlbl_3">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Identifiant</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_27">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_12">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Rechercher</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="pushButton_13">
+              <property name="font">
+               <font>
+                <pointsize>17</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Modifier</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" rowspan="3">
+             <widget class="QTableView" name="tab_delit2">
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Options</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QTabWidget" name="tabWidget_4">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Son</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QPushButton" name="pushButton_ouvm">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>OUVRIR MEDIA</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_play">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Play</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_pause">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Pause</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_stop">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Stop</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="leftMargin">
+               <number>250</number>
+              </property>
+              <property name="rightMargin">
+               <number>250</number>
+              </property>
+              <item>
+               <widget class="QProgressBar" name="avance">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+                <property name="value">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <property name="leftMargin">
+               <number>250</number>
+              </property>
+              <property name="rightMargin">
+               <number>250</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="pushButton_mute">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>MUTE</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSlider" name="volume">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>Affichage</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pushButton_7">
+              <property name="font">
+               <font>
+                <pointsize>21</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Change Mode</string>
+              </property>
+              <property name="checkable">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <property name="spacing">
-             <number>129</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_8">
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_16">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>15</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Age</string>
+               <string>Désactivé</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_age_cm"/>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>mode sombre:</string>
+              </property>
+             </widget>
             </item>
            </layout>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-       <widget class="QSplitter" name="splitter">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>50</y>
-          <width>411</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <widget class="QLabel" name="chercherlbl">
-         <property name="text">
-          <string>Identifiant</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_5"/>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_11">
-       <attribute name="title">
-        <string>Afficher</string>
-       </attribute>
-       <widget class="QTableView" name="tab_criminel1">
-        <property name="geometry">
-         <rect>
-          <x>45</x>
-          <y>31</y>
-          <width>441</width>
-          <height>411</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>150</y>
-          <width>371</width>
-          <height>61</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_24">
-           <property name="text">
-            <string>Nombre total de criminels arrêtés</string>
-           </property>
           </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_17"/>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="">
-        <property name="geometry">
-         <rect>
-          <x>510</x>
-          <y>220</y>
-          <width>381</width>
-          <height>181</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QPushButton" name="pushButton_5">
-           <property name="text">
-            <string>Affichage d'une charte graphique</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="text">
-            <string>Exporter PDF</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="delits">
-     <attribute name="title">
-      <string>Delits</string>
-     </attribute>
-     <widget class="QTabWidget" name="tabWidget_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>901</width>
-        <height>601</height>
-       </rect>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab_12">
-       <attribute name="title">
-        <string>Ajouter</string>
-       </attribute>
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>30</y>
-          <width>541</width>
-          <height>511</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Delit</string>
-        </property>
-        <widget class="QSplitter" name="splitter_7">
-         <property name="geometry">
-          <rect>
-           <x>40</x>
-           <y>60</y>
-           <width>481</width>
-           <height>361</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <widget class="QSplitter" name="splitter_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>Id délit</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="ledelitid"/>
-         </widget>
-         <widget class="QSplitter" name="splitter_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_13">
-           <property name="text">
-            <string>Date de delit</string>
-           </property>
-          </widget>
-          <widget class="QDateEdit" name="dateEditdelit"/>
-         </widget>
-         <widget class="QSplitter" name="splitter_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="handleWidth">
-           <number>1</number>
-          </property>
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>Type</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="comboBox">
-           <item>
-            <property name="text">
-             <string>Delit</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Crime</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Contravention</string>
-            </property>
-           </item>
-          </widget>
-         </widget>
-         <widget class="QSplitter" name="splitter_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="handleWidth">
-           <number>1</number>
-          </property>
-          <widget class="QLabel" name="label_14">
-           <property name="text">
-            <string>Description</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="le_desc_delit"/>
-         </widget>
-         <widget class="QSplitter" name="splitter_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Id criminel</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="comboBox_2"/>
-          <widget class="QPushButton" name="PB_load">
-           <property name="text">
-            <string>LOAD</string>
-           </property>
-          </widget>
-         </widget>
-        </widget>
-       </widget>
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>250</y>
-          <width>171</width>
-          <height>91</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Ajouter</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_16">
-       <attribute name="title">
-        <string>Afficher</string>
-       </attribute>
-       <widget class="QTableView" name="tab_delit1">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>70</y>
-          <width>591</width>
-          <height>411</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_27">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>10</y>
-          <width>331</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Liste des delits</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>70</y>
-          <width>261</width>
-          <height>421</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QPushButton" name="pushButton">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <italic>false</italic>
-             <bold>true</bold>
-             <underline>true</underline>
-            </font>
-           </property>
-           <property name="text">
-            <string>Trier Par Date</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_trier">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-             <underline>true</underline>
-             <strikeout>false</strikeout>
-             <kerning>true</kerning>
-            </font>
-           </property>
-           <property name="text">
-            <string>Trier Par Type</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_trier_2">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-             <underline>true</underline>
-            </font>
-           </property>
-           <property name="text">
-            <string>Graphe de type</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_13">
-       <attribute name="title">
-        <string>Supprimer</string>
-       </attribute>
-       <widget class="QSplitter" name="splitter_9">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>40</y>
-          <width>871</width>
-          <height>141</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <widget class="QWidget" name="layoutWidget_8">
-         <layout class="QHBoxLayout" name="horizontalLayout_23">
-          <property name="spacing">
-           <number>200</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="supprimerlbl_3">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Identifiant de delit</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_26">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QPushButton" name="supprimerPb_3">
-         <property name="font">
-          <font>
-           <pointsize>15</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Supprimer</string>
-         </property>
-        </widget>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_15">
-       <attribute name="title">
-        <string>Modifier</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButton_12">
-        <property name="geometry">
-         <rect>
-          <x>720</x>
-          <y>40</y>
-          <width>151</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Chercher</string>
-        </property>
-       </widget>
-       <widget class="QTableView" name="tab_delit2">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>100</y>
-          <width>431</width>
-          <height>341</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_27">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>40</y>
-          <width>266</width>
-          <height>41</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="chercherlbl_3">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>40</y>
-          <width>140</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Identifiant</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_13">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>450</y>
-          <width>431</width>
-          <height>61</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Modifier</string>
-        </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_7">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>70</y>
-          <width>401</width>
-          <height>441</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Delit</string>
-        </property>
-        <widget class="QSplitter" name="splitter_15">
-         <property name="geometry">
-          <rect>
-           <x>30</x>
-           <y>70</y>
-           <width>361</width>
-           <height>341</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <widget class="QSplitter" name="splitter_16">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_33">
-           <property name="text">
-            <string>Id délit</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="le_mid"/>
-         </widget>
-         <widget class="QSplitter" name="splitter_17">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_34">
-           <property name="text">
-            <string>Date de delit</string>
-           </property>
-          </widget>
-          <widget class="QDateEdit" name="dateEdit_3"/>
-         </widget>
-         <widget class="QSplitter" name="splitter_18">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="handleWidth">
-           <number>1</number>
-          </property>
-          <widget class="QLabel" name="label_35">
-           <property name="text">
-            <string>Type</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="comboBox_3">
-           <item>
-            <property name="text">
-             <string>Delit</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Contravention</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Crime</string>
-            </property>
-           </item>
-          </widget>
-         </widget>
-         <widget class="QSplitter" name="splitter_19">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="handleWidth">
-           <number>1</number>
-          </property>
-          <widget class="QLabel" name="label_36">
-           <property name="text">
-            <string>Description</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="lineEdit_11"/>
-         </widget>
-        </widget>
-       </widget>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Options</string>
-     </attribute>
-     <widget class="QProgressBar" name="avance">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>260</y>
-        <width>531</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>170</y>
-        <width>551</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QPushButton" name="pushButton_play">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Play</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_ouvm">
-         <property name="text">
-          <string>OUVRIR MEDIA</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_pause">
-         <property name="text">
-          <string>Pause</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_stop">
-         <property name="text">
-          <string>Stop</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>340</y>
-        <width>441</width>
-        <height>35</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_12">
-       <item>
-        <widget class="QPushButton" name="pushButton_mute">
-         <property name="text">
-          <string>MUTE</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="volume">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
