@@ -27,6 +27,9 @@ public:
     QSqlQueryModel *get_policiers();
     void updateaffichagevehicule();
     void updateaffichageeq();
+    void remplir();
+    void remplir_vehi();
+    void remplir_equipements();
 
 
 private slots:
@@ -105,7 +108,8 @@ private slots:
 
     void on_radioButton_11_clicked();
 
-
+    void check_voiture_repare();
+    void print_test();
 
     void on_lineEdit_2_textChanged(const QString &arg1);
 
@@ -144,6 +148,10 @@ private slots:
 
     void on_pushButton_27_clicked();
 
+    void check_vehicules_number();
+
+    void check_equipements_number();
+
 private:
     Ui::MainWindow *ui;
     vehicule V;
@@ -152,6 +160,9 @@ private:
     QMediaPlayer *player = new QMediaPlayer;
     QSqlDriver * Driver();
     QSystemTrayIcon *mySystemTrayIcon;
+    int count,count_vehicules,count_equipements;
+    int N=0;
+    int id_policier=1;
 
 };
 #endif // MAINWINDOW_H

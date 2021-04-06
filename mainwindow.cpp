@@ -14,6 +14,7 @@
 #include <QPainter>
 #include <QtMultimedia/QMediaPlayer>
 #include <QSqlDriver>
+#include <QTimer>
 
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
@@ -22,7 +23,16 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+    QTimer *timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(check_voiture_repare()));
+        connect(timer, SIGNAL(timeout()), this, SLOT(check_equipements_number()));
+        connect(timer, SIGNAL(timeout()), this, SLOT(check_vehicules_number()));
+        timer->start(15000);
+
+    remplir_equipements();
+    remplir_vehi();
     mySystemTrayIcon = new QSystemTrayIcon(this);
     mySystemTrayIcon->setIcon(QIcon("C:/Users/WALID/Desktop/Studies/Projet cpp/Police.png"));
     mySystemTrayIcon->setVisible(true);
@@ -42,9 +52,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->MatriculeEdit_2->setValidator ( new QIntValidator(0, 999999999, this));
     ui->idreparation->setValidator ( new QIntValidator(0, 999999999, this));
     ui->type_reparation->setMaxLength(20);
+    remplir();
 
 };
-
+void MainWindow::print_test()
+{
+    qDebug()<<"timer";
+}
 
 MainWindow::~MainWindow()
 {
@@ -887,4 +901,116 @@ void MainWindow::on_idpedit_textChanged(const QString &arg1)
 void MainWindow::on_pushButton_27_clicked()
 {
     mySystemTrayIcon ->showMessage(tr("bruh"),tr("bruh"));
+}
+
+void MainWindow::check_voiture_repare()
+{
+    int check=0;
+    QSqlQuery query;
+    query.prepare("select count(D.id_demande) from demande_reparation D natural join vehicules V where V.IDP=:id AND D.repare='OUI'");
+    query.bindValue(":id",this->id_policier);
+    query.exec();
+    qDebug()<<"1";
+    while(query.next())
+    {
+        if (count<query.value(0).toInt())
+        {
+            mySystemTrayIcon ->showMessage(tr("Reparation Effectué"),tr("Une de vos voitures à été réparé veuillez supprimer la demande"));
+
+
+        }
+        count=query.value(0).toInt();
+    }
+
+
+}
+void MainWindow::remplir()
+{
+    {
+        int check=0;
+        QSqlQuery query;
+        query.prepare("select count(D.id_demande) from demande_reparation D natural join vehicules V where V.IDP=:id AND D.repare='OUI'");
+        query.bindValue(":id",this->id_policier);
+        query.exec();
+        qDebug()<<"1";
+        while(query.next())
+        {
+            count=query.value(0).toInt();
+
+        }
+        qDebug()<<count;
+    }
+}
+
+void MainWindow::check_vehicules_number()
+{
+    QSqlQuery query;
+    query.prepare("select count(*) from vehicules");
+    query.exec();
+    while(query.next())
+    {
+        if (count_vehicules!=query.value(0).toInt())
+        {
+            mySystemTrayIcon ->showMessage(tr("Table Vehicules modifiée"),tr("Des modifications ont été éffectuées sur la table des Vehicules"));
+
+
+        }
+        count_vehicules=query.value(0).toInt();
+
+
+    }
+
+
+
+}
+void MainWindow::check_equipements_number()
+{
+    QSqlQuery query;
+    query.prepare("select count(*) from equipements");
+    query.exec();
+    while(query.next())
+    {
+        if (count_equipements!=query.value(0).toInt())
+        {
+            mySystemTrayIcon ->showMessage(tr("Table Equipements modifiée"),tr("Des modifications ont été éffectuées sur la table des equipements"));
+
+
+        }
+        count_equipements=query.value(0).toInt();
+
+
+    }
+
+}
+
+void MainWindow::remplir_vehi()
+{
+    {
+        int check=0;
+        QSqlQuery query;
+        query.prepare("select count(*) from vehicules");
+        query.exec();
+        while(query.next())
+        {
+            count_vehicules=query.value(0).toInt();
+
+        }
+
+    }
+}
+void MainWindow::remplir_equipements()
+{
+    {
+        int check=0;
+        QSqlQuery query;
+        query.prepare("select count(*) from vehicules");
+        query.exec();
+        while(query.next())
+        {
+            count_vehicules=query.value(0).toInt();
+
+        }
+
+
+    }
 }

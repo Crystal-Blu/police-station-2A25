@@ -18,7 +18,7 @@ Reparations::Reparations (int id, int mat,QString type_q,QString Desc)
 bool Reparations::ajouter_rep()
 {
     QSqlQuery query;
-    query.prepare ("insert into DEMANDE_REPARATION (MATRICULE, ID_DEMANDE, TYPE_R, DESCRIPTION_R, REPARE) VALUES (:matirucle, :id, :type, :desc, :r)");
+    query.prepare ("insert into DEMANDE_REPARATION (MATRICULE, ID_DEMANDE, TYPE, DESCRIPTION, REPARE) VALUES (:matirucle, :id, :type, :desc, :r)");
     query.bindValue(":matirucle",this->get_matricule());
     query.bindValue(":id",this->get_id_rep());
     query.bindValue(":type",this->get_type());
