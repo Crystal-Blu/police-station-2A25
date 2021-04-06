@@ -6,6 +6,7 @@
 #include "connection.h"
 #include <QTextStream>
 #include <QSqlQuery>
+#include <QFile>
 #include <QSqlQueryModel>
 #include "vehicule_modifier_window.h"
 
@@ -564,4 +565,51 @@ void MainWindow::updateaffichageeq()
     Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
      ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
     qDebug()<<Affichageeq_Query_f;
+}
+
+void MainWindow::on_pushButton_19_clicked()
+{
+    QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/dark/style.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pushButton_20_clicked()
+{
+    QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/light/style.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pushButton_23_clicked()
+{
+    QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/DarkOrange/darkorange/darkorange.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    setStyleSheet("");
 }

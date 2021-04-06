@@ -19,12 +19,12 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>991</width>
+      <width>1081</width>
       <height>591</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>11</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -1412,6 +1412,64 @@ background-color: rgb(85, 0, 255);</string>
       <string>Demandes administrative</string>
      </attribute>
     </widget>
+    <widget class="QWidget" name="tab_20">
+     <attribute name="title">
+      <string>Options</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>161</width>
+        <height>231</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Theme</string>
+      </property>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>131</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="pushButton_19">
+          <property name="text">
+           <string>Dark</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_23">
+          <property name="text">
+           <string>Dark Orange</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_20">
+          <property name="text">
+           <string>Light</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_24">
+          <property name="text">
+           <string>Light Classic</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1420,7 +1478,7 @@ background-color: rgb(85, 0, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

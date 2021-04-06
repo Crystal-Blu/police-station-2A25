@@ -105,6 +105,14 @@ private slots:
 
     void on_lineEdit_2_textChanged(const QString &arg1);
 
+    void on_pushButton_19_clicked();
+
+    void on_pushButton_20_clicked();
+
+    void on_pushButton_23_clicked();
+
+    void on_pushButton_24_clicked();
+
 private:
     Ui::MainWindow *ui;
     vehicule V;
