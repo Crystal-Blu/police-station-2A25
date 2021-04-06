@@ -152,6 +152,8 @@ private slots:
 
     void check_equipements_number();
 
+    void on_pushButton_6_clicked();
+
 private:
     Ui::MainWindow *ui;
     vehicule V;

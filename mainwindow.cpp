@@ -1014,3 +1014,8 @@ void MainWindow::remplir_equipements()
 
     }
 }
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    ui->tabWidget->setCurrentWidget(ui->tab_20);
+}
