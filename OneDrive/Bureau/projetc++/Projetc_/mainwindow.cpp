@@ -162,6 +162,8 @@ void MainWindow::on_supp_button_clicked()
     bool test = c1.supprimer(CIN);
 
     if (test){
+        ui->comboBox->setModel(d.afficher_combo());
+         ui->comboBox_cin->setModel(d.afficher_combo_2());
 
 ui->tab_citoyen_modifier->setModel(C.afficher());
  ui->tab_citoyen->setModel(C.afficher());

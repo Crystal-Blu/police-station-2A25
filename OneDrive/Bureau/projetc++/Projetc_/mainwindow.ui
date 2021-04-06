@@ -760,7 +760,7 @@
         <widget class="QLabel" name="label_13">
          <property name="geometry">
           <rect>
-           <x>30</x>
+           <x>20</x>
            <y>40</y>
            <width>61</width>
            <height>21</height>
@@ -807,7 +807,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_15">
        <attribute name="title">
@@ -924,7 +924,7 @@
         <widget class="QLabel" name="label_5">
          <property name="geometry">
           <rect>
-           <x>40</x>
+           <x>20</x>
            <y>140</y>
            <width>47</width>
            <height>13</height>
@@ -1052,9 +1052,9 @@
        <widget class="QGroupBox" name="groupBox_7">
         <property name="geometry">
          <rect>
-          <x>810</x>
+          <x>800</x>
           <y>160</y>
-          <width>221</width>
+          <width>231</width>
           <height>131</height>
          </rect>
         </property>
@@ -1071,7 +1071,7 @@
         <widget class="QLineEdit" name="le_supp_2">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>70</x>
            <y>40</y>
            <width>131</width>
            <height>21</height>
@@ -1081,7 +1081,7 @@
         <widget class="QLabel" name="label_16">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
            <y>40</y>
            <width>61</width>
            <height>21</height>
