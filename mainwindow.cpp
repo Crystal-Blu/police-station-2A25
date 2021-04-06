@@ -13,6 +13,7 @@
 #include <QDesktopServices>
 #include <QPainter>
 #include <QtMultimedia/QMediaPlayer>
+#include <QSqlDriver>
 
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
@@ -22,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    mySystemTrayIcon = new QSystemTrayIcon(this);
+    mySystemTrayIcon->setIcon(QIcon("C:/Users/WALID/Desktop/Studies/Projet cpp/Police.png"));
+    mySystemTrayIcon->setVisible(true);
     player->setMedia(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Studies/Projet cpp/click.wav"));
     player->setVolume(100);
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
@@ -38,7 +42,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->MatriculeEdit_2->setValidator ( new QIntValidator(0, 999999999, this));
     ui->idreparation->setValidator ( new QIntValidator(0, 999999999, this));
     ui->type_reparation->setMaxLength(20);
-}
+
+};
 
 
 MainWindow::~MainWindow()
@@ -67,11 +72,11 @@ void MainWindow::on_ajouter_clicked()
     if (test)
     {
          ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
-        QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+        mySystemTrayIcon ->showMessage(tr("Ajout Effectué avec Succé"),tr("Vehicule Ajouté à la base de donnée"));
     }
     if (!test)
     {
-        QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
+        mySystemTrayIcon ->showMessage(tr("Error"),tr("Vehicule non Ajouté"));
     }
 
 }
@@ -196,11 +201,11 @@ void MainWindow::on_pushButton_9_clicked()
     if (test)
     {
          ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
-        QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+       mySystemTrayIcon ->showMessage(tr("Ajout Effectué avec succé"),tr("Equipement ajoutée"));
     }
     if (!test)
     {
-        QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
+        mySystemTrayIcon ->showMessage(tr("Erreur"),tr("Equipements non ajoutée"));
     }
 }
 
@@ -343,11 +348,11 @@ void MainWindow::on_ajouter_2_clicked()
     if (test)
     {
          ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
-        QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+        mySystemTrayIcon ->showMessage(tr("Ajout Effectué avec succé"),tr("Demande de reparation ajoutée"));
     }
     if (!test)
     {
-        QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
+        mySystemTrayIcon ->showMessage(tr("Erreur"),tr("Demande de reparation non ajoutée"));
     }
 }
 
@@ -877,4 +882,9 @@ void MainWindow::on_idpedit_textChanged(const QString &arg1)
     {
         ui->ajouter->setEnabled(false);
     }
+}
+
+void MainWindow::on_pushButton_27_clicked()
+{
+    mySystemTrayIcon ->showMessage(tr("bruh"),tr("bruh"));
 }

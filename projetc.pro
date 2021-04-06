@@ -39,8 +39,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 QT+= sql
 CONFIG += console
-RESOURCES += dark/style.qrc
+RESOURCES += dark/style.qrc \
+    res.qrc
 RESOURCES += light/style.qrc
 RESOURCES += DarkOrange/darkorange/darkorange.qrc
 QT += core gui \
 multimedia
+
+QMAKE_CXXFLAGS += -std=gnu++14
+
+RC_ICONS = Police.ico

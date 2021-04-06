@@ -8,9 +8,12 @@
 #include "equipements.h"
 #include <QtMultimedia/QMediaPlayer>
 #include "reparations.h"
+#include <QSystemTrayIcon>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -139,12 +142,16 @@ private slots:
 
     void on_idpedit_textChanged(const QString &arg1);
 
+    void on_pushButton_27_clicked();
+
 private:
     Ui::MainWindow *ui;
     vehicule V;
     Equipements E;
     Reparations R;
     QMediaPlayer *player = new QMediaPlayer;
+    QSqlDriver * Driver();
+    QSystemTrayIcon *mySystemTrayIcon;
 
 };
 #endif // MAINWINDOW_H
