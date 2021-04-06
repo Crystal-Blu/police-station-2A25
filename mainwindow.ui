@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>11</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -321,7 +321,7 @@ background-color: rgb(255, 0, 0);</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_16">
        <attribute name="title">
@@ -628,6 +628,19 @@ background-color: rgb(85, 0, 255);</string>
          <string>None</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_25">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>440</y>
+          <width>80</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Print PDF</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_17">
        <attribute name="title">
@@ -708,9 +721,9 @@ background-color: rgb(85, 0, 255);</string>
        <widget class="QLineEdit" name="idpedit">
         <property name="geometry">
          <rect>
-          <x>340</x>
+          <x>170</x>
           <y>150</y>
-          <width>291</width>
+          <width>461</width>
           <height>21</height>
          </rect>
         </property>
@@ -786,16 +799,6 @@ background-color: rgb(85, 0, 255);</string>
           <x>170</x>
           <y>210</y>
           <width>131</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_3">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>150</y>
-          <width>141</width>
           <height>22</height>
          </rect>
         </property>
@@ -967,7 +970,7 @@ background-color: rgb(85, 0, 255);</string>
          <string>Matricule</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="nikrabek">
+       <widget class="QLineEdit" name="type_reparation">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1307,6 +1310,19 @@ background-color: rgb(85, 0, 255);</string>
          <string>Type</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_26">
+        <property name="geometry">
+         <rect>
+          <x>830</x>
+          <y>350</y>
+          <width>80</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Print PDF</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_15">
        <attribute name="title">
@@ -1428,7 +1444,7 @@ background-color: rgb(85, 0, 255);</string>
       <property name="title">
        <string>Theme</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>

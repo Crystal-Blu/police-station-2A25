@@ -9,6 +9,9 @@
 #include <QFile>
 #include <QSqlQueryModel>
 #include "vehicule_modifier_window.h"
+#include <QPdfWriter>
+#include <QDesktopServices>
+#include <QPainter>
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
@@ -297,7 +300,7 @@ void MainWindow::on_ajouter_2_clicked()
     bool test;
     int mat=ui->MatriculeEdit_2->text().toInt();
     int id=ui->idreparation->text().toInt();
-    QString type=ui->nikrabek->text();
+    QString type=ui->type_reparation->text();
     QString Desc=ui->textEdit->toPlainText();
     Reparations repa(id,mat,type,Desc);
     qDebug()<<repa.get_desc();
@@ -613,3 +616,88 @@ void MainWindow::on_pushButton_24_clicked()
 {
     setStyleSheet("");
 }
+
+void MainWindow::on_pushButton_25_clicked()
+{
+    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfvehicules.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Vehicules");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/vehicules.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"Nom De Marque");
+                                     painter.drawText(2300,3300,"Matricule");
+                                     painter.drawText(4300,3300,"Date d'achat");
+                                     painter.drawText(6300,3300,"IDP");
+                                     QSqlQuery query;
+                                     query.prepare("select * from VEHICULES");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                         painter.drawText(6300,i,query.value(3).toString());
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfvehicules.pdf"));
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+    }
+}
+
+void MainWindow::on_pushButton_26_clicked()
+{
+    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfequipements.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Vehicules");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/equipements.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"ID");
+                                     painter.drawText(2300,3300,"Matricule");
+                                     painter.drawText(4300,3300,"TYPE");
+                                     QSqlQuery query;
+                                     query.prepare("select * from EQUIPEMTS");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfequipements.pdf"));
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+}
+}
+
