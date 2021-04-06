@@ -42,3 +42,5 @@ CONFIG += console
 RESOURCES += dark/style.qrc
 RESOURCES += light/style.qrc
 RESOURCES += DarkOrange/darkorange/darkorange.qrc
+QT += core gui \
+multimedia

@@ -12,6 +12,8 @@
 #include <QPdfWriter>
 #include <QDesktopServices>
 #include <QPainter>
+#include <QtMultimedia/QMediaPlayer>
+
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
@@ -20,9 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    player->setMedia(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Studies/Projet cpp/click.wav"));
+    player->setVolume(100);
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
     ui->tableView_4->setModel(R.Afficher_rep());
+
 
 }
 
@@ -35,12 +40,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    player->play();
     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-2);
 
 }
 
 void MainWindow::on_ajouter_clicked()
 {
+    player->play();
     bool test;
     int matricule=ui->MatriculeEdit->text().toInt();
     QString modele=ui->modeleEdit->text();
@@ -62,11 +69,13 @@ void MainWindow::on_ajouter_clicked()
 
 void MainWindow::on_Refresh_clicked()
 {
+    player->play();
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
 }
 
 int MainWindow::on_Vehicule_table_activated(const QModelIndex &index)
 {
+    player->play();
     QString val=ui->Vehicule_table->model()->data(index).toString();
         QSqlQuery qry;
         qry.prepare( " select * from vehicules where matricule ='"+val+"'  "   );
@@ -97,6 +106,7 @@ int MainWindow::on_Vehicule_table_activated(const QModelIndex &index)
 
 void MainWindow::on_Delete_button_clicked()
 {
+    player->play();
     int matricule=ui->matslected->text().toInt();
     V.delete_vehicule(matricule);
      ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
@@ -104,6 +114,7 @@ void MainWindow::on_Delete_button_clicked()
 
 void MainWindow::on_Modif_btton_clicked()
 {
+    player->play();
     QSqlQuery qry;
     int matricule=ui->matslected->text().toInt();
 
@@ -135,6 +146,7 @@ void MainWindow::on_Modif_btton_clicked()
 
 void MainWindow::on_pushButton_21_clicked()
 {
+    player->play();
     if(V.verify_matricule(ui->MatriculeEdit->text().toInt()))
     {
         ui->label_13->setText("Matricule Existante");
@@ -149,6 +161,7 @@ void MainWindow::on_pushButton_21_clicked()
 
 void MainWindow::on_pushButton_22_clicked()
 {
+    player->play();
     if(V.verify_Police_id(ui->idpedit->text().toInt()))
     {
         ui->label_14->setText("Police Id Existant");
@@ -164,6 +177,7 @@ void MainWindow::on_pushButton_22_clicked()
 
 void MainWindow::on_pushButton_9_clicked()
 {
+    player->play();
     bool test;
     int id=ui->lineEdit_7->text().toInt();
     int matricule=ui->Matricule_eq_edit->text().toInt();
@@ -183,11 +197,13 @@ void MainWindow::on_pushButton_9_clicked()
 
 void MainWindow::on_pushButton_13_clicked()
 {
+    player->play();
     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
 }
 
 int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
 {
+    player->play();
     QString val=ui->Equipemen_table->model()->data(index).toString();
         QSqlQuery qry;
         qry.prepare( " select * from Equipements where Ideqp ='"+val+"'  "   );
@@ -217,6 +233,7 @@ int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
 
 void MainWindow::on_pushButton_11_clicked()
 {
+    player->play();
     int id=ui->lineEdit_6->text().toInt();
     E.delete_Equipments(id);
      ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
@@ -225,6 +242,7 @@ void MainWindow::on_pushButton_11_clicked()
 
 void MainWindow::on_pushButton_10_clicked()
 {
+    player->play();
     bool test;
     int id=ui->lineEdit_6->text().toInt();
     int matricule=ui->lineEdit_8->text().toInt();
@@ -244,6 +262,7 @@ void MainWindow::on_pushButton_10_clicked()
 
 void MainWindow::on_Assign_Police_clicked()
 {
+    player->play();
      ui->tabWidget->setCurrentWidget(ui->tab_7);
      ui->tabWidget_3->setCurrentWidget(ui->tab_15);
     QString mat=ui->matslected->text();
@@ -260,11 +279,13 @@ QSqlQueryModel *MainWindow::get_policiers()
 
 void MainWindow::on_pushButton_15_clicked()
 {
+    player->play();
     ui->tableView_4->setModel(R.Afficher_rep());
 }
 
 void MainWindow::on_tableView_4_activated(const QModelIndex &index)
 {
+    player->play();
     QString val=ui->tableView_4->model()->data(index).toString();
         QSqlQuery qry;
         qry.prepare( "select * from demande_reparation where id_demande="+val+"  " );
@@ -289,6 +310,7 @@ void MainWindow::on_tableView_4_activated(const QModelIndex &index)
 }
 void MainWindow::on_Demande_rep_clicked()
 {
+    player->play();
     ui->tabWidget->setCurrentWidget(ui->tab_6);
     ui->tabWidget_4->setCurrentWidget(ui->tab_19);
     QString mat=ui->matslected->text();
@@ -297,6 +319,7 @@ void MainWindow::on_Demande_rep_clicked()
 
 void MainWindow::on_ajouter_2_clicked()
 {
+    player->play();
     bool test;
     int mat=ui->MatriculeEdit_2->text().toInt();
     int id=ui->idreparation->text().toInt();
@@ -321,6 +344,7 @@ void MainWindow::on_ajouter_2_clicked()
 
 void MainWindow::on_pushButton_18_clicked()
 {
+    player->play();
     bool test;
     QMessageBox::StandardButton reply;
       reply = QMessageBox::question(this, "Alert", "Etes vous sure de votre action ?",
@@ -346,6 +370,7 @@ void MainWindow::on_pushButton_18_clicked()
 
 void MainWindow::on_pushButton_16_clicked()
 {
+    player->play();
     R.delete_rep(ui->lineEdit_5->text().toInt());
 }
 
@@ -422,12 +447,14 @@ void MainWindow::updateaffichagevehicule()
 
 void MainWindow::on_pushButton_14_clicked()
 {
+    player->play();
     ui->lineEdit_3->clear();
     Affichagevehicule_Query_f="select * from vehicules ";
 }
 
 void MainWindow::on_radioButton_15_clicked()
 {
+    player->play();
    if(ui->lineEdit_3->text()=="")
     Affichagevehicule_Query="select * from vehicules ";
 
@@ -437,6 +464,8 @@ void MainWindow::on_radioButton_15_clicked()
 
 void MainWindow::on_radioButton_18_clicked()
 {
+    player->play();
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -445,6 +474,9 @@ void MainWindow::on_radioButton_18_clicked()
 
 void MainWindow::on_radioButton_17_clicked()
 {
+    player->play();
+    player->play();
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -453,6 +485,7 @@ void MainWindow::on_radioButton_17_clicked()
 
 void MainWindow::on_radioButton_16_clicked()
 {
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -461,6 +494,7 @@ void MainWindow::on_radioButton_16_clicked()
 
 void MainWindow::on_radioButton_13_clicked()
 {
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -469,6 +503,7 @@ void MainWindow::on_radioButton_13_clicked()
 
 void MainWindow::on_radioButton_14_clicked()
 {
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -477,6 +512,7 @@ void MainWindow::on_radioButton_14_clicked()
 
 void MainWindow::on_radioButton_21_clicked()
 {
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -485,6 +521,7 @@ void MainWindow::on_radioButton_21_clicked()
 
 void MainWindow::on_radioButton_22_clicked()
 {
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -493,6 +530,7 @@ void MainWindow::on_radioButton_22_clicked()
 
 void MainWindow::on_radioButton_9_clicked()
 {
+    player->play();
     if(ui->lineEdit_3->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
@@ -501,6 +539,7 @@ void MainWindow::on_radioButton_9_clicked()
 
 void MainWindow::on_radioButton_7_clicked()
 {
+    player->play();
     if(ui->lineEdit_2->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
@@ -509,6 +548,7 @@ void MainWindow::on_radioButton_7_clicked()
 
 void MainWindow::on_radioButton_10_clicked()
 {
+    player->play();
     if(ui->lineEdit_2->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
@@ -517,6 +557,7 @@ void MainWindow::on_radioButton_10_clicked()
 
 void MainWindow::on_radioButton_8_clicked()
 {
+    player->play();
     if(ui->lineEdit_2->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
@@ -525,6 +566,7 @@ void MainWindow::on_radioButton_8_clicked()
 
 void MainWindow::on_radioButton_11_clicked()
 {
+    player->play();
     if(ui->lineEdit_2->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
@@ -572,6 +614,7 @@ void MainWindow::updateaffichageeq()
 
 void MainWindow::on_pushButton_19_clicked()
 {
+    player->play();
     QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/dark/style.qss");
 
     if (!f.exists())   {
@@ -586,6 +629,7 @@ void MainWindow::on_pushButton_19_clicked()
 
 void MainWindow::on_pushButton_20_clicked()
 {
+    player->play();
     QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/light/style.qss");
 
     if (!f.exists())   {
@@ -600,6 +644,7 @@ void MainWindow::on_pushButton_20_clicked()
 
 void MainWindow::on_pushButton_23_clicked()
 {
+    player->play();
     QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/DarkOrange/darkorange/darkorange.qss");
 
     if (!f.exists())   {
@@ -614,11 +659,13 @@ void MainWindow::on_pushButton_23_clicked()
 
 void MainWindow::on_pushButton_24_clicked()
 {
+    player->play();
     setStyleSheet("");
 }
 
 void MainWindow::on_pushButton_25_clicked()
 {
+    player->play();
     QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfvehicules.pdf");
                                  QPainter painter(&pdf);
                                 int i = 4000;
@@ -662,6 +709,7 @@ void MainWindow::on_pushButton_25_clicked()
 
 void MainWindow::on_pushButton_26_clicked()
 {
+    player->play();
     QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfequipements.pdf");
                                  QPainter painter(&pdf);
                                 int i = 4000;

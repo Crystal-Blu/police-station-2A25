@@ -6,6 +6,7 @@
 #include "vehicule.h"
 #include "vehicule_modifier_window.h"
 #include "equipements.h"
+#include <QtMultimedia/QMediaPlayer>
 #include "reparations.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -123,5 +124,7 @@ private:
     vehicule V;
     Equipements E;
     Reparations R;
+    QMediaPlayer *player = new QMediaPlayer;
+
 };
 #endif // MAINWINDOW_H
