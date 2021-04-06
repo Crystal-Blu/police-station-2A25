@@ -119,6 +119,26 @@ private slots:
     void on_pushButton_26_clicked();
 
 
+    void on_lineEdit_7_textChanged(const QString &arg1);
+
+    void on_Matricule_eq_edit_textChanged(const QString &arg1);
+
+    void on_type_edit_textChanged(const QString &arg1);
+
+    void on_MatriculeEdit_2_textChanged(const QString &arg1);
+
+    void on_idreparation_textChanged(const QString &arg1);
+
+    void on_type_reparation_cursorPositionChanged(int arg1, int arg2);
+
+    void on_textEdit_textChanged();
+
+    void on_MatriculeEdit_textChanged(const QString &arg1);
+
+    void on_modeleEdit_textChanged(const QString &arg1);
+
+    void on_idpedit_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     vehicule V;

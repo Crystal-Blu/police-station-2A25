@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -781,6 +781,9 @@ background-color: rgb(85, 0, 255);</string>
         </property>
        </widget>
        <widget class="QPushButton" name="ajouter">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>320</x>
@@ -1017,6 +1020,9 @@ background-color: rgb(85, 0, 255);</string>
         </property>
        </widget>
        <widget class="QPushButton" name="ajouter_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>330</x>
@@ -1069,7 +1075,7 @@ background-color: rgb(85, 0, 255);</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_14">
        <attribute name="title">
@@ -1375,6 +1381,9 @@ background-color: rgb(85, 0, 255);</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_9">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>160</x>

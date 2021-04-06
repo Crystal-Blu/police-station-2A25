@@ -27,8 +27,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
     ui->tableView_4->setModel(R.Afficher_rep());
-
-
+    ui->lineEdit_7->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->lineEdit_7->setMaxLength(20);
+    ui->Matricule_eq_edit->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->Matricule_eq_edit->setMaxLength(20);
+    ui->type_edit->setMaxLength(20);
+    ui->MatriculeEdit->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->modeleEdit->setMaxLength(20);
+    ui->idpedit->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->MatriculeEdit_2->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->idreparation->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->type_reparation->setMaxLength(20);
 }
 
 
@@ -749,3 +758,123 @@ void MainWindow::on_pushButton_26_clicked()
 }
 }
 
+
+void MainWindow::on_lineEdit_7_textChanged(const QString &arg1)
+{
+    if (ui->lineEdit_7->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
+    {
+        ui->pushButton_9->setEnabled(true);
+    }
+    else
+    {
+        ui->pushButton_9->setEnabled(false);
+    }
+}
+
+void MainWindow::on_Matricule_eq_edit_textChanged(const QString &arg1)
+{
+    if (ui->lineEdit_7->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
+    {
+        ui->pushButton_9->setEnabled(true);
+    }
+    else
+    {
+        ui->pushButton_9->setEnabled(false);
+    }
+}
+
+void MainWindow::on_type_edit_textChanged(const QString &arg1)
+{
+    if (ui->lineEdit_7->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
+    {
+        ui->pushButton_9->setEnabled(true);
+    }
+    else
+    {
+        ui->pushButton_9->setEnabled(false);
+    }
+}
+
+void MainWindow::on_MatriculeEdit_2_textChanged(const QString &arg1)
+{
+    if (ui->MatriculeEdit_2->text()!=""&& ui->idreparation->text()!="" && ui->type_reparation->text()!="" && ui->textEdit->toPlainText()!="")
+    {
+        ui->ajouter_2->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter_2->setEnabled(false);
+    }
+}
+
+void MainWindow::on_idreparation_textChanged(const QString &arg1)
+{
+    if (ui->MatriculeEdit_2->text()!=""&& ui->idreparation->text()!="" && ui->type_reparation->text()!="" && ui->textEdit->toPlainText()!="")
+    {
+        ui->ajouter_2->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter_2->setEnabled(false);
+    }
+}
+
+void MainWindow::on_type_reparation_cursorPositionChanged(int arg1, int arg2)
+{
+    if (ui->MatriculeEdit_2->text()!=""&& ui->idreparation->text()!="" && ui->type_reparation->text()!="" && ui->textEdit->toPlainText()!="")
+    {
+        ui->ajouter_2->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter_2->setEnabled(false);
+    }
+}
+
+void MainWindow::on_textEdit_textChanged()
+{
+    if (ui->MatriculeEdit_2->text()!=""&& ui->idreparation->text()!="" && ui->type_reparation->text()!="" && ui->textEdit->toPlainText()!="")
+    {
+        ui->ajouter_2->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter_2->setEnabled(false);
+    }
+}
+
+void MainWindow::on_MatriculeEdit_textChanged(const QString &arg1)
+{
+    if (ui->MatriculeEdit->text()!=""&& ui->modeleEdit->text()!="" && ui->idpedit->text()!="")
+    {
+        ui->ajouter->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter->setEnabled(false);
+    }
+}
+
+void MainWindow::on_modeleEdit_textChanged(const QString &arg1)
+{
+    if (ui->MatriculeEdit->text()!=""&& ui->modeleEdit->text()!="" && ui->idpedit->text()!="")
+    {
+        ui->ajouter->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter->setEnabled(false);
+    }
+}
+
+void MainWindow::on_idpedit_textChanged(const QString &arg1)
+{
+    if (ui->MatriculeEdit->text()!=""&& ui->modeleEdit->text()!="" && ui->idpedit->text()!="")
+    {
+        ui->ajouter->setEnabled(true);
+    }
+    else
+    {
+        ui->ajouter->setEnabled(false);
+    }
+}
