@@ -141,6 +141,14 @@ qDebug()<<path;
 "Click Cancel to exit"),QMessageBox::Cancel);
 
 
+        ui->le_cin->clear();
+        ui->le_nom->clear();
+        ui->lineEdit_16->clear();
+        ui->le_adresse->clear();
+        ui->dateEdit->clear();
+        ui->label_21->clear();
+
+
     }
     else
         QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
@@ -214,6 +222,12 @@ void MainWindow::on_update_button_clicked()
                                      QObject::tr("Modification effectué\n"
     "Click Cancel to exit"),QMessageBox::Cancel);
 
+            ui->le_cin_modif->clear();
+            ui->le_nom_modif->clear();
+            ui->le_prenom_modif->clear();
+            ui->le_adresse_modif->clear();
+            ui->dateN_modif->clear();
+            ui->label_31->clear();
 
         }
         else
@@ -254,6 +268,13 @@ qDebug()<<idp ;
         QMessageBox::information(nullptr,QObject::tr("OK"),
                                  QObject::tr("Ajout effectué\n"
 "Click Cancel to exit"),QMessageBox::Cancel);
+
+        ui->comboBox->clear();
+        ui->le_nom_2->clear();
+        ui->le_type->clear();
+        ui->comboBox_cin->clear();
+        ui->dateEdit_2->clear();
+        ui->le_id->clear();
 
 
     }
@@ -309,7 +330,7 @@ void MainWindow::on_pushButton_modifier_2_clicked()
  int cin=ui->lineEdit_14->text().toInt();
     QString nom=ui->le_id_3->text();
     QString type=ui->le_id_4->text();
-    QDate DATE_CREATION=ui->dateTimeEdit-> date();
+    QDate DATE_CREATION=ui->dateEdit_3-> date();
 
 
     demandes_administratives d(id,idp,cin,nom,type,DATE_CREATION);
@@ -324,6 +345,13 @@ void MainWindow::on_pushButton_modifier_2_clicked()
         QMessageBox::information(nullptr,QObject::tr("OK"),
                                  QObject::tr("Modification effectué\n"
 "Click Cancel to exit"),QMessageBox::Cancel);
+
+        ui->le_id_2->clear();
+        ui->lineEdit_15->clear();
+        ui->le_id_3->clear();
+        ui->le_id_4->clear();
+        ui->dateEdit_3->clear();
+        ui->lineEdit_14->clear();
 
 
     }
@@ -363,7 +391,7 @@ conn.createconnection();*/
             ui->le_id_4->setText(qry.value(2).toString());
             ui->lineEdit_15->setText(qry.value(3).toString());
             ui->lineEdit_14->setText(qry.value(4).toString());
-            ui->dateTimeEdit->setDateTime(qry.value(5).toDateTime());
+            ui->dateEdit_3->setDateTime(qry.value(5).toDateTime());
 
 
 
@@ -523,7 +551,7 @@ void MainWindow::on_pushButton_4_clicked()
                                      painter.setPen(Qt::red);
 
                                      painter.setFont(QFont("Arial", 30));
-                                     painter.drawText(2100,1200,"Liste Des Demandes");
+                                     painter.drawText(2100,1200,"Requests list");
                                      painter.setPen(Qt::black);
                                      painter.setFont(QFont("Arial", 50));
                                      painter.drawRect(1000,200,6500,2000);
@@ -531,12 +559,12 @@ void MainWindow::on_pushButton_4_clicked()
                                      painter.drawRect(0,3000,9600,500);
                                      painter.setFont(QFont("Arial", 9));
                                      painter.setPen(Qt::blue);
-                                     painter.drawText(200,3300,"IDDEM");
-                                     painter.drawText(1900,3300,"NOM");
+                                     painter.drawText(200,3300,"IDREQ");
+                                     painter.drawText(1900,3300,"NAME");
                                      painter.drawText(3000,3300,"TYPE");
-                                     painter.drawText(4000,3300,"DATE_CREATION");
+                                     painter.drawText(4000,3300,"DATE OF CREATION");
                                      painter.drawText(6000,3300,"ID_P");
-                                     painter.drawText(7000,3300,"CIN");
+                                     painter.drawText(7000,3300,"IC");
 
 
 
