@@ -155,6 +155,8 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+    void update_label();
+
 private:
     QByteArray data ;
         Arduino A;

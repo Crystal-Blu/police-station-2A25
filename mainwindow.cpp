@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
 
                 }
         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+        {
+
+        }
     QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(check_voiture_repare()));
         connect(timer, SIGNAL(timeout()), this, SLOT(check_equipements_number()));
@@ -1029,4 +1032,13 @@ void MainWindow::remplir_equipements()
 void MainWindow::on_pushButton_6_clicked()
 {
     ui->tabWidget->setCurrentWidget(ui->tab_20);
+}
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+    if (data=="1")
+    {
+            mySystemTrayIcon ->showMessage(tr("Un Policier Postule"),tr("hehe"));
+    }
 }
