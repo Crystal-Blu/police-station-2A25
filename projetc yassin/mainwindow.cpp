@@ -21,12 +21,24 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
 
+        QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
 
     ui->setupUi(this);
     this->setWindowTitle("Police ++");
 
     setWindowIcon(QIcon(":/sounds/sound/Police.png"));
 
+    int ret=A.connect_arduino();
+        switch (ret)
+        {
+        case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
+        break ;
+        case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+        break ;
+        case(-1): qDebug() << "arduino is not available";
+
+            }
+    QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
 
     ui->tableViewpolice->setModel(police.afficher());
     ui->tableViewmissions->setModel(mission.afficher());
@@ -43,10 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->le_policeidafficher->setReadOnly(true);
     ui->le_chefidafficher->setReadOnly(true);
 
-
-
-
-
     if(ui->le_missionidadd->text().isEmpty() or ui->le_missionnameadd->text().isEmpty() or ui->le_missiontypeadd->text().isEmpty()  or ui->le_missionpoliceidadd->text().isEmpty() or ui->de_missiondateadd->text().isEmpty() )
     {
         ui->pb_missionadd->setDisabled(1);
@@ -57,9 +65,6 @@ MainWindow::MainWindow(QWidget *parent)
         ui->pb_missionadd->setDisabled(0);
     }
 
-
-
-
     if(ui->le_policeid->text().isEmpty() or ui->le_grade->text().isEmpty() or ui->le_prenompolice->text().isEmpty()  or ui->le_nompolice->text().isEmpty() or ui->le_chefid->text().isEmpty() )
     {
         ui->pb_addpolice->setDisabled(1);
@@ -69,8 +74,6 @@ MainWindow::MainWindow(QWidget *parent)
     {
         ui->pb_addpolice->setDisabled(0);
     }
-
-
 
     //ADD policier
 
@@ -97,23 +100,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->le_missionnamemodifier->setMaxLength(20);
     ui->le_missiontypemodifier->setMaxLength(20);
     ui->le_missionpoliceidmodifier->setValidator ( new QIntValidator(0, 100, this));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
@@ -710,7 +696,8 @@ void MainWindow::on_pb_darkmode_clicked()
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
     music->play();
-    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/dark/style.qss");
+    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetc yassin/dark/style.qss");
+
 
     if (!f.exists())   {
        qDebug("Unable to set stylesheet, file not found\n");
@@ -728,7 +715,7 @@ void MainWindow::on_pb_lightmode_clicked()
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
     music->play();
-    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/light/style.qss");
+    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetc yassin/light/style.qss");
 
     if (!f.exists())   {
        qDebug("Unable to set stylesheet, file not found\n");
@@ -746,7 +733,7 @@ void MainWindow::on_pb_darkorange_clicked()
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sounds/sound/click.wav"));
     music->play();
-    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetcCopy/darkorange/darkorange.qss");
+    QFile f("C:/Users/xDrais/Desktop/qt/qtprojetc++/projetc yassin/darkorange/darkorange.qss");
 
     if (!f.exists())   {
        qDebug("Unable to set stylesheet, file not found\n");

@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/sounds">
-        <file>sound/click.wav</file>
         <file>sound/Police.png</file>
+        <file>sound/click.wav</file>
     </qresource>
 </RCC>

@@ -1,4 +1,4 @@
-QT       += core gui printsupport multimedia
+QT       += core gui printsupport multimedia serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    arduino.cpp \
     connection.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -16,6 +17,7 @@ SOURCES += \
     policier.cpp
 
 HEADERS += \
+    arduino.h \
     connection.h \
     mainwindow.h \
     missions.h \
@@ -30,10 +32,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 QT += sql
 CONFIG += console
-RESOURCES += dark/style.qrc \
+RESOURCES += light/style.qrc \
     image.qrc \
     res.qrc
-RESOURCES += light/style.qrc
+RESOURCES += dark/style.qrc
 RESOURCES += darkorange/darkorange.qrc
 
 

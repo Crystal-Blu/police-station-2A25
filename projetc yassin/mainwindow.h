@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include "policier.h"
 #include "missions.h"
+#include "arduino.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -96,5 +97,8 @@ private:
     Ui::MainWindow *ui;
     policier police;
     missions mission;
+    Arduino A;
+    QByteArray data ;
+
 };
 #endif // MAINWINDOW_H
