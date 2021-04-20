@@ -32,6 +32,18 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    int ret=A.connect_arduino();
+        switch (ret) {
+        case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
+        break ;
+        case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+        break ;
+        case(-1): qDebug() << "arduino is not available";
+
+            }
+  QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+
     ui->le_cin->setValidator ( new QIntValidator(0, 99999999, this));
 
     ui->le_supp->setValidator ( new QIntValidator(0, 99999999, this));

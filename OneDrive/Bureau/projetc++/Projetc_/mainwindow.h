@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <citoyen.h>
 #include<demandes_administratives.h>
+#include <arduino.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -79,6 +80,8 @@ private:
     Citoyen c1;
     demandes_administratives d;
     demandes_administratives d1;
+    QByteArray data ;
+        Arduino A;
 
 };
 #endif // MAINWINDOW_H
