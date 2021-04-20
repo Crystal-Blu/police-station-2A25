@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     ajout_reparation.cpp \
+    arduino.cpp \
     connection.cpp \
     equipements.cpp \
     main.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     ajout_reparation.h \
+    arduino.h \
     connection.h \
     equipements.h \
     mainwindow.h \
@@ -37,6 +39,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+QT+= serialport
 QT+= sql
 CONFIG += console
 RESOURCES += dark/style.qrc \

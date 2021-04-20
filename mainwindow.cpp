@@ -15,7 +15,7 @@
 #include <QtMultimedia/QMediaPlayer>
 #include <QSqlDriver>
 #include <QTimer>
-
+#include "arduino.h"
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
@@ -25,6 +25,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
+    int ret=A.connect_arduino();
+            switch (ret)
+            {
+            case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
+            break ;
+            case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+            break ;
+            case(-1): qDebug() << "arduino is not available";
+
+                }
+        QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
     QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(check_voiture_repare()));
         connect(timer, SIGNAL(timeout()), this, SLOT(check_equipements_number()));
