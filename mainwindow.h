@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <cellule.h>
 #include <detention.h>
+#include <arduino.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -56,12 +57,22 @@ private slots:
 
     void on_pushButton_14_clicked();
 
+    void on_pushButton_15_clicked();
+
+    void on_pushButton_16_clicked();
+
+    void update_label();
+
+
+
 private:
     Ui::MainWindow *ui;
     Cellules C ;
     Cellules C1 ;
     detentions D ;
     detentions D1;
+    QByteArray data ;
+    Arduino A;
 
 };
 #endif // MAINWINDOW_H

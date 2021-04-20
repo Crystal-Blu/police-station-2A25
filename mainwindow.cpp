@@ -13,6 +13,8 @@
 #include <QPdfWriter>
 #include <QSqlQuery>
 #include <QTextStream>
+#include <QDebug>
+#include "arduino.h"
 
 
 
@@ -22,14 +24,34 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->idc->setValidator ( new QIntValidator(0, 10, this));
+    ui->lineEdit->setValidator ( new QIntValidator(0, 10, this));
+    ui->lineEdit_13->setValidator ( new QIntValidator(0, 10, this));
     ui->nblit->setValidator ( new QIntValidator(0, 10, this));
+    ui->lineEdit_4->setValidator ( new QIntValidator(0, 10, this));
     ui->lineEdit_5->setValidator ( new QIntValidator(0, 10000, this));
+    ui->lineEdit_11->setValidator ( new QIntValidator(0, 10000, this));
+    ui->lineEdit_12->setValidator ( new QIntValidator(0, 10000, this));
     ui->lineEdit_8->setMaxLength(20);
+    ui->lineEdit_15->setMaxLength(20);
     ui->lineEdit_8->setPlaceholderText("saisir la raison de la detention");
     ui->lineEdit_15->setMaxLength(20);
     ui->lineEdit_15->setPlaceholderText("saisir la raison de la detention");
     ui->tableView->setModel(C.afficher());
     ui->tableView_2->setModel(D.afficher());
+
+
+    //arduino
+    int ret=A.connect_arduino();
+    switch (ret) {
+    case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
+    break ;
+    case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+    break ;
+    case(-1): qDebug() << "arduino is not available";
+
+        }
+    QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+
 
 
 
@@ -312,8 +334,8 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
         {
             QSqlQuery query;
             QSqlQueryModel * model=new QSqlQueryModel();
-            query.prepare("SELECT * FROM DETENTIONS WHERE idp LIKE :surname");
-            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.prepare("SELECT * FROM DETENTIONS WHERE idp LIKE :rech");
+            query.bindValue(":rech", QString("%%1%").arg(arg1));
             query.exec();
             model->setQuery(query);
             ui->tableView_2->setModel(model);
@@ -324,8 +346,8 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
         {
             QSqlQuery query;
             QSqlQueryModel * model=new QSqlQueryModel();
-            query.prepare("SELECT * FROM DETENTIONS WHERE idcel LIKE :surname");
-            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.prepare("SELECT * FROM DETENTIONS WHERE idcel LIKE :rech");
+            query.bindValue(":rech", QString("%%1%").arg(arg1));
             query.exec();
             model->setQuery(query);
             ui->tableView_2->setModel(model);
@@ -335,8 +357,8 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
         {
             QSqlQuery query;
             QSqlQueryModel * model=new QSqlQueryModel();
-            query.prepare("SELECT * FROM DETENTIONS WHERE raison LIKE :surname");
-            query.bindValue(":surname", QString("%%1%").arg(arg1));
+            query.prepare("SELECT * FROM DETENTIONS WHERE raison LIKE :rech");
+            query.bindValue(":rech", QString("%%1%").arg(arg1));
             query.exec();
             model->setQuery(query);
             ui->tableView_2->setModel(model);
@@ -436,3 +458,26 @@ void MainWindow::on_pushButton_14_clicked()
 {
     setStyleSheet("");
 }
+
+void MainWindow::on_pushButton_15_clicked() //activer systeme lumière
+{
+ A.write_to_arduino("1");
+}
+
+
+
+void MainWindow::on_pushButton_16_clicked() //desactiver systeme lumière
+{
+    A.write_to_arduino("0");
+}
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+    if (data=="1")
+        ui->label_2->setText("lumières alumées");
+    else if (data=="0" || data=="2")
+        ui->label_2->setText("lumières eteinte");
+}
+
+

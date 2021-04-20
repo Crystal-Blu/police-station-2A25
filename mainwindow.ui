@@ -24,60 +24,187 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>Acceuil</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QTabWidget" name="tabWidget_2">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>180</y>
-        <width>191</width>
-        <height>51</height>
+        <x>0</x>
+        <y>0</y>
+        <width>1281</width>
+        <height>531</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true">font: 20pt &quot;MS Shell Dlg 2&quot;;</string>
+      <property name="currentIndex">
+       <number>1</number>
       </property>
-      <property name="text">
-       <string>Data Base</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_6">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>120</y>
-        <width>191</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 20pt &quot;MS Shell Dlg 2&quot;;</string>
-      </property>
-      <property name="text">
-       <string>Options</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_7">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>240</y>
-        <width>191</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 20pt &quot;MS Shell Dlg 2&quot;;
+      <widget class="QWidget" name="tab_12">
+       <attribute name="title">
+        <string>Options</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>50</y>
+          <width>191</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 20pt &quot;MS Shell Dlg 2&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Options</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>130</y>
+          <width>191</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 20pt &quot;MS Shell Dlg 2&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Data Base</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>210</y>
+          <width>191</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 20pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(255, 0, 0);</string>
-      </property>
-      <property name="text">
-       <string>Quit</string>
-      </property>
+        </property>
+        <property name="text">
+         <string>Quit</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_14">
+        <property name="geometry">
+         <rect>
+          <x>1070</x>
+          <y>130</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode Original</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="geometry">
+         <rect>
+          <x>1070</x>
+          <y>50</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode Clair</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="geometry">
+         <rect>
+          <x>1070</x>
+          <y>90</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mode Sombre Orange</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>1070</x>
+          <y>10</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> Mode Sombre</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_13">
+       <attribute name="title">
+        <string>Gestion Lumieres</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButton_15">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>80</y>
+          <width>231</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Activer Systeme de lumières</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_16">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>80</y>
+          <width>231</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Desactiver Systeme de lumières</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>170</y>
+          <width>91</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>204</x>
+          <y>170</y>
+          <width>121</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Etat des lumieres</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -236,67 +363,11 @@ background-color: rgb(255, 80, 67);</string>
          <string>Suppimer</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="geometry">
-         <rect>
-          <x>1000</x>
-          <y>0</y>
-          <width>131</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> Mode Sombre</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_9">
-        <property name="geometry">
-         <rect>
-          <x>1000</x>
-          <y>30</y>
-          <width>131</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Mode Clair</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_12">
-        <property name="geometry">
-         <rect>
-          <x>1000</x>
-          <y>60</y>
-          <width>131</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Mode Sombre Orange</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_14">
-        <property name="geometry">
-         <rect>
-          <x>1000</x>
-          <y>90</y>
-          <width>131</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Mode Original</string>
-        </property>
-       </widget>
        <zorder>tableView</zorder>
        <zorder>label_4</zorder>
        <zorder>pushButton_11</zorder>
        <zorder>pushButton_2</zorder>
        <zorder>pushButton_4</zorder>
-       <zorder>pushButton_3</zorder>
-       <zorder>pushButton_9</zorder>
-       <zorder>pushButton_12</zorder>
-       <zorder>pushButton_14</zorder>
       </widget>
       <widget class="QWidget" name="tab_16">
        <attribute name="title">
@@ -729,7 +800,7 @@ background-color: rgb(255, 80, 67);</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ADD&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_18">
        <attribute name="title">
