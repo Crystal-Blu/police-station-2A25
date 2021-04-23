@@ -47,21 +47,8 @@ private slots:
 
     void on_Modif_btton_clicked();
 
-
-
-    void on_pushButton_21_clicked();
-
-    void on_pushButton_22_clicked();
-
-    void on_pushButton_9_clicked();
-
-    void on_pushButton_13_clicked();
-
     int on_Equipemen_table_activated(const QModelIndex &index);
 
-    void on_pushButton_11_clicked();
-
-    void on_pushButton_10_clicked();
 
     void on_Assign_Police_clicked();
     
@@ -69,19 +56,10 @@ private slots:
     
     void on_pushButton_15_clicked();
 
-    void on_tableView_4_activated(const QModelIndex &index);
 
     void on_ajouter_2_clicked();
 
-    void on_pushButton_18_clicked();
 
-    void on_pushButton_16_clicked();
-
-    void on_lineEdit_3_textChanged(const QString &arg1);
-
-
-
-    void on_pushButton_14_clicked();
 
     void on_radioButton_15_clicked();
 
@@ -95,10 +73,6 @@ private slots:
 
     void on_radioButton_14_clicked();
 
-    void on_radioButton_21_clicked();
-
-    void on_radioButton_22_clicked();
-
     void on_radioButton_9_clicked();
 
     void on_radioButton_7_clicked();
@@ -109,10 +83,14 @@ private slots:
 
     void on_radioButton_11_clicked();
 
+    void on_radioButton_21_clicked();
+
+    void on_radioButton_22_clicked();
+
     void check_voiture_repare();
     void print_test();
 
-    void on_lineEdit_2_textChanged(const QString &arg1);
+    void on_recherche_eq_textChanged(const QString &arg1);
 
     void on_pushButton_19_clicked();
 
@@ -122,12 +100,7 @@ private slots:
 
     void on_pushButton_24_clicked();
 
-    void on_pushButton_25_clicked();
-
-    void on_pushButton_26_clicked();
-
-
-    void on_lineEdit_7_textChanged(const QString &arg1);
+    void on_id_eq_edit_textChanged(const QString &arg1);
 
     void on_Matricule_eq_edit_textChanged(const QString &arg1);
 
@@ -156,6 +129,33 @@ private slots:
     void on_pushButton_6_clicked();
 
     void update_label();
+
+    void on_rechercher_vehicule_edit_textChanged(const QString &arg1);
+
+    void on_cancelbtnvehicules_clicked();
+
+    void on_Chech_matricule_vehi_clicked();
+
+    void on_check_idp_vehi_clicked();
+
+    void on_tableView_reparations_activated(const QModelIndex &index);
+
+    void on_declarerepare_clicked();
+
+    void on_supprimer_reparation_clicked();
+
+
+    void on_ajouter_equipement_clicked();
+
+    void on_Print_pdf_vehicules_clicked();
+
+    void on_print_pdf_equipements_clicked();
+
+    void on_refresh_equipements_clicked();
+
+    void on_supprimer_equipements_clicked();
+
+    void on_modifier_equip_clicked();
 
 private:
     QByteArray data ;

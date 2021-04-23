@@ -54,9 +54,9 @@ MainWindow::MainWindow(QWidget *parent)
     player->setVolume(100);
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
-    ui->tableView_4->setModel(R.Afficher_rep());
-    ui->lineEdit_7->setValidator ( new QIntValidator(0, 999999999, this));
-    ui->lineEdit_7->setMaxLength(20);
+    ui->tableView_reparations->setModel(R.Afficher_rep());
+    ui->id_eq_edit->setValidator ( new QIntValidator(0, 999999999, this));
+    ui->id_eq_edit->setMaxLength(20);
     ui->Matricule_eq_edit->setValidator ( new QIntValidator(0, 999999999, this));
     ui->Matricule_eq_edit->setMaxLength(20);
     ui->type_edit->setMaxLength(20);
@@ -94,7 +94,7 @@ void MainWindow::on_ajouter_clicked()
     int matricule=ui->MatriculeEdit->text().toInt();
     QString modele=ui->modeleEdit->text();
     int idp=ui->idpedit->text().toInt();
-    QDate date_a=ui->dateEdit->date();
+    QDate date_a=ui->dateEdit_vehicules->date();
     vehicule Veh(matricule,modele,date_a,idp);
     test=Veh.ajouter_vehicule();
     if (test)
@@ -186,42 +186,13 @@ void MainWindow::on_Modif_btton_clicked()
 
 
 
-void MainWindow::on_pushButton_21_clicked()
-{
-    player->play();
-    if(V.verify_matricule(ui->MatriculeEdit->text().toInt()))
-    {
-        ui->label_13->setText("Matricule Existante");
-        ui->label_13->setStyleSheet("QLabel {color : red; }");
-    }
-    else
-    {
-        ui->label_13->setText("Matricule Disponible");
-        ui->label_13->setStyleSheet("QLabel {color : green; }");
-    }
-}
 
-void MainWindow::on_pushButton_22_clicked()
-{
-    player->play();
-    if(V.verify_Police_id(ui->idpedit->text().toInt()))
-    {
-        ui->label_14->setText("Police Id Existant");
-        ui->label_14->setStyleSheet("QLabel {color : green; }");
 
-    }
-    else
-    {
-        ui->label_14->setText("Police Id non Existant");
-        ui->label_14->setStyleSheet("QLabel {color : red; }");
-    }
-}
-
-void MainWindow::on_pushButton_9_clicked()
+void MainWindow::on_ajouter_equipement_clicked()
 {
     player->play();
     bool test;
-    int id=ui->lineEdit_7->text().toInt();
+    int id=ui->id_eq_edit->text().toInt();
     int matricule=ui->Matricule_eq_edit->text().toInt();
     QString type_eq=ui->type_edit->text();
     Equipements EQ(id,matricule,type_eq);
@@ -237,11 +208,7 @@ void MainWindow::on_pushButton_9_clicked()
     }
 }
 
-void MainWindow::on_pushButton_13_clicked()
-{
-    player->play();
-    ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
-}
+
 
 int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
 {
@@ -257,11 +224,11 @@ int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
                 int id=qry.value(0).toInt();
                 int mat=qry.value(1).toInt();
                 QString typeq=qry.value(2).toString();
-                ui->lineEdit_6->setText(qry.value(0).toString());
-                ui->lineEdit_8->setText(qry.value(1).toString());
-                ui->lineEdit_9->setText(qry.value(2).toString());
-                ui->pushButton_11->setEnabled(true);
-                ui->pushButton_10->setEnabled(true);
+                ui->selected_id_epuip->setText(qry.value(0).toString());
+                ui->selected_matricule_eq->setText(qry.value(1).toString());
+                ui->selected_type_eq->setText(qry.value(2).toString());
+                ui->supprimer_equipements->setEnabled(true);
+                ui->modifier_equip->setEnabled(true);
                 return id;
         }
 
@@ -273,34 +240,10 @@ int MainWindow::on_Equipemen_table_activated(const QModelIndex &index)
         }
 }
 
-void MainWindow::on_pushButton_11_clicked()
-{
-    player->play();
-    int id=ui->lineEdit_6->text().toInt();
-    E.delete_Equipments(id);
-     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
-}
 
 
-void MainWindow::on_pushButton_10_clicked()
-{
-    player->play();
-    bool test;
-    int id=ui->lineEdit_6->text().toInt();
-    int matricule=ui->lineEdit_8->text().toInt();
-    QString type_eq=ui->lineEdit_9->text();
-    Equipements EQ(id,matricule,type_eq);
-    test=EQ.modifier_Equipments();
-    if (test)
-    {
-         ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
-        QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
-    }
-    if (!test)
-    {
-        QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
-    }
-}
+
+
 
 void MainWindow::on_Assign_Police_clicked()
 {
@@ -322,34 +265,10 @@ QSqlQueryModel *MainWindow::get_policiers()
 void MainWindow::on_pushButton_15_clicked()
 {
     player->play();
-    ui->tableView_4->setModel(R.Afficher_rep());
+    ui->tableView_reparations->setModel(R.Afficher_rep());
 }
 
-void MainWindow::on_tableView_4_activated(const QModelIndex &index)
-{
-    player->play();
-    QString val=ui->tableView_4->model()->data(index).toString();
-        QSqlQuery qry;
-        qry.prepare( "select * from demande_reparation where id_demande="+val+"  " );
-        if(qry.exec( ))
-        {
-            while(qry.next())
 
-        {
-                QString Desc=qry.value(3).toString();
-                ui->textBrowser->setText(Desc);
-                ui->lineEdit_5->setText(qry.value(1).toString());
-                ui->pushButton_18->setEnabled(true);
-                return ;
-        }
-
-        }
-        else
-        {
-          QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("clickez sur le ID.\n" "Clic ok to exit."),QMessageBox::Ok);
-
-        }
-}
 void MainWindow::on_Demande_rep_clicked()
 {
     player->play();
@@ -384,63 +303,11 @@ void MainWindow::on_ajouter_2_clicked()
     }
 }
 
-void MainWindow::on_pushButton_18_clicked()
-{
-    player->play();
-    bool test;
-    QMessageBox::StandardButton reply;
-      reply = QMessageBox::question(this, "Alert", "Etes vous sure de votre action ?",
-                                    QMessageBox::Yes|QMessageBox::No);
-      if (reply == QMessageBox::Yes) {
-          qDebug() << "Yes was clicked";
-         test= R.care_repared (ui->lineEdit_5->text().toInt());
-         if (test)
-         {
-              ui->tableView->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
-             QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
-         }
-         if (!test)
-         {
-             QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
-         }
-        }
-      else {
-          qDebug() << "Yes was *not* clicked";
-        }
-
-}
-
-void MainWindow::on_pushButton_16_clicked()
-{
-    player->play();
-    R.delete_rep(ui->lineEdit_5->text().toInt());
-}
 
 
 
-void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
-{
-
-    if (ui->recherche->currentIndex()==0)
-    {
-        Affichagevehicule_Query="select * from vehicules where matricule LIKE '"+QString("%%1%").arg(arg1)+"' ";
-
-    }
-    if (ui->recherche->currentIndex()==1)
-    {
-        Affichagevehicule_Query="select * from vehicules where NOM_MARQUE LIKE '"+QString("%%1%").arg(arg1)+"' ";
-
-    }
-    if (ui->recherche->currentIndex()==2)
-    {
-        Affichagevehicule_Query="select * from vehicules where IDP LIKE '"+QString("%%1%").arg(arg1)+"' ";
-
-    }
-    updateaffichagevehicule();
 
 
-
-}
 void MainWindow::updateaffichagevehicule()
 {
 
@@ -487,17 +354,17 @@ void MainWindow::updateaffichagevehicule()
 
 
 
-void MainWindow::on_pushButton_14_clicked()
+void MainWindow::on_cancelbtnvehicules_clicked()
 {
     player->play();
-    ui->lineEdit_3->clear();
+    ui->rechercher_vehicule_edit->clear();
     Affichagevehicule_Query_f="select * from vehicules ";
 }
 
 void MainWindow::on_radioButton_15_clicked()
 {
     player->play();
-   if(ui->lineEdit_3->text()=="")
+   if(ui->rechercher_vehicule_edit->text()=="")
     Affichagevehicule_Query="select * from vehicules ";
 
     updateaffichagevehicule();
@@ -508,7 +375,7 @@ void MainWindow::on_radioButton_18_clicked()
 {
     player->play();
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -519,7 +386,7 @@ void MainWindow::on_radioButton_17_clicked()
     player->play();
     player->play();
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -528,7 +395,7 @@ void MainWindow::on_radioButton_17_clicked()
 void MainWindow::on_radioButton_16_clicked()
 {
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -537,7 +404,7 @@ void MainWindow::on_radioButton_16_clicked()
 void MainWindow::on_radioButton_13_clicked()
 {
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -546,7 +413,7 @@ void MainWindow::on_radioButton_13_clicked()
 void MainWindow::on_radioButton_14_clicked()
 {
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -555,7 +422,7 @@ void MainWindow::on_radioButton_14_clicked()
 void MainWindow::on_radioButton_21_clicked()
 {
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -564,7 +431,7 @@ void MainWindow::on_radioButton_21_clicked()
 void MainWindow::on_radioButton_22_clicked()
 {
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -573,7 +440,7 @@ void MainWindow::on_radioButton_22_clicked()
 void MainWindow::on_radioButton_9_clicked()
 {
     player->play();
-    if(ui->lineEdit_3->text()=="")
+    if(ui->rechercher_vehicule_edit->text()=="")
      Affichagevehicule_Query="select * from vehicules ";
 
      updateaffichagevehicule();
@@ -582,7 +449,7 @@ void MainWindow::on_radioButton_9_clicked()
 void MainWindow::on_radioButton_7_clicked()
 {
     player->play();
-    if(ui->lineEdit_2->text()=="")
+    if(ui->recherche_eq->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
      updateaffichageeq();
@@ -591,7 +458,7 @@ void MainWindow::on_radioButton_7_clicked()
 void MainWindow::on_radioButton_10_clicked()
 {
     player->play();
-    if(ui->lineEdit_2->text()=="")
+    if(ui->recherche_eq->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
      updateaffichageeq();
@@ -600,7 +467,7 @@ void MainWindow::on_radioButton_10_clicked()
 void MainWindow::on_radioButton_8_clicked()
 {
     player->play();
-    if(ui->lineEdit_2->text()=="")
+    if(ui->recherche_eq->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
      updateaffichageeq();
@@ -609,7 +476,7 @@ void MainWindow::on_radioButton_8_clicked()
 void MainWindow::on_radioButton_11_clicked()
 {
     player->play();
-    if(ui->lineEdit_2->text()=="")
+    if(ui->recherche_eq->text()=="")
      AffichageEq_Query="select * from Equipements ";
 
      updateaffichageeq();
@@ -617,14 +484,14 @@ void MainWindow::on_radioButton_11_clicked()
 
 
 
-void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
+void MainWindow::on_recherche_eq_textChanged(const QString &arg1)
 {
-    if (ui->comboBox->currentIndex()==0)
+    if (ui->comboBox_eq->currentIndex()==0)
     {
         AffichageEq_Query="select * from Equipements where matricule LIKE '"+QString("%%1%").arg(arg1)+"' ";
 
     }
-    if (ui->comboBox->currentIndex()==1)
+    if (ui->comboBox_eq->currentIndex()==1)
     {
         AffichageEq_Query="select * from Equipements where type LIKE '"+QString("%%1%").arg(arg1)+"' ";
 
@@ -705,126 +572,41 @@ void MainWindow::on_pushButton_24_clicked()
     setStyleSheet("");
 }
 
-void MainWindow::on_pushButton_25_clicked()
-{
-    player->play();
-    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfvehicules.pdf");
-                                 QPainter painter(&pdf);
-                                int i = 4000;
-                                     painter.setPen(Qt::red);
-                                     painter.setFont(QFont("Arial", 30));
-                                     painter.drawText(2100,1200,"Liste Des Vehicules");
-                                     painter.setPen(Qt::black);
-                                     painter.setFont(QFont("Arial", 50));
-                                     painter.drawRect(1000,200,6500,2000);
-                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/vehicules.jpg"));
-                                     painter.drawRect(0,3000,9600,500);
-                                     painter.setFont(QFont("Arial", 9));
-                                     painter.setPen(Qt::blue);
-                                     painter.drawText(300,3300,"Nom De Marque");
-                                     painter.drawText(2300,3300,"Matricule");
-                                     painter.drawText(4300,3300,"Date d'achat");
-                                     painter.drawText(6300,3300,"IDP");
-                                     QSqlQuery query;
-                                     query.prepare("select * from VEHICULES");
-                                     query.exec();
-                                     while (query.next())
-                                     {
-                                         painter.drawText(300,i,query.value(0).toString());
-                                         painter.drawText(2300,i,query.value(1).toString());
-                                         painter.drawText(4300,i,query.value(2).toString());
-                                         painter.drawText(6300,i,query.value(3).toString());
-                                        i = i +500;
-                                     }
-                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
-                                                                         QMessageBox::Yes |  QMessageBox::No);
-                                         if (reponse == QMessageBox::Yes)
-                                         {
-                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfvehicules.pdf"));
-                                             painter.end();
-                                         }
-                                         else
-                                         {
-                                              painter.end();
-    }
-}
-
-void MainWindow::on_pushButton_26_clicked()
-{
-    player->play();
-    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfequipements.pdf");
-                                 QPainter painter(&pdf);
-                                int i = 4000;
-                                     painter.setPen(Qt::red);
-                                     painter.setFont(QFont("Arial", 30));
-                                     painter.drawText(2100,1200,"Liste Des Vehicules");
-                                     painter.setPen(Qt::black);
-                                     painter.setFont(QFont("Arial", 50));
-                                     painter.drawRect(1000,200,6500,2000);
-                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/equipements.jpg"));
-                                     painter.drawRect(0,3000,9600,500);
-                                     painter.setFont(QFont("Arial", 9));
-                                     painter.setPen(Qt::blue);
-                                     painter.drawText(300,3300,"ID");
-                                     painter.drawText(2300,3300,"Matricule");
-                                     painter.drawText(4300,3300,"TYPE");
-                                     QSqlQuery query;
-                                     query.prepare("select * from EQUIPEMTS");
-                                     query.exec();
-                                     while (query.next())
-                                     {
-                                         painter.drawText(300,i,query.value(0).toString());
-                                         painter.drawText(2300,i,query.value(1).toString());
-                                         painter.drawText(4300,i,query.value(2).toString());
-                                        i = i +500;
-                                     }
-                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
-                                                                         QMessageBox::Yes |  QMessageBox::No);
-                                         if (reponse == QMessageBox::Yes)
-                                         {
-                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfequipements.pdf"));
-                                             painter.end();
-                                         }
-                                         else
-                                         {
-                                              painter.end();
-}
-}
 
 
-void MainWindow::on_lineEdit_7_textChanged(const QString &arg1)
+void MainWindow::on_id_eq_edit_textChanged(const QString &arg1)
 {
-    if (ui->lineEdit_7->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
+    if (ui->id_eq_edit->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
     {
-        ui->pushButton_9->setEnabled(true);
+        ui->ajouter_equipement->setEnabled(true);
     }
     else
     {
-        ui->pushButton_9->setEnabled(false);
+        ui->ajouter_equipement->setEnabled(false);
     }
 }
 
 void MainWindow::on_Matricule_eq_edit_textChanged(const QString &arg1)
 {
-    if (ui->lineEdit_7->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
+    if (ui->id_eq_edit->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
     {
-        ui->pushButton_9->setEnabled(true);
+        ui->ajouter_equipement->setEnabled(true);
     }
     else
     {
-        ui->pushButton_9->setEnabled(false);
+        ui->ajouter_equipement->setEnabled(false);
     }
 }
 
 void MainWindow::on_type_edit_textChanged(const QString &arg1)
 {
-    if (ui->lineEdit_7->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
+    if (ui->id_eq_edit->text()!=""&& ui->Matricule_eq_edit->text()!="" && ui->type_edit->text()!="")
     {
-        ui->pushButton_9->setEnabled(true);
+        ui->ajouter_equipement->setEnabled(true);
     }
     else
     {
-        ui->pushButton_9->setEnabled(false);
+        ui->ajouter_equipement->setEnabled(false);
     }
 }
 
@@ -1072,5 +854,240 @@ void MainWindow::update_label()
         qry.exec( );
         mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
         code="";
+    }
+}
+
+void MainWindow::on_rechercher_vehicule_edit_textChanged(const QString &arg1)
+{
+
+    if (ui->recherche->currentIndex()==0)
+    {
+        Affichagevehicule_Query="select * from vehicules where matricule LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    if (ui->recherche->currentIndex()==1)
+    {
+        Affichagevehicule_Query="select * from vehicules where NOM_MARQUE LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    if (ui->recherche->currentIndex()==2)
+    {
+        Affichagevehicule_Query="select * from vehicules where IDP LIKE '"+QString("%%1%").arg(arg1)+"' ";
+
+    }
+    updateaffichagevehicule();
+}
+
+
+
+void MainWindow::on_Chech_matricule_vehi_clicked()
+{
+    player->play();
+    if(V.verify_matricule(ui->MatriculeEdit->text().toInt()))
+    {
+        ui->label_13->setText("Matricule Existante");
+        ui->label_13->setStyleSheet("QLabel {color : red; }");
+    }
+    else
+    {
+        ui->label_13->setText("Matricule Disponible");
+        ui->label_13->setStyleSheet("QLabel {color : green; }");
+    }
+}
+
+void MainWindow::on_check_idp_vehi_clicked()
+{
+    player->play();
+    if(V.verify_Police_id(ui->idpedit->text().toInt()))
+    {
+        ui->label_14->setText("Police Id Existant");
+        ui->label_14->setStyleSheet("QLabel {color : green; }");
+
+    }
+    else
+    {
+        ui->label_14->setText("Police Id non Existant");
+        ui->label_14->setStyleSheet("QLabel {color : red; }");
+    }
+}
+
+void MainWindow::on_tableView_reparations_activated(const QModelIndex &index)
+{
+    player->play();
+    QString val=ui->tableView_reparations->model()->data(index).toString();
+        QSqlQuery qry;
+        qry.prepare( "select * from demande_reparation where id_demande="+val+"  " );
+        if(qry.exec( ))
+        {
+            while(qry.next())
+
+        {
+                QString Desc=qry.value(3).toString();
+                ui->textBrowser->setText(Desc);
+                ui->id_selected_reparation->setText(qry.value(1).toString());
+                ui->declarerepare->setEnabled(true);
+                return ;
+        }
+
+        }
+        else
+        {
+          QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("clickez sur le ID.\n" "Clic ok to exit."),QMessageBox::Ok);
+
+        }
+}
+
+void MainWindow::on_declarerepare_clicked()
+{
+    player->play();
+    bool test;
+    QMessageBox::StandardButton reply;
+      reply = QMessageBox::question(this, "Alert", "Etes vous sure de votre action ?",
+                                    QMessageBox::Yes|QMessageBox::No);
+      if (reply == QMessageBox::Yes) {
+          qDebug() << "Yes was clicked";
+         test= R.care_repared (ui->id_selected_reparation->text().toInt());
+         if (test)
+         {
+              ui->tableView->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
+             QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+         }
+         if (!test)
+         {
+             QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
+         }
+        }
+      else {
+          qDebug() << "Yes was *not* clicked";
+        }
+}
+
+void MainWindow::on_supprimer_reparation_clicked()
+{
+    player->play();
+        R.delete_rep(ui->id_selected_reparation->text().toInt());
+}
+
+
+
+
+
+void MainWindow::on_Print_pdf_vehicules_clicked()
+{
+    player->play();
+    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfvehicules.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Vehicules");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/vehicules.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"Nom De Marque");
+                                     painter.drawText(2300,3300,"Matricule");
+                                     painter.drawText(4300,3300,"Date d'achat");
+                                     painter.drawText(6300,3300,"IDP");
+                                     QSqlQuery query;
+                                     query.prepare("select * from VEHICULES");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                         painter.drawText(6300,i,query.value(3).toString());
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfvehicules.pdf"));
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+    }
+}
+
+void MainWindow::on_print_pdf_equipements_clicked()
+{
+    player->play();
+    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfequipements.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Equipements");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/equipements.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"ID");
+                                     painter.drawText(2300,3300,"Matricule");
+                                     painter.drawText(4300,3300,"TYPE");
+                                     QSqlQuery query;
+                                     query.prepare("select * from EQUIPEMENTS");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfequipements.pdf"));
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+}
+}
+
+void MainWindow::on_refresh_equipements_clicked()
+{
+    player->play();
+    ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
+}
+
+void MainWindow::on_supprimer_equipements_clicked()
+{
+    player->play();
+    int id=ui->selected_id_epuip->text().toInt();
+    E.delete_Equipments(id);
+     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
+}
+
+void MainWindow::on_modifier_equip_clicked()
+{
+    player->play();
+    bool test;
+    int id=ui->selected_id_epuip->text().toInt();
+    int matricule=ui->selected_matricule_eq->text().toInt();
+    QString type_eq=ui->selected_type_eq->text();
+    Equipements EQ(id,matricule,type_eq);
+    test=EQ.modifier_Equipments();
+    if (test)
+    {
+         ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
+        QMessageBox::information(nullptr, QObject::tr("OK"),QObject::tr("Ajout Effectué avec succées \n"), QMessageBox::Ok);
+    }
+    if (!test)
+    {
+        QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
     }
 }
