@@ -2251,15 +2251,15 @@ PlotWidget {
         <item row="1" column="0">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>3</number>
+           <number>4</number>
           </property>
-          <widget class="QWidget" name="tab_7">
+          <widget class="QWidget" name="tab_ajoutercr">
            <attribute name="title">
             <string>Ajouter</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QGroupBox" name="groupBox">
+             <widget class="QGroupBox" name="groupBoxajou_cri">
               <property name="font">
                <font>
                 <weight>75</weight>
@@ -2280,7 +2280,7 @@ PlotWidget {
                 <number>82</number>
                </property>
                <item row="0" column="0">
-                <widget class="QLabel" name="label">
+                <widget class="QLabel" name="label_cri_id">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2301,7 +2301,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLabel" name="label_3">
+                <widget class="QLabel" name="label_prenom_cri">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2322,7 +2322,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="label_2">
+                <widget class="QLabel" name="label_cri_nom">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2343,7 +2343,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QLabel" name="label_4">
+                <widget class="QLabel" name="label_age_cri">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2367,7 +2367,7 @@ PlotWidget {
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="PB_add_c">
+             <widget class="QPushButton" name="pushButton_ajoutcriminel">
               <property name="font">
                <font>
                 <pointsize>36</pointsize>
@@ -2385,7 +2385,7 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_8">
+          <widget class="QWidget" name="tab_supp_cri">
            <attribute name="title">
             <string>Supprimer</string>
            </attribute>
@@ -2408,7 +2408,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_18">
+               <widget class="QLineEdit" name="lineEdit_supp_c">
                 <property name="font">
                  <font>
                   <pointsize>15</pointsize>
@@ -2419,7 +2419,7 @@ PlotWidget {
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="PB_DEL_C">
+             <widget class="QPushButton" name="pushButton_supprimercriminel">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -2432,7 +2432,7 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_9">
+          <widget class="QWidget" name="tab_recherche_cri">
            <attribute name="title">
             <string>Rechercher</string>
            </attribute>
@@ -2452,7 +2452,7 @@ PlotWidget {
                <number>0</number>
               </property>
               <item row="0" column="0">
-               <widget class="QLabel" name="label_6">
+               <widget class="QLabel" name="label_id_cri_recherche">
                 <property name="font">
                  <font>
                   <pointsize>16</pointsize>
@@ -2464,7 +2464,7 @@ PlotWidget {
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="lineEdit_10">
+               <widget class="QLineEdit" name="lineEdit_recherche_c2">
                 <property name="font">
                  <font>
                   <pointsize>16</pointsize>
@@ -2473,7 +2473,7 @@ PlotWidget {
                </widget>
               </item>
               <item row="1" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="pushButton_recherchercriminel2">
                 <property name="font">
                  <font>
                   <pointsize>16</pointsize>
@@ -2488,13 +2488,13 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_10">
+          <widget class="QWidget" name="tab_mod_cri">
            <attribute name="title">
             <string>Modifier</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_7">
             <item row="2" column="0" rowspan="2">
-             <widget class="QGroupBox" name="groupBox_2">
+             <widget class="QGroupBox" name="groupBox_mod_cri">
               <property name="title">
                <string>Nouvelles données  </string>
               </property>
@@ -2503,7 +2503,7 @@ PlotWidget {
                 <number>66</number>
                </property>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_9">
+                <widget class="QLabel" name="label_idc2">
                  <property name="font">
                   <font>
                    <pointsize>18</pointsize>
@@ -2524,7 +2524,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLabel" name="label_10">
+                <widget class="QLabel" name="label_prenomc2">
                  <property name="font">
                   <font>
                    <pointsize>18</pointsize>
@@ -2545,7 +2545,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="label_7">
+                <widget class="QLabel" name="label_nomcrim2">
                  <property name="font">
                   <font>
                    <pointsize>18</pointsize>
@@ -2578,7 +2578,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QLabel" name="label_8">
+                <widget class="QLabel" name="label_agecrire">
                  <property name="font">
                   <font>
                    <pointsize>18</pointsize>
@@ -2593,7 +2593,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="4" column="0">
-             <widget class="QPushButton" name="PB_mod_c">
+             <widget class="QPushButton" name="pushButton_modifiercriminel">
               <property name="font">
                <font>
                 <pointsize>22</pointsize>
@@ -2622,7 +2622,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_5">
+               <widget class="QLineEdit" name="lineEdit_recherche_c">
                 <property name="font">
                  <font>
                   <pointsize>17</pointsize>
@@ -2631,7 +2631,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="pushButton_recherchercriminel">
                 <property name="font">
                  <font>
                   <pointsize>15</pointsize>
@@ -2646,13 +2646,13 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_11">
+          <widget class="QWidget" name="tab_afficher_cri">
            <attribute name="title">
             <string>Afficher</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_8">
             <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_5">
+             <widget class="QPushButton" name="pushButton_chart1">
               <property name="font">
                <font>
                 <pointsize>11</pointsize>
@@ -2666,7 +2666,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="2" column="2">
-             <widget class="QPushButton" name="pushButton_4">
+             <widget class="QPushButton" name="pushButton_exportercriminel">
               <property name="font">
                <font>
                 <pointsize>12</pointsize>
@@ -2680,7 +2680,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="4" column="0">
-             <widget class="QLabel" name="label_24">
+             <widget class="QLabel" name="label_nombre_criminel">
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
@@ -2692,7 +2692,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLineEdit" name="lineEdit_17">
+             <widget class="QLineEdit" name="lineEdit_nombre_criminel">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -2725,13 +2725,13 @@ PlotWidget {
           <property name="currentIndex">
            <number>3</number>
           </property>
-          <widget class="QWidget" name="tab_12">
+          <widget class="QWidget" name="tab_ajouter_del">
            <attribute name="title">
             <string>Ajouter</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <widget class="QGroupBox" name="groupBox_3">
+             <widget class="QGroupBox" name="groupBox_ajout_delit">
               <property name="font">
                <font>
                 <weight>75</weight>
@@ -2746,7 +2746,7 @@ PlotWidget {
                 <number>57</number>
                </property>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_11">
+                <widget class="QLabel" name="label_iddelit">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2773,7 +2773,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLabel" name="label_13">
+                <widget class="QLabel" name="label_datedelit">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2794,7 +2794,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="label_12">
+                <widget class="QLabel" name="label_typedelit">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2806,7 +2806,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QComboBox" name="comboBox">
+                <widget class="QComboBox" name="comboBox_type_d2">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2830,7 +2830,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QLabel" name="label_14">
+                <widget class="QLabel" name="label_descdelit">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2851,7 +2851,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="4" column="0">
-                <widget class="QLabel" name="label_5">
+                <widget class="QLabel" name="label_idc_d">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2863,7 +2863,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="4" column="1">
-                <widget class="QComboBox" name="comboBox_2">
+                <widget class="QComboBox" name="comboBox_id_c">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -2887,7 +2887,7 @@ PlotWidget {
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_6">
+             <widget class="QPushButton" name="pushButton_ajoutdelit">
               <property name="font">
                <font>
                 <pointsize>24</pointsize>
@@ -2900,13 +2900,13 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_16">
+          <widget class="QWidget" name="tab_afficher_del">
            <attribute name="title">
             <string>Afficher</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0">
-             <widget class="QLabel" name="label_27">
+             <widget class="QLabel" name="label_listedelit">
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
@@ -2929,7 +2929,7 @@ PlotWidget {
             <item row="1" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_3">
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="pushButton_trierdelitdate">
                 <property name="font">
                  <font>
                   <pointsize>16</pointsize>
@@ -2945,7 +2945,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_trier">
+               <widget class="QPushButton" name="pushButton_trierdelittype">
                 <property name="font">
                  <font>
                   <pointsize>16</pointsize>
@@ -2962,7 +2962,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_trier_2">
+               <widget class="QPushButton" name="pushButton_chart2">
                 <property name="font">
                  <font>
                   <pointsize>11</pointsize>
@@ -2980,7 +2980,7 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_13">
+          <widget class="QWidget" name="tab_supprimerdelit">
            <attribute name="title">
             <string>Supprimer</string>
            </attribute>
@@ -3006,7 +3006,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_26">
+               <widget class="QLineEdit" name="lineEdit_supprimer_d">
                 <property name="font">
                  <font>
                   <pointsize>19</pointsize>
@@ -3015,7 +3015,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="supprimerPb_3">
+               <widget class="QPushButton" name="pushButton_supprimerdelit">
                 <property name="font">
                  <font>
                   <pointsize>19</pointsize>
@@ -3030,13 +3030,13 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_15">
+          <widget class="QWidget" name="tab_modifoe_delit">
            <attribute name="title">
             <string>Modifier</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0" rowspan="3">
-             <widget class="QGroupBox" name="groupBox_7">
+             <widget class="QGroupBox" name="groupBox_mod_delit">
               <property name="title">
                <string>Delit</string>
               </property>
@@ -3051,7 +3051,7 @@ PlotWidget {
                 <number>14</number>
                </property>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_33">
+                <widget class="QLabel" name="label_iddelit2">
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -3072,7 +3072,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLabel" name="label_34">
+                <widget class="QLabel" name="label_datedelit2">
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -3093,7 +3093,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="label_35">
+                <widget class="QLabel" name="label_typedelit2">
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -3105,7 +3105,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QComboBox" name="comboBox_3">
+                <widget class="QComboBox" name="comboBox_type_d">
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -3129,7 +3129,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QLabel" name="label_36">
+                <widget class="QLabel" name="label_descdelit2">
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -3141,7 +3141,7 @@ PlotWidget {
                 </widget>
                </item>
                <item row="3" column="1">
-                <widget class="QLineEdit" name="lineEdit_11">
+                <widget class="QLineEdit" name="lineEdit_desc_d">
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -3170,7 +3170,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_27">
+               <widget class="QLineEdit" name="lineEdit_rechercher_d">
                 <property name="font">
                  <font>
                   <pointsize>15</pointsize>
@@ -3179,7 +3179,7 @@ PlotWidget {
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_12">
+               <widget class="QPushButton" name="pushButton_rechercherdelit">
                 <property name="font">
                  <font>
                   <pointsize>15</pointsize>
@@ -3193,7 +3193,7 @@ PlotWidget {
              </layout>
             </item>
             <item row="3" column="0">
-             <widget class="QPushButton" name="pushButton_13">
+             <widget class="QPushButton" name="pushButton_modifierdelit">
               <property name="font">
                <font>
                 <pointsize>17</pointsize>
@@ -3219,7 +3219,7 @@ PlotWidget {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tab_option">
        <attribute name="title">
         <string>Options</string>
        </attribute>
@@ -3229,7 +3229,7 @@ PlotWidget {
           <property name="currentIndex">
            <number>1</number>
           </property>
-          <widget class="QWidget" name="tab_2">
+          <widget class="QWidget" name="tab_optionson">
            <attribute name="title">
             <string>Son</string>
            </attribute>
@@ -3352,13 +3352,13 @@ PlotWidget {
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_3">
+          <widget class="QWidget" name="tab_optionsaff">
            <attribute name="title">
             <string>Affichage</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_4">
             <item row="1" column="0">
-             <widget class="QPushButton" name="pushButton_7">
+             <widget class="QPushButton" name="pushButton_changerlight">
               <property name="font">
                <font>
                 <pointsize>21</pointsize>
@@ -3373,7 +3373,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="0" column="0">
-             <widget class="QLabel" name="label_15">
+             <widget class="QLabel" name="label_mode">
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
@@ -3385,7 +3385,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="pushButton_8">
+             <widget class="QPushButton" name="pushButton_changerdark">
               <property name="font">
                <font>
                 <pointsize>21</pointsize>
@@ -3397,7 +3397,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_9">
+             <widget class="QPushButton" name="pushButton_changerorange">
               <property name="font">
                <font>
                 <pointsize>21</pointsize>
@@ -3409,7 +3409,7 @@ PlotWidget {
              </widget>
             </item>
             <item row="0" column="1" colspan="2">
-             <widget class="QLabel" name="label_16">
+             <widget class="QLabel" name="label_modech">
               <property name="font">
                <font>
                 <pointsize>15</pointsize>

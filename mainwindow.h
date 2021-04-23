@@ -22,29 +22,29 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_6_clicked();
+    void on_pushButton_ajoutdelit_clicked();
 
-    void on_supprimerPb_3_clicked();
+    void on_pushButton_supprimerdelit_clicked();
 
-    void on_pushButton_13_clicked();
+    void on_pushButton_modifierdelit_clicked();
 
-    void on_PB_add_c_clicked();
+    void on_pushButton_ajoutcriminel_clicked();
 
-    void on_PB_DEL_C_clicked();
+    void on_pushButton_supprimercriminel_clicked();
 
-    void on_PB_mod_c_clicked();
+    void on_pushButton_modifiercriminel_clicked();
 
-    void on_pushButton_12_clicked();
+    void on_pushButton_rechercherdelit_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_pushButton_recherchercriminel_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_pushButton_recherchercriminel2_clicked();
 
-    void on_pushButton_trier_clicked();
+    void on_pushButton_trierdelittype_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_trierdelitdate_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_pushButton_chart1_clicked();
 
     void on_pushButton_ouvm_clicked();
 
@@ -60,15 +60,15 @@ private slots:
 
     void on_PB_load_clicked();
 
-    void on_pushButton_trier_2_clicked();
+    void on_pushButton_chart2_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_pushButton_exportercriminel_clicked();
 
-    void on_pushButton_7_clicked();
+    void on_pushButton_changerlight_clicked();
 
-    void on_pushButton_8_clicked();
+    void on_pushButton_changerdark_clicked();
 
-    void on_pushButton_9_clicked();
+    void on_pushButton_changerorange_clicked();
 
 private:
     Ui::MainWindow *ui;
