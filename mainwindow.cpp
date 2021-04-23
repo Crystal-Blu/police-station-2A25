@@ -25,15 +25,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
+    ui->label_4->setText(QString::number(volume)+"%");
     int ret=A.connect_arduino();
             switch (ret)
             {
             case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
+                ui->label_24->setText("Arduino is available and connected");
+                ui->label_24->setStyleSheet("QLabel {color : green; }");
+                arduino_connected=1;
             break ;
             case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+                if (arduino_connected==0)
+               { ui->label_24->setText("Arduino is available and not connected");
+                ui->label_24->setStyleSheet("QLabel {color : yellow; }");}
             break ;
             case(-1): qDebug() << "arduino is not available";
-
+                ui->label_24->setText("Arduino is not available");
+                ui->label_24->setStyleSheet("QLabel {color : red; }");
+                arduino_connected=0;
                 }
         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
         {
@@ -51,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     mySystemTrayIcon->setIcon(QIcon("C:/Users/WALID/Desktop/Studies/Projet cpp/Police.png"));
     mySystemTrayIcon->setVisible(true);
     player->setMedia(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Studies/Projet cpp/click.wav"));
-    player->setVolume(100);
+    player->setVolume(volume);
     ui->Vehicule_table->setModel(V.afficher_vehicules(Affichagevehicule_Query_f));
     ui->Equipemen_table->setModel(E.afficher_equipments(Affichageeq_Query_f));
     ui->tableView_reparations->setModel(R.Afficher_rep());
@@ -1090,4 +1099,60 @@ void MainWindow::on_modifier_equip_clicked()
     {
         QMessageBox::critical(nullptr, QObject::tr("OK"),QObject::tr("Ajout Non Effectué \n"), QMessageBox::Ok);
     }
+}
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    volume=ui->horizontalSlider->value();
+    ui->label_4->setText(QString::number(volume)+"%");
+    player->setVolume(volume);
+    ui->checkBox->setChecked(false);
+}
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+    if (ui->checkBox->isChecked())
+    {
+        player->setVolume(0);
+        ui->label_4->setText("0%");
+    }
+    else
+    {
+        player->setVolume(volume);
+        ui->label_4->setText(QString::number(volume)+"%");
+    }
+}
+
+void MainWindow::on_test_clicked()
+{
+    int ret=A.connect_arduino();
+            switch (ret)
+            {
+            case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
+                ui->label_24->setText("Arduino is available and connected");
+                ui->label_24->setStyleSheet("QLabel {color : green; }");
+                arduino_connected=1;
+            break ;
+            case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+                if (arduino_connected==0)
+               { ui->label_24->setText("Arduino is available and not connected");
+                ui->label_24->setStyleSheet("QLabel {color : yellow; }");}
+            break ;
+            case(-1): qDebug() << "arduino is not available";
+                ui->label_24->setText("Arduino is not available");
+                ui->label_24->setStyleSheet("QLabel {color : red; }");
+                arduino_connected=0;
+                }
+            QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+            {
+
+            }
+}
+
+void MainWindow::on_checkBox_2_stateChanged(int arg1)
+{
+    if (ui->checkBox_2->isChecked())
+    mySystemTrayIcon->setVisible(false);
+    else
+        mySystemTrayIcon->setVisible(true);
 }

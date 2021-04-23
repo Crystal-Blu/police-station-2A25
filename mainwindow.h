@@ -157,6 +157,14 @@ private slots:
 
     void on_modifier_equip_clicked();
 
+    void on_horizontalSlider_valueChanged(int value);
+
+    void on_checkBox_stateChanged(int arg1);
+
+    void on_test_clicked();
+
+    void on_checkBox_2_stateChanged(int arg1);
+
 private:
     QByteArray data ;
         Arduino A;
@@ -171,6 +179,8 @@ private:
     int N=0;
     int id_policier=1;
     QString code;
+    int volume=100;
+    int arduino_connected;
 
 };
 #endif // MAINWINDOW_H
