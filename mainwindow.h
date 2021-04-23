@@ -170,6 +170,7 @@ private:
     int count,count_vehicules,count_equipements;
     int N=0;
     int id_policier=1;
+    QString code;
 
 };
 #endif // MAINWINDOW_H

@@ -1036,9 +1036,41 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::update_label()
 {
+    QString Message;
+    int job;
     data=A.read_from_arduino();
-    if (data=="1")
+    for (int i=0;i<data.length();i++)
     {
-            mySystemTrayIcon ->showMessage(tr("Un Policier Postule"),tr("hehe"));
+        code=code+data[i];
+    }
+    if (code.contains("\r\n"))
+    {
+        Message="Carte RFID introuvable dans la base de données";
+        code.remove("\r\n");
+        QSqlQuery qry;
+        qry.prepare( " select * from policier where CODE =:code");
+        qry.bindValue(":code",code);
+        if(qry.exec( ))
+        {
+            while(qry.next())
+
+        {
+                job=qry.value(6).toInt();
+                if (qry.value(6)==0)
+                 Message="Le Policier : "+qry.value(1).toString()+" "+qry.value(2).toString()+" ID = "+qry.value(0).toString()+" Grade: "+qry.value(3).toString()+" vient d'entrer !";
+                else if (qry.value(6)==1)
+                 Message="Le Policier : "+qry.value(1).toString()+" "+qry.value(2).toString()+" ID = "+qry.value(0).toString()+" Grade: "+qry.value(3).toString()+" vient de rentrer !";
+
+
+        }
+        }
+            if (job==0)
+        qry.prepare( " UPDATE policier set on_job=1 where CODE =:code");
+            else
+            qry.prepare( " UPDATE policier set on_job=0 where CODE =:code");
+        qry.bindValue(":code",code);
+        qry.exec( );
+        mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
+        code="";
     }
 }
