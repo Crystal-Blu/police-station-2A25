@@ -424,6 +424,12 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_ouvm_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
    QString filename = QFileDialog :: getOpenFileName(this,"police");
    if (filename.isEmpty()) {return;}
    mMediaPlayer->setMedia(QUrl::fromLocalFile(filename));
@@ -433,22 +439,46 @@ void MainWindow::on_pushButton_ouvm_clicked()
 
 void MainWindow::on_pushButton_play_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
     mMediaPlayer->play();
 }
 
 void MainWindow::on_pushButton_pause_clicked()
 {
-  mMediaPlayer->pause();
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+    mMediaPlayer->pause();
 }
 
 void MainWindow::on_pushButton_stop_clicked()
 {
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
     mMediaPlayer->stop();
 }
 
 void MainWindow::on_pushButton_mute_clicked()
 {
-   if(ui->pushButton_mute->text()=="MUTE"){
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+    if(ui->pushButton_mute->text()=="MUTE"){
     mMediaPlayer->setMuted(true);
     ui->pushButton_mute->setText("UNMUTE");
    }else {
@@ -459,7 +489,8 @@ void MainWindow::on_pushButton_mute_clicked()
 
 void MainWindow::on_volume_valueChanged(int value)
 {
-  mMediaPlayer->setVolume(value);
+
+    mMediaPlayer->setVolume(value);
 }
 
 void MainWindow::on_PB_load_clicked()
@@ -501,7 +532,12 @@ void MainWindow::on_pushButton_4_clicked()
 
 
 
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
 
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
 
     QPdfWriter pdf("C:/Users/Ilyes/Desktop/Pdfcriminel.pdf");
                                  QPainter painter(&pdf);
@@ -565,30 +601,101 @@ void MainWindow::on_pushButton_7_clicked()
      mmMediaPlayer->setVolume(50);
      mmMediaPlayer->play();
 
-    if (ui->pushButton_7->isChecked()){
-        ui->label_16->setText("Activé");
-        QFile file("C:/Users/Ilyes/Downloads/Style_Gray.qss");
+        QFile file("C:/Users/Ilyes/Desktop/Ilyes/Smart_police_station_ilyes/ressources/light/style.qss");
 
         file.open(QFile::ReadOnly);
         QString styleSheet = QString::fromLatin1(file.readAll());
+        ui->label_16->setText("Light Mode");
 
         // Option 1: Set theme for the inner central widget
         //ui->centralWidget->setStyleSheet(styleSheet);
 
         // Option 2: Set theme for the entire application
         this->setStyleSheet(styleSheet);
-    }
-    else{ ui->label_16->setText("Désactivé");
-        QFile file("C:/Users/Ilyes/Downloads/Style_Blue.qss");
+}
 
+
+
+/*void MainWindow::on_pushButton_19_clicked()
+{
+    player->play();
+    QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/dark/style.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pushButton_20_clicked()
+{
+    player->play();
+    QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/light/style.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pushButton_23_clicked()
+{
+    player->play();
+    QFile f("C:/Users/WALID/Desktop/Studies/Projet cpp/DarkOrange/darkorange/darkorange.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
+}
+*/
+void MainWindow::on_pushButton_8_clicked()
+{
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+        QFile file("C:/Users/Ilyes/Desktop/Ilyes/Smart_police_station_ilyes/ressources/dark/style.qss");
         file.open(QFile::ReadOnly);
         QString styleSheet = QString::fromLatin1(file.readAll());
+ui->label_16->setText("Dark Mode");
+        // Option 1: Set theme for the inner central widget
+        //ui->centralWidget->setStyleSheet(styleSheet);
+
+        // Option 2: Set theme for the entire application
+        this->setStyleSheet(styleSheet);
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+     mmMediaPlayer->setMedia(url);
+     mmMediaPlayer->setVolume(50);
+     mmMediaPlayer->play();
+        QFile file("C:/Users/Ilyes/Desktop/Ilyes/Smart_police_station_ilyes/ressources/DarkOrange/darkorange.qss");
+        file.open(QFile::ReadOnly);
+        QString styleSheet = QString::fromLatin1(file.readAll());
+        ui->label_16->setText("Dark orange");
 
         // Option 1: Set theme for the inner central widget
         //ui->centralWidget->setStyleSheet(styleSheet);
 
         // Option 2: Set theme for the entire application
-        this->setStyleSheet(styleSheet);}
-
-
+        this->setStyleSheet(styleSheet);
 }

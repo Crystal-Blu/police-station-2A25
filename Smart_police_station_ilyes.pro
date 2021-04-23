@@ -1,6 +1,6 @@
 QT       += core gui multimedia printsupport
 QT       += sql
-QT += charts
+QT += charts serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -11,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     Connection.cpp \
+    arduino.cpp \
     chart.cpp \
     charttype.cpp \
     criminels.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     Connection.h \
+    arduino.h \
     chart.h \
     charttype.h \
     criminels.h \
