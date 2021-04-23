@@ -25,6 +25,7 @@
 #include <QUrl>
 #include <QPdfWriter>
 #include <QMediaPlayer>
+#include<QQuickItem>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -32,6 +33,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
+    ui->quickWidget->show();
+
 
     int ret=A.connect_arduino();
         switch (ret) {

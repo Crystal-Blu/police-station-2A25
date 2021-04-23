@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1124</width>
-    <height>570</height>
+    <width>1164</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
       <x>0</x>
       <y>0</y>
       <width>1121</width>
-      <height>551</height>
+      <height>521</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -52,7 +52,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_34">
        <attribute name="title">
@@ -802,12 +802,12 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1061</width>
-        <height>511</height>
+        <width>1071</width>
+        <height>441</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_15">
        <attribute name="title">
@@ -1409,6 +1409,24 @@ border-color: rgb(0, 0, 0);
      <zorder>pb_darkorange</zorder>
      <zorder>pushButton_9</zorder>
     </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Map</string>
+     </attribute>
+     <widget class="QQuickWidget" name="quickWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>1091</width>
+        <height>471</height>
+       </rect>
+      </property>
+      <property name="resizeMode">
+       <enum>QQuickWidget::SizeRootObjectToView</enum>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1416,13 +1434,20 @@ border-color: rgb(0, 0, 0);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1124</width>
+     <width>1164</width>
      <height>20</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QQuickWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QtQuickWidgets/QQuickWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icon.qrc"/>
  </resources>

@@ -1,5 +1,5 @@
 #include "connection.h"
-
+#include<QDebug>
 
 Connection::Connection()
 {
@@ -10,6 +10,7 @@ bool Connection::createconnection()
 
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+
     bool test=false;
 db.setDatabaseName("Source_Projet2A");//inserer le nom de la source de données ODBC
 db.setUserName("bayrem");//inserer nom de l'utilisateur

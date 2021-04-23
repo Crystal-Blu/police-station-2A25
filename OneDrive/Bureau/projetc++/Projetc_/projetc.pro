@@ -1,4 +1,5 @@
-QT       += core gui printsupport multimedia serialport
+QT       += core gui printsupport multimedia serialport quickwidgets  positioning location qml
+QT += location
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,6 +36,7 @@ QT += sql
 
 RESOURCES += \
     icon.qrc \
+    qml.qrc \
     translation.qrc
     RESOURCES += darkorange/darkorange.qrc
     RESOURCES += dark/style.qrc
@@ -42,3 +44,4 @@ RESOURCES += \
 
 DISTFILES += \
     Police.ico
+
