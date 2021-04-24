@@ -21,6 +21,7 @@
 #include<QFile>
 #include<QApplication>
 #include<QSoundEffect>
+#include"arduino.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -44,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     //CONTROLE SAISIE ID DELIT
+    setWindowIcon(QIcon("C:/Users/Ilyes/Desktop/Ilyes/Smart_police_station_ilyes/images.png"));
 
 
 
@@ -653,4 +655,11 @@ void MainWindow::on_pushButton_changerorange_clicked()
 
         // Option 2: Set theme for the entire application
         this->setStyleSheet(styleSheet);
+}
+
+void MainWindow::on_arduiopen_clicked()
+{
+    arduino arduino;
+    arduino.setModal(true);
+    arduino.exec();
 }

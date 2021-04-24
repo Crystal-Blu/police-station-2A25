@@ -3227,7 +3227,7 @@ PlotWidget {
         <item>
          <widget class="QTabWidget" name="tabWidget_4">
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab_optionson">
            <attribute name="title">
@@ -3421,6 +3421,24 @@ PlotWidget {
              </widget>
             </item>
            </layout>
+          </widget>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Page</string>
+           </attribute>
+           <widget class="QPushButton" name="arduiopen">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>180</y>
+              <width>80</width>
+              <height>25</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
           </widget>
          </widget>
         </item>

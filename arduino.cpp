@@ -1,79 +1,98 @@
 #include "arduino.h"
-#include <QtDebug>
+#include "ui_arduino.h"
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QDebug>
+#include <QtWidgets>
+#include <QSqlQuery>
+#include <QSqlDriver>
 
-Arduino::Arduino()
+arduino::arduino(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::arduino)
 {
+    ui->setupUi(this);
 
-}
-int Arduino::connect_arduino()
-{
+    arduino_is_available = false;
+    arduino_port_name = "";
+    serial = new QSerialPort;
 
-
-    foreach (const QSerialPortInfo &serial_port_info, QSerialPortInfo::availablePorts())
-    {
-        if (serial_port_info.hasVendorIdentifier() && serial_port_info.hasProductIdentifier())
-        {
-          if( serial_port_info.vendorIdentifier() == arduino_uno_vendor_id && serial_port_info.productIdentifier() == arduino_uno_producy_id )
-          {
-           arduino_is_available= true ;
-           arduino_port_name=serial_port_info.portName();
-          }
+    /*
+    qDebug() << "Number of available ports: " << QSerialPortInfo::availablePorts().length();
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
+        qDebug() << "Has vendor ID: " << serialPortInfo.hasVendorIdentifier();
+        if(serialPortInfo.hasVendorIdentifier()){
+            qDebug() << "Vendor ID: " << serialPortInfo.vendorIdentifier();
+        }
+        qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
+        if(serialPortInfo.hasProductIdentifier()){
+            qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
         }
     }
-    qDebug()<< "arduino_port_name is :" << arduino_port_name;
-    if (arduino_is_available)
-    {
-     serial.setPortName(arduino_port_name);
-     if (serial.open(QSerialPort::ReadWrite))
-     {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
-            return 0 ;
+    */
+
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
+        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){
+            if(serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id){
+                if(serialPortInfo.productIdentifier() == arduino_uno_product_id){
+                    arduino_port_name = serialPortInfo.portName();
+                    arduino_is_available = true;
+                }
+            }
+        }
     }
-return 1;
 
-}
-    if  (arduino_is_available != true)
-    return -1;
-
-}
-
-int Arduino::close_arduino(){
-    if(serial.isOpen()){
-        serial.close();
-        return 0 ;
-    }
-    return 1;
-}
-
-QByteArray Arduino::read_from_arduino()
-{
-    if (serial.isReadable()){
-        data=serial.readAll();
-                return data;
+    if(arduino_is_available){
+        // open and configure the serialport
+        serial->setPortName(arduino_port_name);
+        serial->open(QSerialPort::WriteOnly);
+        serial->setBaudRate(QSerialPort::Baud9600);
+        serial->setDataBits(QSerialPort::Data8);
+        serial->setParity(QSerialPort::NoParity);
+        serial->setStopBits(QSerialPort::OneStop);
+        serial->setFlowControl(QSerialPort::NoFlowControl);
+    }else{
+        // give error message if not available
+        QMessageBox::warning(this, "Port error", "Couldn't find the Arduino!");
     }
 }
 
-int Arduino::write_to_arduino(QByteArray d)
+arduino::~arduino()
 {
-    if(serial.isWritable()){
-        serial.write(d);
-    } else {
-        qDebug() << "Could't write to serial";
+    if(serial->isOpen()){
+        serial->close();
+    }
+    delete ui;
+}
 
+
+
+
+void arduino::updateRGB(QString command)
+{
+    if(serial->isWritable()){
+        serial->write(command.toStdString().c_str());
+    }else{
+        qDebug() << "Couldn't write to serial!";
     }
 }
 
-QString Arduino::getarduino_port_name()
+void arduino::on_pushButton_testarduino_clicked()
 {
-    return arduino_port_name;
-}
+    int CODE=ui->lineEdit_testarduino->text().toInt();
 
+    QString CODEstr=QString::number(CODE);
+    QSqlQuery query;
 
-QSerialPort* Arduino::getserial()
-{
-    return &serial;
+          int numRows= 0;
+          query.exec("SELECT COUNT(*) FROM DELITS WHERE ID_DELIT  ='"+CODEstr+"'");
+          if(query.first())
+              numRows = query.value(0).toInt();
+          if (numRows==0){
+    arduino::updateRGB(QString("r%1").arg(150));
+    qDebug() << 150;}
+          else{
+    arduino::updateRGB(QString("g%1").arg(150));
+    qDebug() << 150;
+          }
 }

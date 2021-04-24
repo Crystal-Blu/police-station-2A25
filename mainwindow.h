@@ -70,6 +70,9 @@ private slots:
 
     void on_pushButton_changerorange_clicked();
 
+
+    void on_arduiopen_clicked();
+
 private:
     Ui::MainWindow *ui;
     Delits D1 ;
