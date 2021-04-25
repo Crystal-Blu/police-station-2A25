@@ -15,6 +15,7 @@
 #include <QtMultimedia/QMediaPlayer>
 #include <QSqlDriver>
 #include <QTimer>
+#include <QFileDialog>
 #include "arduino.h"
 
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
@@ -1048,7 +1049,12 @@ void MainWindow::on_supprimer_reparation_clicked()
 void MainWindow::on_Print_pdf_vehicules_clicked()
 {
     player->play();
-    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfvehicules.pdf");
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                "/home",
+                                                QFileDialog::ShowDirsOnly
+                                                | QFileDialog::DontResolveSymlinks);
+    qDebug()<<dir;
+    QPdfWriter pdf(dir+"/Pdfvehicules.pdf");
                                  QPainter painter(&pdf);
                                 int i = 4000;
                                      painter.setPen(Qt::red);
@@ -1080,7 +1086,7 @@ void MainWindow::on_Print_pdf_vehicules_clicked()
                                                                          QMessageBox::Yes |  QMessageBox::No);
                                          if (reponse == QMessageBox::Yes)
                                          {
-                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfvehicules.pdf"));
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile(dir+"/Pdfvehicules.pdf"));
                                              painter.end();
                                          }
                                          else
@@ -1091,8 +1097,12 @@ void MainWindow::on_Print_pdf_vehicules_clicked()
 
 void MainWindow::on_print_pdf_equipements_clicked()
 {
-    player->play();
-    QPdfWriter pdf("C:/Users/WALID/Desktop/Pdfequipements.pdf");
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                "/home",
+                                                QFileDialog::ShowDirsOnly
+                                                | QFileDialog::DontResolveSymlinks);
+    qDebug()<<dir;
+    QPdfWriter pdf(dir+"/Pdfequipements.pdf");
                                  QPainter painter(&pdf);
                                 int i = 4000;
                                      painter.setPen(Qt::red);
@@ -1122,7 +1132,7 @@ void MainWindow::on_print_pdf_equipements_clicked()
                                                                          QMessageBox::Yes |  QMessageBox::No);
                                          if (reponse == QMessageBox::Yes)
                                          {
-                                             QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/WALID/Desktop/Pdfequipements.pdf"));
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile(dir+"/Pdfequipements.pdf"));
                                              painter.end();
                                          }
                                          else
@@ -1771,7 +1781,12 @@ music->setMedia(QUrl("qrc:/new/prefix1/click.wav"));
 music->play();
 */
     player->play();
-QPdfWriter pdf("C:/Users/xDrais/Desktop/Pdfdetention.pdf");
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                "/home",
+                                                QFileDialog::ShowDirsOnly
+                                                | QFileDialog::DontResolveSymlinks);
+    qDebug()<<dir;
+    QPdfWriter pdf(dir+"/Pdfmissions.pdf");
                              QPainter painter(&pdf);
                             int i = 4000;
                                  painter.setPen(Qt::red);
@@ -1814,7 +1829,7 @@ QPdfWriter pdf("C:/Users/xDrais/Desktop/Pdfdetention.pdf");
                                                                      QMessageBox::Yes |  QMessageBox::No);
                                      if (reponse == QMessageBox::Yes)
                                      {
-                                         QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/xDrais/Desktop/Pdfdetention.pdf"));
+                                         QDesktopServices::openUrl(QUrl::fromLocalFile(dir+"/Pdfmissions.pdf"));
 
                                          painter.end();
                                      }
