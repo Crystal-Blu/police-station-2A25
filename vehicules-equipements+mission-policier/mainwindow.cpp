@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     remplir_equipements();
     remplir_vehi();
     mySystemTrayIcon = new QSystemTrayIcon(this);
-    mySystemTrayIcon->setIcon(QIcon("C:/Users/WALID/Desktop/Studies/Projet cpp/Police.png"));
+    mySystemTrayIcon->setIcon(QIcon(":/new/prefix1/Police.png"));
     mySystemTrayIcon->setVisible(true);
     player->setMedia(QUrl::fromLocalFile("C:/Users/xDrais/Desktop/police-station-2A25-vehicules-equipements/click.wav"));
     player->setVolume(volume);
@@ -593,7 +593,7 @@ void MainWindow::updateaffichageeq()
 void MainWindow::on_pushButton_19_clicked()
 {
     player->play();
-    QFile f("C:/Users/xDrais/Desktop/police-station-2A25-vehicules-equipements/dark/style.qss");
+    QFile f("C:/Users/xDrais/Projet-C-Groupe-2-2A25/vehicules-equipements+mission-policier/dark/style.qss");
 
     if (!f.exists())   {
         printf("Unable to set stylesheet, file not found\n");
@@ -608,7 +608,7 @@ void MainWindow::on_pushButton_19_clicked()
 void MainWindow::on_pushButton_20_clicked()
 {
     player->play();
-    QFile f("C:/Users/xDrais/Desktop/police-station-2A25-vehicules-equipements/light/style.qss");
+    QFile f(":/qdarkstyle/light/style.qss");
 
     if (!f.exists())   {
         printf("Unable to set stylesheet, file not found\n");
@@ -623,7 +623,7 @@ void MainWindow::on_pushButton_20_clicked()
 void MainWindow::on_pushButton_23_clicked()
 {
     player->play();
-    QFile f("C:/Users/xDrais/Desktop/police-station-2A25-vehicules-equipements/DarkOrange/darkorange/darkorange.qss");
+    QFile f(":/darkorange.qss");
 
     if (!f.exists())   {
         printf("Unable to set stylesheet, file not found\n");
