@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/new/prefix1">
-        <file>Police.png</file>
-        <file>click.wav</file>
+        <file>themes/Darkeum.qss</file>
     </qresource>
 </RCC>

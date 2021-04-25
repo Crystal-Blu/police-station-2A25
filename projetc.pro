@@ -15,6 +15,8 @@ SOURCES += \
     equipements.cpp \
     main.cpp \
     mainwindow.cpp \
+    missions.cpp \
+    policier.cpp \
     reparations.cpp \
     vehicule.cpp \
     vehicule_modifier_window.cpp
@@ -25,6 +27,8 @@ HEADERS += \
     connection.h \
     equipements.h \
     mainwindow.h \
+    missions.h \
+    policier.h \
     reparations.h \
     vehicule.h \
     vehicule_modifier_window.h
@@ -42,9 +46,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 QT+= serialport
 QT+= sql
 CONFIG += console
-RESOURCES += dark/style.qrc \
-    res.qrc
-RESOURCES += light/style.qrc
+
+
+RESOURCES += light/style.qrc \
+    darktheme.qrc
+RESOURCES += res.qrc
+
+
 RESOURCES += DarkOrange/darkorange/darkorange.qrc
 QT += core gui \
 multimedia
@@ -52,3 +60,6 @@ multimedia
 QMAKE_CXXFLAGS += -std=gnu++14
 
 RC_ICONS = Police.ico
+
+DISTFILES += \
+    Police.png
