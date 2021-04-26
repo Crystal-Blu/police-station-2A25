@@ -4,6 +4,7 @@
 #include <QtSerialPort/QSerialPortInfo>
 
 
+
 class Arduino
 {
 public:
@@ -14,8 +15,9 @@ public:
     QByteArray read_from_arduino();
     QSerialPort* getserial();
     QString getarduino_port_name();
+
 private:
-    QSerialPort * serial ;
+    QSerialPort  serial ;
     static const quint16 arduino_uno_vendor_id=9025;
     static const quint16 arduino_uno_producy_id=67;
     QString arduino_port_name ;

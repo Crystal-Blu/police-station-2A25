@@ -15,6 +15,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include "arduino.h"
+#include <QFile>
 
 
 
@@ -24,20 +25,20 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->idc->setValidator ( new QIntValidator(0, 10, this));
-    ui->lineEdit->setValidator ( new QIntValidator(0, 10, this));
-    ui->lineEdit_13->setValidator ( new QIntValidator(0, 10, this));
+    ui->idc_md->setValidator ( new QIntValidator(0, 10, this));
+    ui->idc_supp->setValidator ( new QIntValidator(0, 10, this));
     ui->nblit->setValidator ( new QIntValidator(0, 10, this));
-    ui->lineEdit_4->setValidator ( new QIntValidator(0, 10, this));
-    ui->lineEdit_5->setValidator ( new QIntValidator(0, 10000, this));
-    ui->lineEdit_11->setValidator ( new QIntValidator(0, 10000, this));
-    ui->lineEdit_12->setValidator ( new QIntValidator(0, 10000, this));
-    ui->lineEdit_8->setMaxLength(20);
-    ui->lineEdit_15->setMaxLength(20);
-    ui->lineEdit_8->setPlaceholderText("saisir la raison de la detention");
-    ui->lineEdit_15->setMaxLength(20);
-    ui->lineEdit_15->setPlaceholderText("saisir la raison de la detention");
-    ui->tableView->setModel(C.afficher());
-    ui->tableView_2->setModel(D.afficher());
+    ui->nb_lit_md->setValidator ( new QIntValidator(0, 10, this));
+    ui->id_det->setValidator ( new QIntValidator(0, 10000, this));
+    ui->id_det_md->setValidator ( new QIntValidator(0, 10000, this));
+    ui->id_det_supp->setValidator ( new QIntValidator(0, 10000, this));
+    ui->raison_det->setMaxLength(20);
+    ui->raison_maya_md->setMaxLength(20);
+    ui->raison_det->setPlaceholderText("saisir la raison de la detention");
+    ui->raison_maya_md->setMaxLength(20);
+    ui->raison_maya_md->setPlaceholderText("saisir la raison de la detention");
+    ui->tableView_cellule->setModel(C.afficher());
+    ui->tableView_detention->setModel(D.afficher());
 
 
     //arduino
@@ -48,9 +49,10 @@ MainWindow::MainWindow(QWidget *parent)
     case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
     break ;
     case(-1): qDebug() << "arduino is not available";
+        break;
 
         }
-    QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+    QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label_lumiere()));
 
 
 
@@ -65,7 +67,7 @@ MainWindow::~MainWindow()
 
 
 
-void MainWindow::on_pushButton_ajouter1_clicked()
+void MainWindow::on_pushButton_ajouter_cel_clicked()
 {
     int idcel=ui->idc->text().toInt();
     int nombre_det=ui->nbdet->text().toInt();
@@ -79,7 +81,7 @@ void MainWindow::on_pushButton_ajouter1_clicked()
 
         if (test){
 
-     ui->tableView->setModel(C.afficher());
+     ui->tableView_cellule->setModel(C.afficher());
      ui->idc->clear();
      ui->nbdet->clear();
      ui->nbdetmax->clear();
@@ -97,13 +99,13 @@ void MainWindow::on_pushButton_ajouter1_clicked()
 }
 
 
-void MainWindow::on_pushButton_modifier1_clicked()
+void MainWindow::on_pushButton_modifier_cel_clicked()
 {
 
-    int idcel=ui->lineEdit->text().toInt();
-    int nombre_det=ui->lineEdit_2->text().toInt();
-    int nombre_det_max=ui->lineEdit_3->text().toInt();
-    int nombre_lit=ui->lineEdit_4->text().toInt();
+    int idcel=ui->idc_md->text().toInt();
+    int nombre_det=ui->nb_det_md->text().toInt();
+    int nombre_det_max=ui->nb_det_max_md->text().toInt();
+    int nombre_lit=ui->nb_lit_md->text().toInt();
 
 
     Cellules C(idcel,nombre_det,nombre_det_max,nombre_lit);
@@ -111,11 +113,11 @@ void MainWindow::on_pushButton_modifier1_clicked()
 
     if (test){
 
- ui->tableView->setModel(C.afficher());
- ui->lineEdit->clear();
- ui->lineEdit_2->clear();
- ui->lineEdit_3->clear();
- ui->lineEdit_4->clear();
+ ui->tableView_cellule->setModel(C.afficher());
+ ui->idc_md->clear();
+ ui->nb_det_md->clear();
+ ui->nb_det_max_md->clear();
+ ui->nb_lit_md->clear();
 
 
         QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -131,15 +133,15 @@ void MainWindow::on_pushButton_modifier1_clicked()
 
 
 
-void MainWindow::on_pushButton_supp1_clicked()
+void MainWindow::on_pushButton_supp_cel_clicked()
 {
-    int idcel  = ui->lineEdit_13->text().toInt();
+    int idcel  = ui->idc_supp->text().toInt();
         bool test = C1.supprimer(idcel);
 
         if (test){
 
-     ui->tableView->setModel(C.afficher());
-     ui->lineEdit_13->clear();
+     ui->tableView_cellule->setModel(C.afficher());
+     ui->idc_supp->clear();
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
                                      QObject::tr("Suppression effectué\n"
@@ -155,14 +157,14 @@ void MainWindow::on_pushButton_supp1_clicked()
 
 
 
-void MainWindow::on_pushButton_ajouter2_clicked()
+void MainWindow::on_pushButton_ajouter_det_clicked()
 {
-    int iddet=ui->lineEdit_5->text().toInt();
-    QDate date_entree=ui->dateEdit->date();
-    QDate date_sortie=ui->dateEdit_2->date();
-    QString raison=ui->lineEdit_8->text();
-    int idcel=ui->lineEdit_10->text().toInt();
-    int idp=ui->lineEdit_9->text().toInt();
+    int iddet=ui->id_det->text().toInt();
+    QDate date_entree=ui->date_entree->date();
+    QDate date_sortie=ui->date_sortie->date();
+    QString raison=ui->raison_det->text();
+    int idcel=ui->idcel_2->text().toInt();
+    int idp=ui->idp_maya->text().toInt();
 
 
 
@@ -194,14 +196,14 @@ while (query.next()) {
         if (test){
 
      C.ajout_det(idcel);
-     ui->tableView_2->setModel(D.afficher());
-     ui->tableView->setModel(C.afficher());
-     ui->lineEdit_5->clear();
-     ui->dateEdit->clear();
-     ui->dateEdit_2->clear();
-     ui->lineEdit_8->clear();
-     ui->lineEdit_10->clear();
-     ui->lineEdit_9->clear();
+     ui->tableView_detention->setModel(D.afficher());
+     ui->tableView_cellule->setModel(C.afficher());
+     ui->id_det->clear();
+     ui->date_entree->clear();
+     ui->date_sortie->clear();
+     ui->raison_det->clear();
+     ui->idcel_2->clear();
+     ui->idp_maya->clear();
 
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -216,27 +218,27 @@ while (query.next()) {
                else
                    QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Nombre max atteint.Veuillez ajouter dans une autre cellule.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 }
-void MainWindow::on_pushButton_modifier2_clicked()
+void MainWindow::on_pushButton_modifier_det_clicked()
 {
-    int iddet=ui->lineEdit_11->text().toInt();
-    QDate date_entree=ui->dateEdit_3->date();
-    QDate date_sortie=ui->dateEdit_4->date();
-    QString raison=ui->lineEdit_15->text();
-    int idcel=ui->lineEdit_18->text().toInt();
-    int idp=ui->lineEdit_17->text().toInt();
+    int iddet=ui->id_det_md->text().toInt();
+    QDate date_entree=ui->date_entree_md->date();
+    QDate date_sortie=ui->date_sortie_md->date();
+    QString raison=ui->raison_maya_md->text();
+    int idcel=ui->id_cel_2_md->text().toInt();
+    int idp=ui->idp_maya_2_md->text().toInt();
 
            detentions D(iddet,date_entree,date_sortie,raison,idcel,idp);
            bool test = D.modifier(iddet);
 
            if (test){
 
-        ui->tableView_2->setModel(D.afficher());
-        ui->lineEdit_11->clear();
-        ui->dateEdit_3->clear();
-        ui->dateEdit_4->clear();
-        ui->lineEdit_15->clear();
-        ui->lineEdit_17->clear();
-        ui->lineEdit_18->clear();
+        ui->tableView_detention->setModel(D.afficher());
+        ui->id_det_md->clear();
+        ui->date_entree_md->clear();
+        ui->date_sortie_md->clear();
+        ui->raison_maya_md->clear();
+        ui->idp_maya_2_md->clear();
+        ui->id_cel_2_md->clear();
 
 
                QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -251,15 +253,15 @@ void MainWindow::on_pushButton_modifier2_clicked()
 
 
 
-void MainWindow::on_pushButton_supprimer2_clicked()
+void MainWindow::on_pushButton_supprimer_det_clicked()
 {
-    int iddet  = ui->lineEdit_12->text().toInt();
+    int iddet  = ui->id_det_supp->text().toInt();
         bool test = D1.supprimer(iddet);
 
         if (test){
 
-     ui->tableView_2->setModel(D.afficher());
-     ui->lineEdit_12->clear();
+     ui->tableView_detention->setModel(D.afficher());
+     ui->id_det_supp->clear();
 
 
             QMessageBox::information(nullptr,QObject::tr("OK"),
@@ -272,7 +274,7 @@ void MainWindow::on_pushButton_supprimer2_clicked()
             QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Suppression de la detention non effectuée.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_metier_pdf_clicked()
 {
 
     QPdfWriter pdf("C:/Users/user/desktop/Pdfdetention.pdf");
@@ -328,9 +330,9 @@ void MainWindow::on_pushButton_clicked()
 }
 }
 
-void MainWindow::on_le_recherche_textChanged(const QString &arg1)
+void MainWindow::on_le_recherche_maya_textChanged(const QString &arg1)
 {
-    if(ui->rb_idp->isChecked())
+    if(ui->rb_idp_maya->isChecked())
         {
             QSqlQuery query;
             QSqlQueryModel * model=new QSqlQueryModel();
@@ -338,7 +340,7 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
             query.bindValue(":rech", QString("%%1%").arg(arg1));
             query.exec();
             model->setQuery(query);
-            ui->tableView_2->setModel(model);
+            ui->tableView_detention->setModel(model);
 
         }
 
@@ -350,10 +352,10 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
             query.bindValue(":rech", QString("%%1%").arg(arg1));
             query.exec();
             model->setQuery(query);
-            ui->tableView_2->setModel(model);
+            ui->tableView_detention->setModel(model);
 
         }
-    if(ui->rb_raison->isChecked())
+    if(ui->rb_raison_maya->isChecked())
         {
             QSqlQuery query;
             QSqlQueryModel * model=new QSqlQueryModel();
@@ -361,53 +363,53 @@ void MainWindow::on_le_recherche_textChanged(const QString &arg1)
             query.bindValue(":rech", QString("%%1%").arg(arg1));
             query.exec();
             model->setQuery(query);
-            ui->tableView_2->setModel(model);
+            ui->tableView_detention->setModel(model);
 
         }
 }
 
-void MainWindow::on_pushButton_11_clicked()
+void MainWindow::on_pushButton_maya_1_clicked()
 {
     ui->tabcellule->setCurrentIndex(ui->tabcellule->count()-3);
 
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_maya_2_clicked()
 {
     ui->tabcellule->setCurrentIndex(ui->tabcellule->count()-2);
 }
 
 
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_pushButton_maya_3_clicked()
 {
     ui->tabcellule->setCurrentIndex(ui->tabcellule->count()-1);
 }
 
 
 
-void MainWindow::on_pushButton_13_clicked()
+void MainWindow::on_pushButton_maya_4_clicked()
 {
     ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-3);
 }
 
 
 
-void MainWindow::on_pushButton_10_clicked()
+void MainWindow::on_pushButton_maya_5_clicked()
 {
     ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-2);
 }
 
 
 
-void MainWindow::on_pushButton_8_clicked()
+void MainWindow::on_pushButton_maya_6_clicked()
 {
     ui->tabWidget_4->setCurrentIndex(ui->tabcellule->count()-1);
 }
 
 
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_pushButton_md_sombre_clicked()
 {
     QFile f("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/dark/style.qss");
 
@@ -425,7 +427,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 
 
-void MainWindow::on_pushButton_9_clicked()
+void MainWindow::on_pushButton_md_clair_clicked()
 {
     QFile f("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/light/style.qss");
 
@@ -440,7 +442,7 @@ void MainWindow::on_pushButton_9_clicked()
 }
 
 
-void MainWindow::on_pushButton_12_clicked()
+void MainWindow::on_pushButton_md_sombre_orange_clicked()
 {
     QFile f("C:/Users/user/Desktop/khedma_projetC/police-station-2A25/DarkOrange/darkorange/darkorange.qss");
 
@@ -454,30 +456,30 @@ void MainWindow::on_pushButton_12_clicked()
        }
 }
 
-void MainWindow::on_pushButton_14_clicked()
+void MainWindow::on_pushButton_md_original_clicked()
 {
     setStyleSheet("");
 }
 
-void MainWindow::on_pushButton_15_clicked() //activer systeme lumière
+void MainWindow::on_pushButton_lumiere_act_clicked() //activer systeme lumière
 {
  A.write_to_arduino("1");
 }
 
 
 
-void MainWindow::on_pushButton_16_clicked() //desactiver systeme lumière
+void MainWindow::on_pushButton_lumiere_desact_clicked() //desactiver systeme lumière
 {
     A.write_to_arduino("0");
 }
 
-void MainWindow::update_label()
+void MainWindow::update_label_lumiere()
 {
     data=A.read_from_arduino();
     if (data=="1")
-        ui->label_2->setText("lumières alumées");
+        ui->label_etat_lumiere->setText("lumières allumées");
     else if (data=="0" || data=="2")
-        ui->label_2->setText("lumières eteinte");
+        ui->label_etat_lumiere->setText("lumières eteinte");
 }
 
 
