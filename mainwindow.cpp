@@ -1080,7 +1080,7 @@ void MainWindow::on_Print_pdf_vehicules_clicked()
                                      painter.setPen(Qt::black);
                                      painter.setFont(QFont("Arial", 50));
                                      painter.drawRect(1000,200,6500,2000);
-                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/vehicules.jpg"));
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap(":/new/prefix1/vehicules.jpg"));
                                      painter.drawRect(0,3000,9600,500);
                                      painter.setFont(QFont("Arial", 9));
                                      painter.setPen(Qt::blue);
@@ -1128,7 +1128,7 @@ void MainWindow::on_print_pdf_equipements_clicked()
                                      painter.setPen(Qt::black);
                                      painter.setFont(QFont("Arial", 50));
                                      painter.drawRect(1000,200,6500,2000);
-                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/WALID/Desktop/Studies/Projet cpp/equipements.jpg"));
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap(":/new/prefix1/vehicules.jpg"));
                                      painter.drawRect(0,3000,9600,500);
                                      painter.setFont(QFont("Arial", 9));
                                      painter.setPen(Qt::blue);
