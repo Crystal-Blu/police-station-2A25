@@ -11,7 +11,9 @@ CONFIG += c++11
 SOURCES += \
     ajout_reparation.cpp \
     arduino.cpp \
+    cellule.cpp \
     connection.cpp \
+    detention.cpp \
     equipements.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -24,7 +26,9 @@ SOURCES += \
 HEADERS += \
     ajout_reparation.h \
     arduino.h \
+    cellule.h \
     connection.h \
+    detention.h \
     equipements.h \
     mainwindow.h \
     missions.h \
@@ -49,7 +53,8 @@ CONFIG += console
 
 
 RESOURCES += light/style.qrc \
-    darktheme.qrc
+    darktheme.qrc \
+    images.qrc
 RESOURCES += res.qrc
 
 
