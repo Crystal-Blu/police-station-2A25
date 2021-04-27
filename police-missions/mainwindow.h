@@ -12,6 +12,8 @@
 #include "arduino.h"
 #include "policier.h"
 #include "missions.h"
+#include "detention.h"
+#include "cellule.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -235,6 +237,43 @@ private slots:
 
     void on_pb_missionrefresh_clicked();
 
+    void on_pushButton_maya_1_clicked();
+    void on_pushButton_supp_cel_clicked();
+
+    void on_pushButton_ajouter_cel_clicked();
+
+    void on_pushButton_modifier_cel_clicked();
+
+    void on_pushButton_ajouter_det_clicked();
+
+    void on_pushButton_modifier_det_clicked();
+
+    void on_pushButton_supprimer_det_clicked();
+
+    void on_pushButton_metier_pdf_clicked();
+
+    void on_le_recherche_maya_textChanged(const QString &arg1);
+    void on_pushButton_maya_2_clicked();
+
+    void on_pushButton_maya_3_clicked();
+
+    void on_pushButton_maya_4_clicked();
+
+    void on_pushButton_maya_5_clicked();
+
+    void on_pushButton_maya_6_clicked();
+
+    void on_pushButton_lumiere_act_clicked();
+
+    void on_pushButton_lumiere_desact_clicked();
+
+    void update_label_lumiere();
+
+
+    void on_rafraichir_maya1_clicked();
+
+    void on_rafraichir_maya2_clicked();
+
 private:
     QByteArray data ;
         Arduino A;
@@ -253,6 +292,10 @@ private:
     int arduino_connected;
     policier police;
     missions mission;
+    Cellules C ;
+    Cellules C1 ;
+    detentions D ;
+    detentions D1;
 
 };
 #endif // MAINWINDOW_H

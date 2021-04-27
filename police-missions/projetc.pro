@@ -11,7 +11,9 @@ CONFIG += c++11
 SOURCES += \
     ajout_reparation.cpp \
     arduino.cpp \
+    cellule.cpp \
     connection.cpp \
+    detention.cpp \
     equipements.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -24,7 +26,9 @@ SOURCES += \
 HEADERS += \
     ajout_reparation.h \
     arduino.h \
+    cellule.h \
     connection.h \
+    detention.h \
     equipements.h \
     mainwindow.h \
     missions.h \
@@ -46,9 +50,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 QT+= serialport
 QT+= sql
 CONFIG += console
-RESOURCES += dark/style.qrc \
-    res.qrc
-RESOURCES += light/style.qrc
+
+
+RESOURCES += light/style.qrc \
+    darktheme.qrc \
+    images.qrc
+RESOURCES += res.qrc
+
+
 RESOURCES += DarkOrange/darkorange/darkorange.qrc
 QT += core gui \
 multimedia
@@ -56,3 +65,6 @@ multimedia
 QMAKE_CXXFLAGS += -std=gnu++14
 
 RC_ICONS = Police.ico
+
+DISTFILES += \
+    Police.png
