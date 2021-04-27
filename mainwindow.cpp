@@ -3094,10 +3094,9 @@ void MainWindow::on_supp_button_clicked()
         ui->comboBox->setModel(d.afficher_combo());
          ui->comboBox_cin->setModel(d.afficher_combo_2());
 
-ui->tab_citoyen_modifier->setModel(C.afficher());
- ui->tab_citoyen->setModel(C.afficher());
- ui->tab_citoyen_2->setModel(C.afficher());
-
+ui->tab_citoyen_modifier->setModel(Ci.afficher());
+ ui->tab_citoyen->setModel(Ci.afficher());
+ ui->tab_citoyen_2->setModel(Ci.afficher());
         QMessageBox::information(nullptr,QObject::tr("OK"),
                                  QObject::tr("Suppression effectué\n"
 "Click Cancel to exit"),QMessageBox::Cancel);
@@ -3565,11 +3564,11 @@ void MainWindow::on_lineEdit_18_textChanged(const QString &arg1)
 void MainWindow::on_refresh_citoyen_clicked()
 {
     player->play();
-    ui->tab_citoyen->setModel(C.afficher());
+    ui->tab_citoyen->setModel(Ci.afficher());
      ui->comboBox->setModel(d.afficher_combo());
       ui->comboBox_cin->setModel(d.afficher_combo_2());
-    ui->tab_citoyen_modifier->setModel(C.afficher());
-    ui->tab_citoyen_2->setModel(C.afficher());
+    ui->tab_citoyen_modifier->setModel(Ci.afficher());
+    ui->tab_citoyen_2->setModel(Ci.afficher());
     ui->tab_demande->setModel(d.afficher());
      ui->tab_demande_2->setModel(d.afficher());
       ui->tableView->setModel(d.afficher());

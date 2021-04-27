@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>12</number>
+     <number>10</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -946,8 +946,8 @@ background-color: rgb(255, 0, 0);</string>
          <rect>
           <x>60</x>
           <y>440</y>
-          <width>71</width>
-          <height>81</height>
+          <width>81</width>
+          <height>91</height>
          </rect>
         </property>
         <property name="text">
@@ -5692,7 +5692,7 @@ background-color: rgb(255, 80, 67);</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="add_demande">
        <attribute name="title">
@@ -6674,7 +6674,7 @@ border-color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
