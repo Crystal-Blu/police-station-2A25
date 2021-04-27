@@ -16,6 +16,8 @@
 #include "cellule.h"
 #include "delits.h"
 #include "criminels.h"
+#include "citoyen.h"
+#include "demandes_administratives.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -271,7 +273,6 @@ private slots:
 
     void update_label_lumiere();
 
-
     void on_rafraichir_maya1_clicked();
 
     void on_rafraichir_maya2_clicked();
@@ -320,6 +321,47 @@ private slots:
 
     void on_pushButton_ilyes_cri_clicked();
 
+    void on_pushButton_Ajouter_clicked();
+
+    void on_supp_button_clicked();
+
+    void on_update_button_clicked();
+
+    void on_pushButton_Ajouter_2_clicked();
+
+    void on_pushButton_supp_2_clicked();
+
+    void on_pushButton_modifier_2_clicked();
+
+    void on_tableView_activated(const QModelIndex &index);
+
+    void on_tab_demande_2_activated(const QModelIndex &index);
+
+    void on_pushButton_2_clicked();
+
+    void on_tab_citoyen_2_activated(const QModelIndex &index);
+
+    void on_tab_citoyen_modifier_activated(const QModelIndex &index);
+
+    void on_lineEdit_17_textChanged(const QString &arg1);
+
+    void on_pushButton_4_clicked();
+
+    void on_tab_citoyen_activated(const QModelIndex &index);
+
+    void on_pushButton_3_clicked();
+
+    void on_lineEdit_18_textChanged(const QString &arg1);
+
+
+    void on_le_recherche_citoyen_textChanged(const QString &arg1);
+
+    void on_refresh_citoyen_clicked();
+
+    void on_Refresh_demande_clicked();
+
+    void on_refreshmap_clicked();
+
 private:
     QByteArray data ;
         Arduino A;
@@ -346,6 +388,10 @@ private:
     QMediaPlayer *mMediaPlayer ;
     QMediaPlayer *mmMediaPlayer ;
     Delits De1 ;
+    Citoyen Ci ;
+    Citoyen c1;
+    demandes_administratives d;
+    demandes_administratives d1;
 
 
 };

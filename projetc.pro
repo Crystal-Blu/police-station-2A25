@@ -14,9 +14,11 @@ SOURCES += \
     cellule.cpp \
     chart.cpp \
     charttype.cpp \
+    citoyen.cpp \
     connection.cpp \
     criminels.cpp \
     delits.cpp \
+    demandes_administratives.cpp \
     detention.cpp \
     equipements.cpp \
     main.cpp \
@@ -33,9 +35,11 @@ HEADERS += \
     cellule.h \
     chart.h \
     charttype.h \
+    citoyen.h \
     connection.h \
     criminels.h \
     delits.h \
+    demandes_administratives.h \
     detention.h \
     equipements.h \
     mainwindow.h \
@@ -64,7 +68,9 @@ CONFIG += console
 
 RESOURCES += light/style.qrc \
     darktheme.qrc \
-    images.qrc
+    images.qrc \
+    qml.qrc \
+    translation.qrc
 RESOURCES += res.qrc
 
 
@@ -72,9 +78,18 @@ RESOURCES += DarkOrange/darkorange/darkorange.qrc
 QT += core gui \
 multimedia
 
+
+QT += quickwidgets
+QT += positioning
+QT += location
+QT += qml
+
 QMAKE_CXXFLAGS += -std=gnu++14
 
 RC_ICONS = Police.ico
 
 DISTFILES += \
-    Police.png
+    Police.png \
+    english.qm \
+    english.ts \
+    map.qml
