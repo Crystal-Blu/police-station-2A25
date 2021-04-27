@@ -14,6 +14,8 @@
 #include "missions.h"
 #include "detention.h"
 #include "cellule.h"
+#include "delits.h"
+#include "criminels.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -274,6 +276,50 @@ private slots:
 
     void on_rafraichir_maya2_clicked();
 
+    void on_pushButton_modifiercriminel_2_clicked();
+
+    void on_PB_load_clicked();
+
+    void on_pushButton_trierdelitdate_clicked();
+
+    void on_pushButton_trierdelittype_clicked();
+
+    void on_pushButton_chart2_clicked();
+
+    void on_pushButton_supprimerdelit_clicked();
+
+    void on_pushButton_modifierdelit_clicked();
+
+    void on_pushButton_rechercherdelit_clicked();
+
+    void on_pushButton_ajoutcriminel_clicked();
+
+    void on_pushButton_supp_cri_clicked();
+
+    void on_pushButton_modifiercriminel_clicked();
+
+    void on_pushButton_recherchercriminel_clicked();
+
+    void on_pushButton_chart1_clicked();
+
+    void on_pushButton_exprterpdfcri_clicked();
+
+    void on_pushButton_ouvm_clicked();
+
+    void on_pushButton_play_clicked();
+
+    void on_pushButton_pause_clicked();
+
+    void on_pushButton_stop_clicked();
+
+    void on_pushButton_mute_clicked();
+
+    void on_volume_valueChanged(int value);
+
+    void on_pushButton_ilyesrefresh_clicked();
+
+    void on_pushButton_ilyes_cri_clicked();
+
 private:
     QByteArray data ;
         Arduino A;
@@ -296,6 +342,11 @@ private:
     Cellules C1 ;
     detentions D ;
     detentions D1;
+    Criminels Cr1,Cr2;
+    QMediaPlayer *mMediaPlayer ;
+    QMediaPlayer *mmMediaPlayer ;
+    Delits De1 ;
+
 
 };
 #endif // MAINWINDOW_H

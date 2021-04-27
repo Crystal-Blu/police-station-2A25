@@ -19,7 +19,12 @@
 #include "arduino.h"
 #include "cellule.h"
 #include "detention.h"
-
+#include"delits.h"
+#include "chart.h"
+#include "criminels.h"
+#include<QMediaPlayer>
+#include<QSoundEffect>
+#include"charttype.h"
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
 MainWindow::MainWindow(QWidget *parent)
@@ -28,6 +33,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
+
+
+
+
+
+
     ui->label_4->setText(QString::number(volume)+"%");
     int ret=A.connect_arduino();
             switch (ret)
@@ -154,6 +165,64 @@ MainWindow::MainWindow(QWidget *parent)
     ui->le_missionnamemodifier->setMaxLength(20);
     ui->le_missiontypemodifier->setMaxLength(20);
     ui->le_missionpoliceidmodifier->setValidator ( new QIntValidator(0, 100, this));
+
+
+
+    //CONTROLE SAISIE ID CRIMINEL
+
+    QRegExp rx("[0-9]{5}");
+
+
+    QValidator *validator = new QRegExpValidator(rx, this);
+
+    ui->lineEdit_id_c->setValidator(validator);
+    ui->lineEdit_ID_cm->setValidator(validator);
+    ui->lineEdit_supp_c->setValidator(validator);
+    ui->lineEdit_recherche_c->setValidator(validator);
+
+
+
+
+    //CONTROLE SAISIE ID DELIT
+
+
+    QRegExp rx1("[0-9]{4}");
+    QValidator *validator1 = new QRegExpValidator(rx, this);
+    ui->lineEdit_rechercher_d->setValidator(validator1);
+    ui->lineEdit_supprimer_d->setValidator(validator1);
+    ui->le_mid->setValidator(validator1);
+    ui->ledelitid->setValidator(validator1);
+
+
+//INITIATION AFFICHAGE
+
+
+
+    //AFFICHAGE NOMBRE CRIMINEL
+
+    QSqlQuery query;
+       int numRows= 0;
+       query.exec("SELECT COUNT(*) FROM CRIMINELS  ");
+       if(query.first())
+           numRows = query.value(0).toInt();
+       QString numRowsstr=QString::number(numRows);
+
+ui->lineEdit_nombre_criminel->setText(numRowsstr);
+
+//INITIATION MEDIAPLAYER
+
+
+mMediaPlayer = new QMediaPlayer (this);
+connect(mMediaPlayer,&QMediaPlayer ::positionChanged,[&](qint64 pos){
+    ui->avance->setValue(pos);
+}    );
+connect(mMediaPlayer,&QMediaPlayer::durationChanged,[&](qint64 dur) {
+    ui->avance->setMaximum(dur);
+});
+
+
+mmMediaPlayer = new QMediaPlayer (this);
+
 
 };
 void MainWindow::print_test()
@@ -587,6 +656,7 @@ void MainWindow::on_recherche_eq_textChanged(const QString &arg1)
 }
 void MainWindow::updateaffichageeq()
 {
+
     if (ui->radioButton_7->isChecked())
     {
          groupbyeq="ORDER BY matricule ASC ";
@@ -1215,7 +1285,8 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 }
 
 void MainWindow::on_test_clicked()
-{
+{    player->play();
+
     int ret=A.connect_arduino();
             switch (ret)
             {
@@ -2316,7 +2387,7 @@ void MainWindow::on_pushButton_supprimer_det_clicked()
 {
     player->play();
     int iddet  = ui->id_det_supp->text().toInt();
-        bool test = D1.supprimer(iddet);
+        bool test = De1.supprimer(iddet);
 
         if (test){
 
@@ -2509,4 +2580,395 @@ void MainWindow::on_rafraichir_maya2_clicked()
 {
     player->play();
     ui->tableView_detention->setModel(D.afficher());
+}
+
+void MainWindow::on_pushButton_modifiercriminel_2_clicked()
+{
+    int ID_DELIT=ui->ledelitid->text().toInt();
+    QString TYPE_DELIT=ui->comboBox_type_d2->currentText();
+
+
+    QString DESCRIPTION_DELIT=ui->le_desc_delit->text();
+    QDate DATE_DELIT=ui->dateEditdelit->date();
+    int ID_CRIMINEL=ui->comboBox_id_c->currentText().toInt();
+    Delits H(ID_DELIT,DATE_DELIT,TYPE_DELIT,DESCRIPTION_DELIT,ID_CRIMINEL);
+    bool test=H.ajouter();
+    if (test){
+
+        ui->tab_delit1->setModel(De1.afficher());
+        ui->tab_delit2->setModel(De1.afficher());
+
+
+            QMessageBox::information(nullptr,QObject::tr("OK"),
+                                     QObject::tr("Ajout effectué\n"
+    "Click Cancel to exit"),QMessageBox::Cancel);
+
+
+        }
+        else
+            QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+}
+
+void MainWindow::on_PB_load_clicked()
+{
+     player->play();
+    QSqlQuery query;
+    query.exec("SELECT ID_CRIMINEL FROM CRIMINELS");
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery(query);
+    ui->comboBox_id_c->setModel(model);
+        qDebug() <<(model->rowCount());
+}
+
+void MainWindow::on_pushButton_trierdelitdate_clicked()
+{
+
+        player->play();
+
+
+
+
+    QSqlQuery query;
+    query.exec("SELECT * FROM DELITS ORDER BY DATE_DELIT");
+
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery(query);
+    QTableView *view =ui->tab_delit1;
+
+       view->setModel(model);
+       ui->lineEdit_ID_cm->setText("");
+}
+
+void MainWindow::on_pushButton_trierdelittype_clicked()
+{
+     player->play();
+
+    QSqlQuery query;
+    query.exec("SELECT * FROM DELITS ORDER BY TYPE_DELIT");
+
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery(query);
+    QTableView *view =ui->tab_delit1;
+
+       view->setModel(model);
+       ui->lineEdit_ID_cm->setText("");
+
+}
+
+void MainWindow::on_pushButton_chart2_clicked()
+{    player->play();
+
+     charttype charttype;
+      charttype.setModal(true);
+      charttype.exec();
+}
+
+void MainWindow::on_pushButton_supprimerdelit_clicked()
+{
+    int ID_DELIT=ui->lineEdit_supprimer_d->text().toInt();
+    bool test =De1.supprimer(ID_DELIT);
+
+    if (test){
+
+     ui->tab_delit1->setModel(De1.afficher());
+     ui->tab_delit2->setModel(De1.afficher());
+
+            QMessageBox::information(nullptr,QObject::tr("OK"),
+                                     QObject::tr("Suppression effectué\n"
+    "Click Cancel to exit"),QMessageBox::Cancel);
+
+
+        }
+        else
+ QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Suppression  non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+}
+
+void MainWindow::on_pushButton_modifierdelit_clicked()
+{
+    int ID_DELIT=ui->le_mid->text().toInt();
+    QString TYPE_DELIT=ui->comboBox_type_d->currentText();
+    QString DESCRIPTION_DELIT=ui->lineEdit_desc_d->text();
+     QDate DATE_DELIT=ui->dateEdit_3->date();
+     int ID_CRIMINEL=ui->comboBox_id_c->currentText().toInt();
+
+     Delits F(ID_DELIT,DATE_DELIT,TYPE_DELIT,DESCRIPTION_DELIT,ID_CRIMINEL);
+    bool test = F.modifier(ID_DELIT);
+
+    if (test){
+
+ ui->tab_delit1->setModel(F.afficher());
+ ui->tab_delit2->setModel(F.afficher());
+
+        QMessageBox::information(nullptr,QObject::tr("OK"),
+                                 QObject::tr("Modification effectué\n"
+"Click Cancel to exit"),QMessageBox::Cancel);
+
+
+    }
+    else
+        QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Modification non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+
+}
+
+void MainWindow::on_pushButton_rechercherdelit_clicked()
+{
+     player->play();
+
+    QSqlQuery query;
+    int ID_DELIT=ui->lineEdit_rechercher_d->text().toInt();
+
+    QString ID_DELITstr=QString::number(ID_DELIT);
+
+    query.exec("SELECT * from DELITS WHERE ID_DELIT  ='"+ID_DELITstr+"'   ");
+
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery(query);
+
+     QTableView *view =ui->tab_delit2;
+
+        view->setModel(model);
+        ui->lineEdit_rechercher_d->setText("");
+}
+
+void MainWindow::on_pushButton_ajoutcriminel_clicked()
+{
+    int ID_CRIMINEL=ui->lineEdit_id_c->text().toInt();
+    QString NOM_CRIMINEL=ui->lineEdit_nom_c->text() ;
+    QString PRENOM_CRIMINEL=ui->lineEdit_prenom_c->text();
+    int AGE_CRIMINEL=ui->lineEdit_age_c->text().toInt();
+    Criminels C1(ID_CRIMINEL,AGE_CRIMINEL,NOM_CRIMINEL,PRENOM_CRIMINEL);
+    bool test=C1.ajouter_c();
+    if (test){
+        QSqlQuery query;
+           int numRows= 0;
+           query.exec("SELECT COUNT(*) FROM CRIMINELS  ");
+           if(query.first())
+               numRows = query.value(0).toInt();
+           QString numRowsstr=QString::number(numRows);
+
+    ui->lineEdit_nombre_criminel->setText(numRowsstr);
+        ui->tab_criminel1->setModel(C1.afficher_c());
+
+        ui->tab_criminel2->setModel(C1.afficher_c());
+
+            QMessageBox::information(nullptr,QObject::tr("OK"),
+                                     QObject::tr("Ajout effectué\n"
+    "Click Cancel to exit"),QMessageBox::Cancel);
+
+
+        }
+        else
+            QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Ajout non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+}
+
+void MainWindow::on_pushButton_supp_cri_clicked()
+{
+
+    int ID_CRIMINEL=ui->lineEdit_supp_c->text().toInt();
+    bool test =Cr1.supprimer_c(ID_CRIMINEL);
+
+    if (test){
+        QSqlQuery query;
+           int numRows= 0;
+           query.exec("SELECT COUNT(*) FROM CRIMINELS  ");
+           if(query.first())
+               numRows = query.value(0).toInt();
+           QString numRowsstr=QString::number(numRows);
+
+    ui->lineEdit_nombre_criminel->setText(numRowsstr);
+     ui->tab_criminel1->setModel(Cr1.afficher_c());
+     ui->tab_criminel2->setModel(Cr1.afficher_c());
+
+            QMessageBox::information(nullptr,QObject::tr("OK"),
+                                     QObject::tr("Suppression effectué\n"
+    "Click Cancel to exit"),QMessageBox::Cancel);
+
+
+        }
+        else
+ QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Suppression  non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+}
+
+void MainWindow::on_pushButton_modifiercriminel_clicked()
+{
+    int ID_CRIMINEL=ui->lineEdit_ID_cm->text().toInt();
+    QString NOM_CRIMINEL=ui->lineEdit_nom_cm->text();
+    QString PRENOM_CRIMINEL=ui->lineEdit_prenom_cm->text();
+     int AGE_CRIMINEL=ui->lineEdit_age_cm->text().toInt();
+
+     Criminels C1(ID_CRIMINEL,AGE_CRIMINEL,NOM_CRIMINEL,PRENOM_CRIMINEL);
+    bool test = C1.modifier_c(ID_CRIMINEL);
+
+    if (test){
+
+ ui->tab_criminel1->setModel(C1.afficher_c());
+ ui->tab_criminel2->setModel(C1.afficher_c());
+
+        QMessageBox::information(nullptr,QObject::tr("OK"),
+                                 QObject::tr("Modification effectué\n"
+"Click Cancel to exit"),QMessageBox::Cancel);
+
+
+    }
+    else
+        QMessageBox::critical(nullptr,QObject::tr("Not OK"), QObject::tr("Modification non effectué.\n" "Clic Cancel to exit."),QMessageBox::Cancel);
+
+
+}
+
+void MainWindow::on_pushButton_recherchercriminel_clicked()
+{
+        player->play();
+
+    QSqlQuery query;
+    int ID_CRIMINEL=ui->lineEdit_recherche_c->text().toInt();
+
+    QString ID_CRIMINELstr=QString::number(ID_CRIMINEL);
+
+    query.exec("SELECT * from CRIMINELS WHERE ID_CRIMINEL  ='"+ID_CRIMINELstr+"'   ");
+
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery(query);
+
+     QTableView *view =ui->tab_criminel2;
+
+        view->setModel(model);
+        ui->lineEdit_ID_cm->setText("");
+}
+
+void MainWindow::on_pushButton_chart1_clicked()
+{
+    player->play();
+    chart chart;
+    chart.setModal(true);
+    chart.exec();
+}
+
+void MainWindow::on_pushButton_exprterpdfcri_clicked()
+{
+
+       player->play();
+
+       QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                   "/home",
+                                                   QFileDialog::ShowDirsOnly
+                                                   | QFileDialog::DontResolveSymlinks);
+       qDebug()<<dir;
+       QPdfWriter pdf(dir+"/PdfCriminel.pdf");                                 QPainter painter(&pdf);
+                                int i = 4000;
+                                     painter.setPen(Qt::red);
+
+                                     painter.setFont(QFont("Arial", 30));
+                                     painter.drawText(2100,1200,"Liste Des Criminel");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Arial", 50));
+                                     painter.drawRect(1000,200,6500,2000);
+                                     painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap(":/homme.jpg"));
+                                     painter.drawRect(0,3000,9600,500);
+                                     painter.setFont(QFont("Arial", 9));
+                                     painter.setPen(Qt::blue);
+                                     painter.drawText(300,3300,"ID CRIMINEL");
+                                     painter.drawText(2300,3300,"AGE");
+                                     painter.drawText(4300,3300,"NOM");
+                                     painter.drawText(6300,3300,"PRENOM");
+
+
+                                     QSqlQuery query;
+                                     query.prepare("select * from CRIMINELS");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                         painter.drawText(6300,i,query.value(3).toString());
+
+
+
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes |  QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile(dir+"/PdfCriminel.pdf"));
+
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+
+
+
+
+
+}
+}
+
+void MainWindow::on_pushButton_ouvm_clicked()
+{
+        player->play();
+   QString filename = QFileDialog :: getOpenFileName(this,"police");
+   if (filename.isEmpty()) {return;}
+   mMediaPlayer->setMedia(QUrl::fromLocalFile(filename));
+   mMediaPlayer->setVolume(ui->volume->value());
+   on_pushButton_play_clicked();
+}
+
+void MainWindow::on_pushButton_play_clicked()
+{
+      player->play();
+    mMediaPlayer->play();
+}
+
+void MainWindow::on_pushButton_pause_clicked()
+{
+    QUrl url ;
+  url = QUrl("C:/Users/Ilyes/Downloads/button.wav");
+
+        player->play();
+    mMediaPlayer->pause();
+}
+
+void MainWindow::on_pushButton_stop_clicked()
+{
+     player->play();;
+    mMediaPlayer->stop();
+}
+
+void MainWindow::on_pushButton_mute_clicked()
+{
+      player->play();
+    if(ui->pushButton_mute->text()=="MUTE"){
+    mMediaPlayer->setMuted(true);
+    ui->pushButton_mute->setText("UNMUTE");
+   }else {
+       mMediaPlayer->setMuted(false);
+       ui->pushButton_mute->setText("MUTE");
+}}
+
+void MainWindow::on_volume_valueChanged(int value)
+{
+    mMediaPlayer->setVolume(value);
+}
+
+void MainWindow::on_pushButton_ilyesrefresh_clicked()
+{     player->play();
+   ui->tab_delit1->setModel(De1.afficher());
+ui->tab_delit2->setModel(De1.afficher());
+
+
+
+}
+
+void MainWindow::on_pushButton_ilyes_cri_clicked()
+{
+         player->play();
+    ui->tab_criminel1->setModel(Cr1.afficher_c());
+    ui->tab_criminel2->setModel(Cr1.afficher_c());
+
 }

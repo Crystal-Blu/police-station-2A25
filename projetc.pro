@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,7 +12,11 @@ SOURCES += \
     ajout_reparation.cpp \
     arduino.cpp \
     cellule.cpp \
+    chart.cpp \
+    charttype.cpp \
     connection.cpp \
+    criminels.cpp \
+    delits.cpp \
     detention.cpp \
     equipements.cpp \
     main.cpp \
@@ -27,7 +31,11 @@ HEADERS += \
     ajout_reparation.h \
     arduino.h \
     cellule.h \
+    chart.h \
+    charttype.h \
     connection.h \
+    criminels.h \
+    delits.h \
     detention.h \
     equipements.h \
     mainwindow.h \
@@ -39,6 +47,8 @@ HEADERS += \
 
 FORMS += \
     ajout_reparation.ui \
+    chart.ui \
+    charttype.ui \
     mainwindow.ui \
     vehicule_modifier_window.ui
 

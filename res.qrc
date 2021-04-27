@@ -3,4 +3,8 @@
         <file>Police.png</file>
         <file>click.wav</file>
     </qresource>
+    <qresource prefix="/">
+        <file>homme.jpg</file>
+        <file>button.wav</file>
+    </qresource>
 </RCC>
