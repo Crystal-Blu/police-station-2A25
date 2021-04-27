@@ -74,6 +74,8 @@ private slots:
 
     void on_pushButton_9_clicked();
 
+    void on_le_recherche_citoyen_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 

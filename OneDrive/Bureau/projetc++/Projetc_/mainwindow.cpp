@@ -758,3 +758,4 @@ void MainWindow::on_pushButton_9_clicked()
            QTextStream ts(&f);
            setStyleSheet(ts.readAll());}
 }
+

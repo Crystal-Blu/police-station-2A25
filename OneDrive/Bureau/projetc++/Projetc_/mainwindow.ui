@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_10">
      <attribute name="title">
@@ -52,7 +52,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_34">
        <attribute name="title">
@@ -303,7 +303,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="label_33">
+       <widget class="QLabel" name="label_recherche_citoyen">
         <property name="geometry">
          <rect>
           <x>100</x>
@@ -375,7 +375,7 @@
        <zorder>groupBox_2</zorder>
        <zorder>groupBox</zorder>
        <zorder>pic</zorder>
-       <zorder>label_33</zorder>
+       <zorder>label_recherche_citoyen</zorder>
        <zorder>lineEdit_18</zorder>
        <zorder>rb_cin_2</zorder>
        <zorder>rb_nom_2</zorder>
@@ -1416,16 +1416,38 @@ border-color: rgb(0, 0, 0);
      <widget class="QQuickWidget" name="quickWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>1091</width>
-        <height>471</height>
+        <x>40</x>
+        <y>50</y>
+        <width>1041</width>
+        <height>421</height>
        </rect>
       </property>
       <property name="resizeMode">
        <enum>QQuickWidget::SizeRootObjectToView</enum>
       </property>
      </widget>
+     <widget class="QGroupBox" name="groupBox_14">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>1061</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="title">
+       <string>Map</string>
+      </property>
+     </widget>
+     <zorder>groupBox_14</zorder>
+     <zorder>quickWidget</zorder>
     </widget>
    </widget>
   </widget>
