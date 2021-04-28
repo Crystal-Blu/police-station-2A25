@@ -30,7 +30,7 @@ bool Reparations::ajouter_rep()
 QSqlQueryModel * Reparations::Afficher_rep()
 {
     QSqlQueryModel * modele=new QSqlQueryModel();
-    modele->setQuery("select * from demande_reparation");
+    modele->setQuery("select * from demande_reparation natural join vehicules");
     modele->setHeaderData(0,Qt::Horizontal,QObject::tr("Matricule"));
     modele->setHeaderData(1,Qt::Horizontal,QObject::tr("ID"));
     modele->setHeaderData(2,Qt::Horizontal,QObject::tr("Type"));

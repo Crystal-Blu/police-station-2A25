@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -6674,7 +6674,7 @@ border-color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
