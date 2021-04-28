@@ -353,6 +353,9 @@ private slots:
 
     void on_lineEdit_18_textChanged(const QString &arg1);
 
+
+    void on_le_recherche_citoyen_textChanged(const QString &arg1);
+
     void on_refresh_citoyen_clicked();
 
     void on_Refresh_demande_clicked();
