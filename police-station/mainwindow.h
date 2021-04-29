@@ -41,6 +41,8 @@ public:
     void remplir();
     void remplir_vehi();
     void remplir_equipements();
+    QSqlQueryModel *get_history();
+    void init_history_count();
 
 
 private slots:
@@ -69,7 +71,7 @@ private slots:
 
     void on_ajouter_2_clicked();
 
-
+    void check_history();
 
     void on_radioButton_15_clicked();
 
@@ -368,6 +370,8 @@ private slots:
     void on_enregistrer_sous_excel_clicked();
 
 
+    void on_refreshhistory_clicked();
+
 private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);
@@ -401,7 +405,7 @@ private:
     demandes_administratives d;
     demandes_administratives d1;
     QStandardItemModel * mModel;
-
+    int counthistory;
 
 };
 #endif // MAINWINDOW_H

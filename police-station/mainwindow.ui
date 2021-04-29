@@ -24,11 +24,11 @@
       <x>10</x>
       <y>0</y>
       <width>1081</width>
-      <height>611</height>
+      <height>621</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>11</number>
+     <number>12</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -6529,8 +6529,8 @@ border-color: rgb(0, 0, 0);
      <widget class="QGroupBox" name="groupBox_2">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>310</y>
+        <x>220</x>
+        <y>150</y>
         <width>521</width>
         <height>231</height>
        </rect>
@@ -6720,6 +6720,47 @@ border-color: rgb(0, 0, 0);
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="tabhistory">
+     <attribute name="title">
+      <string>Hisotry</string>
+     </attribute>
+     <widget class="QPushButton" name="refreshhistory">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>20</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Refresh</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tableHistory">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>961</width>
+        <height>491</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="history">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>20</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>History</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -6728,7 +6769,7 @@ border-color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

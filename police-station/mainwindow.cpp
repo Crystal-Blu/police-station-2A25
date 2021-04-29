@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
    ui->quickWidget->show();
 
-
+    init_history_count();
    mModel= new QStandardItemModel(this); //excel
    ui->tableViewExcel->setModel(mModel);  //excel
 
@@ -75,10 +75,8 @@ MainWindow::MainWindow(QWidget *parent)
 
         }
     QTimer *timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(check_voiture_repare()));
-        connect(timer, SIGNAL(timeout()), this, SLOT(check_equipements_number()));
-        connect(timer, SIGNAL(timeout()), this, SLOT(check_vehicules_number()));
-        timer->start(15000);
+        connect(timer, SIGNAL(timeout()), this, SLOT(check_history()));
+        timer->start(1000);
 
     remplir_equipements();
     remplir_vehi();
@@ -102,6 +100,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->idreparation->setValidator ( new QIntValidator(0, 999999999, this));
     ui->type_reparation->setMaxLength(20);
     remplir();
+    ui->tableHistory->setModel(get_history());
     ui->tableViewpolice->setModel(police.afficher());
     ui->tableViewmissions->setModel(mission.afficher());
     ui->le_missionid->setReadOnly(true);
@@ -3702,4 +3701,65 @@ QString MainWindow::getValueAt(int ix, int jx)
     return mModel->item(ix,jx)->text();
 }
 
+void MainWindow::check_history()
+{
+    QString A="";
+    int C=0;
+    QSqlQuery query;
+    query.prepare("select count(*) from historique");
+    query.exec();
+    while(query.next())
+    {
+        C=query.value(0).toInt();
+    }
+    query.prepare("SELECT *FROM (SELECT * FROM historique order by date_m desc)WHERE ROWNUM <= 1;");
+    query.exec();
+    while(query.next())
+    {
+        if(query.value(2).toString()=="A")
+        {
+            A="Un Nouvel élèment a été ajouté de la table ";
+        }
+        else if(query.value(2).toString()=="U")
+        {
+            A="Un élèment a été Modifié de la table ";
+        }
+        else if(query.value(2).toString()=="D")
+        {
+            A="Un élèment a été supprimé de la table ";
+        }
+        A=A+query.value(1).toString();
+    }
+    if (C!=counthistory)
+    {
+        mySystemTrayIcon->showMessage(tr("Alerte"),tr(A.toStdString().c_str()));
+        counthistory=C;
+    }
 
+}
+
+QSqlQueryModel * MainWindow::get_history()
+{
+            QSqlQueryModel * modele=new QSqlQueryModel();
+            modele->setQuery("select * from historique order by date_m desc");
+            modele->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+            modele->setHeaderData(1,Qt::Horizontal,QObject::tr("Table"));
+            modele->setHeaderData(2,Qt::Horizontal,QObject::tr("Type"));
+            /*modele->setHeaderData(3,Qt::Horizontal,QObject::tr("Description"));*/
+            modele->setHeaderData(4,Qt::Horizontal,QObject::tr("Date"));
+            return modele;
+}
+void MainWindow::on_refreshhistory_clicked()
+{
+     ui->tableHistory->setModel(get_history());
+}
+void MainWindow::init_history_count()
+{
+    QSqlQuery query;
+    query.prepare("select count(*) from historique");
+    query.exec();
+    while(query.next())
+    {
+       counthistory=query.value(0).toInt();
+    }
+}
