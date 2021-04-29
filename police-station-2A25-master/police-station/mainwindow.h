@@ -18,10 +18,15 @@
 #include "criminels.h"
 #include "citoyen.h"
 #include "demandes_administratives.h"
+#include "calculer.h"
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+
+class QStandardItemModel;
 
 
 class MainWindow : public QMainWindow
@@ -33,12 +38,18 @@ public:
     ~MainWindow();
     vehicule_modifier_window create_newwindow(vehicule_modifier_window WM);
     vehicule_modifier_window WM;
+
+    Calculer create_newwindow(Calculer calc);
+    Calculer calc;
+
     QSqlQueryModel *get_policiers();
     void updateaffichagevehicule();
     void updateaffichageeq();
     void remplir();
     void remplir_vehi();
     void remplir_equipements();
+    QSqlQueryModel *get_history();
+    void init_history_count();
 
 
 private slots:
@@ -67,7 +78,7 @@ private slots:
 
     void on_ajouter_2_clicked();
 
-
+    void check_history();
 
     void on_radioButton_15_clicked();
 
@@ -359,7 +370,20 @@ private slots:
 
     void on_refreshmap_clicked();
 
+    void on_ouvrir_excel_clicked();
+
+    void on_nouveau_excel_clicked();
+
+    void on_enregistrer_sous_excel_clicked();
+
+
+    void on_refreshhistory_clicked();
+
+    void on_pb_calculatorwindow_clicked();
+
 private:
+    void setValueAt(int ix, int jx, const QString &value);
+    QString getValueAt(int ix, int jx);
     QByteArray data ;
         Arduino A;
     Ui::MainWindow *ui;
@@ -389,7 +413,11 @@ private:
     Citoyen c1;
     demandes_administratives d;
     demandes_administratives d1;
+    QStandardItemModel * mModel;
+    int counthistory;
 
+    //Calcul create_newwindow( Calcul calcul);
+      //  vehicule_modifier_window calcul;
 
 };
 #endif // MAINWINDOW_H

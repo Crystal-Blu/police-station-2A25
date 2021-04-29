@@ -28,6 +28,18 @@
 #include<QIntValidator>
 #include <QValidator>
 #include<QQuickItem>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QStandardItemModel>
+#include "excel.h"
+#include <QDialog>
+
+#include "Calculer.h"
+
+
+
+
+
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
 MainWindow::MainWindow(QWidget *parent)
@@ -40,7 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
    ui->quickWidget->show();
 
-
+    init_history_count();
+   mModel= new QStandardItemModel(this); //excel
+   ui->tableViewExcel->setModel(mModel);  //excel
 
 
     ui->label_4->setText(QString::number(volume)+"%");
@@ -67,10 +81,8 @@ MainWindow::MainWindow(QWidget *parent)
 
         }
     QTimer *timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(check_voiture_repare()));
-        connect(timer, SIGNAL(timeout()), this, SLOT(check_equipements_number()));
-        connect(timer, SIGNAL(timeout()), this, SLOT(check_vehicules_number()));
-        timer->start(15000);
+        connect(timer, SIGNAL(timeout()), this, SLOT(check_history()));
+        timer->start(1000);
 
     remplir_equipements();
     remplir_vehi();
@@ -94,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->idreparation->setValidator ( new QIntValidator(0, 999999999, this));
     ui->type_reparation->setMaxLength(20);
     remplir();
+    ui->tableHistory->setModel(get_history());
     ui->tableViewpolice->setModel(police.afficher());
     ui->tableViewmissions->setModel(mission.afficher());
     ui->le_missionid->setReadOnly(true);
@@ -108,6 +121,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->le_gradeafficher->setReadOnly(true);
     ui->le_policeidafficher->setReadOnly(true);
     ui->le_chefidafficher->setReadOnly(true);
+    //controle de saisie cellule+detention
     ui->idc->setValidator ( new QIntValidator(0, 10, this));
     ui->idc_md->setValidator ( new QIntValidator(0, 10, this));
     ui->idc_supp->setValidator ( new QIntValidator(0, 10, this));
@@ -3592,4 +3606,175 @@ void MainWindow::on_refreshmap_clicked()
 {
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
    ui->quickWidget->show();
+}
+
+
+
+void MainWindow::on_ouvrir_excel_clicked()
+{
+  auto filename = QFileDialog::getOpenFileName(this,"ouvrir",QDir::rootPath(),"CSV File(*.csv)");
+ if (filename.isEmpty()) {
+     return;
+ }
+ QFile file(filename);
+ if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+ {
+     return;
+ }
+ QTextStream xin(&file);
+ int lign= 0;
+ while(!xin.atEnd())
+ {
+     mModel->setRowCount(lign);
+     auto line = xin.readLine();
+     auto values = line.split(";");
+     const int col=values.size();
+     mModel->setColumnCount(col);
+     for(int i=0; i<col; i++)
+    {
+     setValueAt(lign,i,values.at(i));
+
+
+     }
+
+          ++lign;
+ }
+ file.close();
+}
+
+void MainWindow::on_nouveau_excel_clicked()
+{
+    excel d(this);
+    if ( d.exec() == QDialog::Rejected)
+    {
+     return;
+    }
+    const int col=d.getcol();
+    const int lign=d.getlign();
+    mModel->setRowCount(lign);
+    mModel->setColumnCount(col);
+}
+
+void MainWindow::on_enregistrer_sous_excel_clicked()
+{
+  auto filename= QFileDialog::getSaveFileName(this,"enregister",QDir::rootPath(),"CSV File (*.csv)");
+if (filename.isEmpty())
+{
+ return;
+}
+QFile file(filename);
+if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+{
+    return ;
+}
+QTextStream xout(&file);
+const int lign = mModel->rowCount();
+const int col = mModel->columnCount();
+
+for ( int i=0 ; i<lign; ++i)
+{   xout <<getValueAt(i,0);
+    for (int j=1; j<col ; ++j )
+    {
+     xout<< " ; " << getValueAt(i,j);
+    }
+    xout <<"\n";
+}
+
+file.flush();
+file.close();
+
+}
+
+
+void MainWindow::setValueAt(int ix, int jx, const QString &value)
+{
+  if (!mModel->item(ix,jx))
+  {
+      mModel->setItem(ix,jx,new QStandardItem(value));
+  }
+  else {
+      mModel->item(ix,jx)->setText(value);
+  }
+}
+
+
+QString MainWindow::getValueAt(int ix, int jx)
+{
+    if (!mModel->item(ix,jx))
+    {
+        return "";
+    }
+    return mModel->item(ix,jx)->text();
+}
+
+void MainWindow::check_history()
+{
+    QString A="";
+    int C=0;
+    QSqlQuery query;
+    query.prepare("select count(*) from historique");
+    query.exec();
+    while(query.next())
+    {
+        C=query.value(0).toInt();
+    }
+    query.prepare("SELECT *FROM (SELECT * FROM historique order by date_m desc)WHERE ROWNUM <= 1;");
+    query.exec();
+    while(query.next())
+    {
+        if(query.value(2).toString()=="A")
+        {
+            A="Un Nouvel élèment a été ajouté de la table ";
+        }
+        else if(query.value(2).toString()=="U")
+        {
+            A="Un élèment a été Modifié de la table ";
+        }
+        else if(query.value(2).toString()=="D")
+        {
+            A="Un élèment a été supprimé de la table ";
+        }
+        A=A+query.value(1).toString();
+    }
+    if (C!=counthistory)
+    {
+        mySystemTrayIcon->showMessage(tr("Alerte"),tr(A.toStdString().c_str()));
+        counthistory=C;
+    }
+
+}
+
+QSqlQueryModel * MainWindow::get_history()
+{
+            QSqlQueryModel * modele=new QSqlQueryModel();
+            modele->setQuery("select * from historique order by date_m desc");
+            modele->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
+            modele->setHeaderData(1,Qt::Horizontal,QObject::tr("Table"));
+            modele->setHeaderData(2,Qt::Horizontal,QObject::tr("Type"));
+            /*modele->setHeaderData(3,Qt::Horizontal,QObject::tr("Description"));*/
+            modele->setHeaderData(4,Qt::Horizontal,QObject::tr("Date"));
+            return modele;
+}
+void MainWindow::on_refreshhistory_clicked()
+{
+     ui->tableHistory->setModel(get_history());
+}
+void MainWindow::init_history_count()
+{
+    QSqlQuery query;
+    query.prepare("select count(*) from historique");
+    query.exec();
+    while(query.next())
+    {
+       counthistory=query.value(0).toInt();
+    }
+}
+
+void MainWindow::on_pb_calculatorwindow_clicked()
+{
+
+
+
+     calc.show();
+
 }

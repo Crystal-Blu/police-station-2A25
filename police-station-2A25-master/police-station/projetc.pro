@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     ajout_reparation.cpp \
     arduino.cpp \
+    calculer.cpp \
     cellule.cpp \
     chart.cpp \
     charttype.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     demandes_administratives.cpp \
     detention.cpp \
     equipements.cpp \
+    excel.cpp \
     main.cpp \
     mainwindow.cpp \
     missions.cpp \
@@ -32,6 +34,7 @@ SOURCES += \
 HEADERS += \
     ajout_reparation.h \
     arduino.h \
+    calculer.h \
     cellule.h \
     chart.h \
     charttype.h \
@@ -42,6 +45,7 @@ HEADERS += \
     demandes_administratives.h \
     detention.h \
     equipements.h \
+    excel.h \
     mainwindow.h \
     missions.h \
     policier.h \
@@ -51,8 +55,10 @@ HEADERS += \
 
 FORMS += \
     ajout_reparation.ui \
+    calculer.ui \
     chart.ui \
     charttype.ui \
+    excel.ui \
     mainwindow.ui \
     vehicule_modifier_window.ui
 
@@ -93,3 +99,5 @@ DISTFILES += \
     english.qm \
     english.ts \
     map.qml
+
+QMAKE_CXXFLAGS += -std=gnu++14
