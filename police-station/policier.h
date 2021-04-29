@@ -7,7 +7,8 @@ class policier
 {
 private :
     int idp , idpchef;
-    QString nom , prenom , grade ;
+    QString nom , prenom , grade ,rfid;
+
 
 
 
@@ -32,7 +33,7 @@ public:
     void setnom(QString);
     void setprenom(QString);
     void setgrade(QString);
-
+    void setrfid(QString R){rfid=R;};
     //functions
 
     bool ajouter();

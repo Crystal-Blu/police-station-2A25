@@ -1359,13 +1359,14 @@ void MainWindow::on_pb_addpolice_clicked()
 
     player->play();
 int idp = ui->le_policeid->text().toInt();
-
+QString rfid=ui->rfid_line->text();
 QString nom=ui->le_nompolice->text();
 QString prenom=ui->le_prenompolice->text();
 QString grade=ui->le_grade->text();
 int idpchef = ui->le_chefid->text().toInt();
 
 policier p(idp,nom,prenom,grade,idpchef);
+p.setrfid(rfid);
 bool test=p.ajouter();
 if(test)
 {
