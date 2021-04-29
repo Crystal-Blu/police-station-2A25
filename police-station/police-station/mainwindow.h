@@ -379,11 +379,8 @@ private slots:
 
     void on_refreshhistory_clicked();
 
-<<<<<<< HEAD:police-station-2A25-master/police-station/mainwindow.h
     void on_pb_calculatorwindow_clicked();
 
-=======
->>>>>>> 4b72cd115d2f70b07d201ec32f156c78485c7144:police-station/mainwindow.h
 private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);
@@ -418,12 +415,9 @@ private:
     demandes_administratives d1;
     QStandardItemModel * mModel;
     int counthistory;
-<<<<<<< HEAD:police-station-2A25-master/police-station/mainwindow.h
 
     //Calcul create_newwindow( Calcul calcul);
       //  vehicule_modifier_window calcul;
-=======
->>>>>>> 4b72cd115d2f70b07d201ec32f156c78485c7144:police-station/mainwindow.h
 
 };
 #endif // MAINWINDOW_H

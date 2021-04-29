@@ -84,15 +84,13 @@ bool policier::ajouter()
     QSqlQuery query;
     QString res= QString::number(idp);
     QString resss= QString::number(idpchef);
-    query.prepare("INSERT INTO POLICIER (idp, nom, prenom , grade , idp_chef , code,on_job) "
-                  "VALUES (:idp, :nom, :prenom,:grade, :idpchef, :code, 0)");
+    query.prepare("INSERT INTO POLICIER (idp, nom, prenom , grade ,idpchef) "
+                  "VALUES (:idp, :nom, :prenom,:grade, :idpchef)");
     query.bindValue(":idp", res);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
     query.bindValue(":grade", grade);
     query.bindValue(":idpchef", resss);
-    query.bindValue(":code", rfid);
-    qDebug()<<rfid+res+nom+prenom+grade+resss+rfid;
 
     return query.exec();
 
