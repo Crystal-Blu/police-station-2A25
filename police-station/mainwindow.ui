@@ -24,11 +24,11 @@
       <x>10</x>
       <y>0</y>
       <width>1081</width>
-      <height>591</height>
+      <height>611</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>11</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -6240,6 +6240,60 @@ border-color: rgb(0, 0, 0);
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_33">
+     <attribute name="title">
+      <string>Excel</string>
+     </attribute>
+     <widget class="QPushButton" name="ouvrir_excel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>111</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ouvrir</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="enregistrer_sous_excel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>111</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enregistrer sous</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tableViewExcel">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>40</y>
+        <width>801</width>
+        <height>411</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="nouveau_excel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>111</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nouveau</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tab_20">
      <attribute name="title">
       <string>Options</string>
@@ -6674,7 +6728,7 @@ border-color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

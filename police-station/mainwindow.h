@@ -23,6 +23,8 @@ namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 
+class QStandardItemModel;
+
 
 class MainWindow : public QMainWindow
 {
@@ -359,7 +361,16 @@ private slots:
 
     void on_refreshmap_clicked();
 
+    void on_ouvrir_excel_clicked();
+
+    void on_nouveau_excel_clicked();
+
+    void on_enregistrer_sous_excel_clicked();
+
+
 private:
+    void setValueAt(int ix, int jx, const QString &value);
+    QString getValueAt(int ix, int jx);
     QByteArray data ;
         Arduino A;
     Ui::MainWindow *ui;
@@ -389,6 +400,7 @@ private:
     Citoyen c1;
     demandes_administratives d;
     demandes_administratives d1;
+    QStandardItemModel * mModel;
 
 
 };

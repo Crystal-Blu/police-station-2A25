@@ -28,6 +28,12 @@
 #include<QIntValidator>
 #include <QValidator>
 #include<QQuickItem>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QStandardItemModel>
+#include "excel.h"
+#include <QDialog>
+
 QString Affichagevehicule_Query="select * from vehicules",groupebyvehi="",Affichagevehicule_Query_f=Affichagevehicule_Query+groupebyvehi;
 QString AffichageEq_Query="select * from equipements",groupbyeq="",Affichageeq_Query_f=AffichageEq_Query+groupbyeq;
 MainWindow::MainWindow(QWidget *parent)
@@ -41,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent)
    ui->quickWidget->show();
 
 
+   mModel= new QStandardItemModel(this); //excel
+   ui->tableViewExcel->setModel(mModel);  //excel
 
 
     ui->label_4->setText(QString::number(volume)+"%");
@@ -108,6 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->le_gradeafficher->setReadOnly(true);
     ui->le_policeidafficher->setReadOnly(true);
     ui->le_chefidafficher->setReadOnly(true);
+    //controle de saisie cellule+detention
     ui->idc->setValidator ( new QIntValidator(0, 10, this));
     ui->idc_md->setValidator ( new QIntValidator(0, 10, this));
     ui->idc_supp->setValidator ( new QIntValidator(0, 10, this));
@@ -3593,3 +3602,104 @@ void MainWindow::on_refreshmap_clicked()
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
    ui->quickWidget->show();
 }
+
+
+
+void MainWindow::on_ouvrir_excel_clicked()
+{
+  auto filename = QFileDialog::getOpenFileName(this,"ouvrir",QDir::rootPath(),"CSV File(*.csv)");
+ if (filename.isEmpty()) {
+     return;
+ }
+ QFile file(filename);
+ if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+ {
+     return;
+ }
+ QTextStream xin(&file);
+ int lign= 0;
+ while(!xin.atEnd())
+ {
+     mModel->setRowCount(lign);
+     auto line = xin.readLine();
+     auto values = line.split(";");
+     const int col=values.size();
+     mModel->setColumnCount(col);
+     for(int i=0; i<col; i++)
+    {
+     setValueAt(lign,i,values.at(i));
+
+
+     }
+
+          ++lign;
+ }
+ file.close();
+}
+
+void MainWindow::on_nouveau_excel_clicked()
+{
+    excel d(this);
+    if ( d.exec() == QDialog::Rejected)
+    {
+     return;
+    }
+    const int col=d.getcol();
+    const int lign=d.getlign();
+    mModel->setRowCount(lign);
+    mModel->setColumnCount(col);
+}
+
+void MainWindow::on_enregistrer_sous_excel_clicked()
+{
+  auto filename= QFileDialog::getSaveFileName(this,"enregister",QDir::rootPath(),"CSV File (*.csv)");
+if (filename.isEmpty())
+{
+ return;
+}
+QFile file(filename);
+if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+{
+    return ;
+}
+QTextStream xout(&file);
+const int lign = mModel->rowCount();
+const int col = mModel->columnCount();
+
+for ( int i=0 ; i<lign; ++i)
+{   xout <<getValueAt(i,0);
+    for (int j=1; j<col ; ++j )
+    {
+     xout<< " ; " << getValueAt(i,j);
+    }
+    xout <<"\n";
+}
+
+file.flush();
+file.close();
+
+}
+
+
+void MainWindow::setValueAt(int ix, int jx, const QString &value)
+{
+  if (!mModel->item(ix,jx))
+  {
+      mModel->setItem(ix,jx,new QStandardItem(value));
+  }
+  else {
+      mModel->item(ix,jx)->setText(value);
+  }
+}
+
+
+QString MainWindow::getValueAt(int ix, int jx)
+{
+    if (!mModel->item(ix,jx))
+    {
+        return "";
+    }
+    return mModel->item(ix,jx)->text();
+}
+
+

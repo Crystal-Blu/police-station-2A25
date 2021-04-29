@@ -21,6 +21,7 @@ SOURCES += \
     demandes_administratives.cpp \
     detention.cpp \
     equipements.cpp \
+    excel.cpp \
     main.cpp \
     mainwindow.cpp \
     missions.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     demandes_administratives.h \
     detention.h \
     equipements.h \
+    excel.h \
     mainwindow.h \
     missions.h \
     policier.h \
@@ -53,6 +55,7 @@ FORMS += \
     ajout_reparation.ui \
     chart.ui \
     charttype.ui \
+    excel.ui \
     mainwindow.ui \
     vehicule_modifier_window.ui
 
@@ -93,3 +96,5 @@ DISTFILES += \
     english.qm \
     english.ts \
     map.qml
+
+QMAKE_CXXFLAGS += -std=gnu++14
