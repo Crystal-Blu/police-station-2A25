@@ -28,7 +28,11 @@
      </rect>
     </property>
     <property name="currentIndex">
+<<<<<<< HEAD:police-station-2A25-master/police-station/mainwindow.ui
      <number>12</number>
+=======
+     <number>1</number>
+>>>>>>> 4b72cd115d2f70b07d201ec32f156c78485c7144:police-station/mainwindow.ui
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -117,7 +121,7 @@ background-color: rgb(255, 0, 0);</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ADD&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_21">
        <attribute name="title">
@@ -516,6 +520,29 @@ background-color: rgb(255, 0, 0);</string>
         </property>
         <property name="text">
          <string>Prenom :</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="rfid_line">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>350</y>
+          <width>551</width>
+          <height>24</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_91">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>350</y>
+          <width>55</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Code :</string>
         </property>
        </widget>
       </widget>
@@ -1466,7 +1493,7 @@ background-color: rgb(255, 0, 0);</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ADD&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_22">
        <attribute name="title">

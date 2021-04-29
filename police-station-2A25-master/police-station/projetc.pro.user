@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD:police-station-2A25-master/police-station/projetc.pro.user
 <!-- Written by QtCreator 4.14.0, 2021-04-29T22:03:56. -->
+=======
+<!-- Written by QtCreator 4.14.2, 2021-04-29T18:51:41. -->
+>>>>>>> 4b72cd115d2f70b07d201ec32f156c78485c7144:police-station/projetc.pro.user
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
