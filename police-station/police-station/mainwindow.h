@@ -381,6 +381,8 @@ private slots:
 
     void on_pb_calculatorwindow_clicked();
 
+    void on_pushButton_envoyer_clicked();
+
 private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);

@@ -33,6 +33,7 @@
 #include <QStandardItemModel>
 #include "excel.h"
 #include <QDialog>
+#include "mailing/SmtpMime"
 
 #include "Calculer.h"
 
@@ -3777,4 +3778,47 @@ void MainWindow::on_pb_calculatorwindow_clicked()
 
      calc.show();
 
+}
+
+void MainWindow::on_pushButton_envoyer_clicked()
+
+
+{
+    player->play();
+
+    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
+
+
+
+
+                      smtp.setUser("bayrem.hamdi@esprit.tn");
+                      smtp.setPassword("191JMT3579");
+
+
+
+              MimeMessage message;
+
+              message.setSender(new EmailAddress("bayrem.hamdi@esprit.tn", "Police C++"));
+              message.addRecipient(new EmailAddress(ui->lineEdit_adresse->text(), "Recipient's name"));
+              message.setSubject(ui->lineEdit_objet->text());
+
+
+
+              MimeText text;
+
+              text.setText(ui->textEdit_texte->toPlainText());
+
+
+
+              message.addPart(&text);
+
+              smtp.connectToHost();
+              smtp.login();
+              if (smtp.sendMail(message)){
+                 QMessageBox::information(this, "OK", "email envoyé");
+              }
+              else{
+                 QMessageBox::critical(this, "Erreur","email non envoyé");
+              }
+              smtp.quit();
 }

@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>12</number>
+     <number>14</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -6733,6 +6733,118 @@ border-color: rgb(0, 0, 0);
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_34">
+     <attribute name="title">
+      <string>Mail</string>
+     </attribute>
+     <widget class="QLabel" name="label_91">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>60</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>E-mail  :</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_envoyer">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>380</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+</string>
+      </property>
+      <property name="text">
+       <string>Envoyer</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_texte">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>160</y>
+        <width>531</width>
+        <height>151</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_92">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>110</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Objectif :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_93">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>170</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Text :</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_objet">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>110</y>
+        <width>531</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_adresse">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>60</y>
+        <width>531</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tabhistory">
      <attribute name="title">
       <string>Hisotry</string>
@@ -6782,7 +6894,7 @@ border-color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
