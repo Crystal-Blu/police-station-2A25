@@ -14,6 +14,18 @@ SOURCES += \
     citoyen.cpp \
     connection.cpp \
     demandes_administratives.cpp \
+    mailing/emailaddress.cpp \
+    mailing/mimeattachment.cpp \
+    mailing/mimecontentformatter.cpp \
+    mailing/mimefile.cpp \
+    mailing/mimehtml.cpp \
+    mailing/mimeinlinefile.cpp \
+    mailing/mimemessage.cpp \
+    mailing/mimemultipart.cpp \
+    mailing/mimepart.cpp \
+    mailing/mimetext.cpp \
+    mailing/quotedprintable.cpp \
+    mailing/smtpclient.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -22,6 +34,20 @@ HEADERS += \
     citoyen.h \
     connection.h \
     demandes_administratives.h \
+    mailing/SmtpMime \
+    mailing/emailaddress.h \
+    mailing/mimeattachment.h \
+    mailing/mimecontentformatter.h \
+    mailing/mimefile.h \
+    mailing/mimehtml.h \
+    mailing/mimeinlinefile.h \
+    mailing/mimemessage.h \
+    mailing/mimemultipart.h \
+    mailing/mimepart.h \
+    mailing/mimetext.h \
+    mailing/quotedprintable.h \
+    mailing/smtpclient.h \
+    mailing/smtpexports.h \
     mainwindow.h
 
 FORMS += \

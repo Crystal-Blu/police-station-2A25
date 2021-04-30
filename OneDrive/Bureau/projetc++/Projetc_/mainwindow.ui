@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab_10">
      <attribute name="title">
@@ -1448,6 +1448,117 @@ border-color: rgb(0, 0, 0);
      </widget>
      <zorder>groupBox_14</zorder>
      <zorder>quickWidget</zorder>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Mail</string>
+     </attribute>
+     <widget class="QLabel" name="label_33">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>E-mail  :</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_texte">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>140</y>
+        <width>531</width>
+        <height>151</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_adresse">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>40</y>
+        <width>531</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_objet">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>91</y>
+        <width>531</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_34">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Text :</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_envoyer">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>309</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Envoyer</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_35">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Objectif :</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

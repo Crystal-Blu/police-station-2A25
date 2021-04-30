@@ -26,6 +26,7 @@
 #include <QPdfWriter>
 #include <QMediaPlayer>
 #include<QQuickItem>
+#include "mailing/SmtpMime"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -759,3 +760,43 @@ void MainWindow::on_pushButton_9_clicked()
            setStyleSheet(ts.readAll());}
 }
 
+
+void MainWindow::on_pushButton_envoyer_clicked()
+{
+
+    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
+
+
+
+
+                smtp.setUser("bayrem.hamdi@esprit.tn");
+                smtp.setPassword("191JMT3579");
+
+
+
+        MimeMessage message;
+
+        message.setSender(new EmailAddress("bayrem.hamdi@esprit.tn", "Police ++"));
+        message.addRecipient(new EmailAddress(ui->lineEdit_adresse->text(), "Recipient's name"));
+        message.setSubject(ui->lineEdit_objet->text());
+
+
+
+        MimeText text;
+
+        text.setText(ui->textEdit_texte->toPlainText());
+
+
+
+        message.addPart(&text);
+
+        smtp.connectToHost();
+        smtp.login();
+        if (smtp.sendMail(message)){
+           QMessageBox::information(this, "OK", "email envoyé");
+        }
+        else{
+           QMessageBox::critical(this, "Erreur","email non envoyé");
+        }
+        smtp.quit();
+}
