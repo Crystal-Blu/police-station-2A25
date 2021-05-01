@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.2, 2021-05-01T15:54:49. -->
+<<<<<<< HEAD:police-station/police-station/projetc.pro.user
+<!-- Written by QtCreator 4.14.2, 2021-05-01T15:32:08. -->
+=======
+<!-- Written by QtCreator 4.14.0, 2021-04-27T23:03:32. -->
+>>>>>>> 049a485d98fdc54d00eac8da28d098370dc3769f:login test/projetc.pro.user.efcc350
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -294,9 +298,14 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+<<<<<<< HEAD:police-station/police-station/projetc.pro.user
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">projetc2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/WALID/Desktop/Studies/Projet cpp/police-station/police-station/projetc.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/WALID/Desktop/Studies/Projet cpp/police-station/police-station/projetc.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/asus/OneDrive/Bureau/integration/police-station-2A25/projetc.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/asus/OneDrive/Bureau/integration/police-station-2A25/projetc.pro</value>
+>>>>>>> 049a485d98fdc54d00eac8da28d098370dc3769f:login test/projetc.pro.user.efcc350
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

@@ -34,7 +34,10 @@
 #include "excel.h"
 #include <QDialog>
 #include "mailing/SmtpMime"
+<<<<<<< HEAD:police-station/mainwindow.cpp
+=======
 
+>>>>>>> 60016b2865176008d8b1f737f73409c8cf46041d:police-station/police-station/mainwindow.cpp
 #include "Calculer.h"
 
 
@@ -48,9 +51,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
 
+
     ui->setupUi(this);
 
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
+    //QString username = ui->le_username->text();
+    //if(ui->le_username=="test" )
    ui->quickWidget->show();
 
     init_history_count();
