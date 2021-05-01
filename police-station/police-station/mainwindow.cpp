@@ -1024,6 +1024,7 @@ void MainWindow::update_label()
     {
         Message="Carte RFID introuvable dans la base de données";
         code.remove("\r\n");
+        ui->rfid_code_line->setText(code);
         QSqlQuery qry;
         qry.prepare( " select * from policier where CODE =:code");
         qry.bindValue(":code",code);
@@ -3758,6 +3759,7 @@ QSqlQueryModel * MainWindow::get_history()
 }
 void MainWindow::on_refreshhistory_clicked()
 {
+    player->play();
      ui->tableHistory->setModel(get_history());
 }
 void MainWindow::init_history_count()
@@ -3774,7 +3776,7 @@ void MainWindow::init_history_count()
 void MainWindow::on_pb_calculatorwindow_clicked()
 {
 
-
+player->play();
 
      calc.show();
 
@@ -3821,4 +3823,13 @@ void MainWindow::on_pushButton_envoyer_clicked()
                  QMessageBox::critical(this, "Erreur","email non envoyé");
               }
               smtp.quit();
+}
+
+
+
+void MainWindow::on_copy_clicked()
+{
+    player->play();
+    ui->rfid_code_line->selectAll();
+    ui->rfid_code_line->copy();
 }

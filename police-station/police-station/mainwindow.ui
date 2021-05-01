@@ -6664,14 +6664,53 @@ border-color: rgb(0, 0, 0);
      <widget class="QPushButton" name="pb_calculatorwindow">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>440</y>
+        <x>50</x>
+        <y>460</y>
         <width>80</width>
         <height>25</height>
        </rect>
       </property>
       <property name="text">
-       <string>calculator</string>
+       <string>Calculator</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="copy">
+      <property name="geometry">
+       <rect>
+        <x>980</x>
+        <y>270</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Copy</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="rfid_code_line">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>780</x>
+        <y>270</y>
+        <width>191</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="code_rfid_label">
+      <property name="geometry">
+       <rect>
+        <x>780</x>
+        <y>240</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Code RFID</string>
       </property>
      </widget>
     </widget>
@@ -6767,8 +6806,7 @@ border-color: rgb(0, 0, 0);
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-</string>
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Envoyer</string>
@@ -6894,7 +6932,7 @@ border-color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1089</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

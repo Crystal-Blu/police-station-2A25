@@ -383,6 +383,8 @@ private slots:
 
     void on_pushButton_envoyer_clicked();
 
+    void on_copy_clicked();
+
 private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);

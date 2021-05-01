@@ -8,9 +8,9 @@ Connection::Connection()
 
 bool Connection::createconnect()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 
-        db.setHostName("26.215.175.171");
+        db.setHostName("localhost");
         db.setPort(1521);
         bool test=false;
     db.setDatabaseName("Source_Projet2A");//inserer le nom de la source de données ODBC
