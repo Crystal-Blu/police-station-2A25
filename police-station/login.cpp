@@ -1,6 +1,7 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QSqlQuery>
+#include <QMessageBox>
 
 login::login(QWidget *parent) :
     QDialog(parent),
@@ -31,7 +32,7 @@ QString login::getpassword()
 void login::on_pb_loginok_clicked()
 {
     QSqlQuery qry;
-    qry.prepare( " select * from user_police where username=:username AND password=:pwd");
+    qry.prepare( " select * from POLICIER where nom=:username AND idp=:pwd");
     qry.bindValue(":username",getusername());
     qry.bindValue(":pwd",getpassword());
     if(qry.exec( ))
@@ -40,7 +41,10 @@ void login::on_pb_loginok_clicked()
     {
             accept();
     }
+
     }
+    else
+        QMessageBox::critical(nullptr,QObject::tr(" LOGIN "), QObject::tr("wrong username or password. \n" "Clic ok to exit."),QMessageBox::Ok);
 
 
 }

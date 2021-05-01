@@ -14,16 +14,20 @@ int main(int argc, char *argv[])
     Connection c;
     bool test=c.createconnect();
     if(!test)
-    {w.show();
+    {
+        //exit(EXIT_FAILURE);
+        //w.show();
+
         QMessageBox::information(nullptr, QObject::tr("database is open"),
-                    QObject::tr("Couldn't establish a connection with the database.\n"
-                                "Click ok to exit."), QMessageBox::Ok);
+                    QObject::tr("Couldn't establish a connection with the database. Can't login till database is working Click ok to exit."), QMessageBox::Ok);
+        //L.exec();
         return a.exec();
 
 }
     else
     {if (L.exec()==QDialog::Accepted)
-        w.show();
+       w.show();
+
     }
     return a.exec();
 }
