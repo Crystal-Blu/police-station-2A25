@@ -34,6 +34,10 @@
 #include "excel.h"
 #include <QDialog>
 #include "mailing/SmtpMime"
+<<<<<<< HEAD:police-station/mainwindow.cpp
+=======
+
+>>>>>>> 60016b2865176008d8b1f737f73409c8cf46041d:police-station/police-station/mainwindow.cpp
 #include "Calculer.h"
 
 
