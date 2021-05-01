@@ -35,6 +35,7 @@
 #include <QDialog>
 #include "mailing/SmtpMime"
 #include "Calculer.h"
+#include <QProcess>
 
 
 
@@ -3834,4 +3835,11 @@ void MainWindow::on_copy_clicked()
     player->play();
     ui->rfid_code_line->selectAll();
     ui->rfid_code_line->copy();
+}
+
+
+void MainWindow::on_pb_disconnect_clicked()
+{
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }

@@ -385,6 +385,8 @@ private slots:
 
     void on_copy_clicked();
 
+    void on_pb_disconnect_clicked();
+
 private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);
