@@ -2,6 +2,7 @@
 #include "ui_login.h"
 #include <QSqlQuery>
 #include <QMessageBox>
+#include<QIntValidator>
 
 login::login(QWidget *parent) :
     QDialog(parent),
@@ -9,6 +10,23 @@ login::login(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Login");
+    //setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
+    setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint );
+/*
+     if(ui->le_loginusername->text().isEmpty() or  ui->le_loginpassword->text().isEmpty()  )
+    {
+        ui->pb_loginok->setDisabled(1);
+
+    }
+    else
+    {
+        ui->pb_loginok->setDisabled(0);
+    }
+*/
+     ui->le_loginpassword->setValidator ( new QIntValidator(0, 100, this));
+     ui->le_loginusername->setMaxLength(20);
+
+
 
 
 }
@@ -16,6 +34,7 @@ login::login(QWidget *parent) :
 login::~login()
 {
     delete ui;
+
 }
 
 QString login::getusername()
@@ -52,4 +71,5 @@ void login::on_pb_loginok_clicked()
 void login::on_pb_logincancel_clicked()
 {
    reject();
+   exit(EXIT_FAILURE);
 }
