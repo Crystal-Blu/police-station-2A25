@@ -4,11 +4,13 @@
 #include "connection.h"
 #include <QApplication>
 #include<QFile>
+#include "login.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    login L;
     Connection c;
     bool test=c.createconnect();
     if(!test)
@@ -20,6 +22,8 @@ int main(int argc, char *argv[])
 
 }
     else
-    {w.show();
-    return a.exec();}
+    {if (L.exec()==QDialog::Accepted)
+        w.show();
+    }
+    return a.exec();
 }

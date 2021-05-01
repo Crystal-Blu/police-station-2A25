@@ -23,6 +23,7 @@ SOURCES += \
     detention.cpp \
     equipements.cpp \
     excel.cpp \
+    login.cpp \
     mailing/emailaddress.cpp \
     mailing/mimeattachment.cpp \
     mailing/mimecontentformatter.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     detention.h \
     equipements.h \
     excel.h \
+    login.h \
     mailing/SmtpMime \
     mailing/emailaddress.h \
     mailing/mimeattachment.h \
@@ -85,6 +87,7 @@ FORMS += \
     chart.ui \
     charttype.ui \
     excel.ui \
+    login.ui \
     mainwindow.ui \
     vehicule_modifier_window.ui
 

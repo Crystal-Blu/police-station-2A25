@@ -1,46 +1,51 @@
 #include "login.h"
 #include "ui_login.h"
-login::login(QObject *parent)
-    : QMainWindow(parent)
+#include <QSqlQuery>
+
+login::login(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::login)
 {
+    ui->setupUi(this);
+    setWindowTitle("Login");
+
+
 }
 
-QVariant login::headerData(int section, Qt::Orientation orientation, int role) const
+login::~login()
 {
-    // FIXME: Implement me!
+    delete ui;
 }
 
-QModelIndex login::index(int row, int column, const QModelIndex &parent) const
+QString login::getusername()
 {
-    // FIXME: Implement me!
+    return ui->le_loginusername->text();
 }
 
-QModelIndex login::parent(const QModelIndex &index) const
+QString login::getpassword()
 {
-    // FIXME: Implement me!
+    return ui->le_loginpassword->text();
 }
 
-int login::rowCount(const QModelIndex &parent) const
-{
-    if (!parent.isValid())
-        return 0;
 
-    // FIXME: Implement me!
+void login::on_pb_loginok_clicked()
+{
+    QSqlQuery qry;
+    qry.prepare( " select * from user_police where username=:username AND password=:pwd");
+    qry.bindValue(":username",getusername());
+    qry.bindValue(":pwd",getpassword());
+    if(qry.exec( ))
+    {
+        while(qry.next())
+    {
+            accept();
+    }
+    }
+
+
 }
 
-int login::columnCount(const QModelIndex &parent) const
+void login::on_pb_logincancel_clicked()
 {
-    if (!parent.isValid())
-        return 0;
-
-    // FIXME: Implement me!
-}
-
-QVariant login::data(const QModelIndex &index, int role) const
-{
-    if (!index.isValid())
-        return QVariant();
-
-    // FIXME: Implement me!
-    return QVariant();
+   reject();
 }

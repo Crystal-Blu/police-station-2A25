@@ -419,6 +419,8 @@ private:
     demandes_administratives d1;
     QStandardItemModel * mModel;
     int counthistory;
+    QString password;
+    QString username;
 
     //Calcul create_newwindow( Calcul calcul);
       //  vehicule_modifier_window calcul;
