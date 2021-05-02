@@ -391,7 +391,9 @@ private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);
     QByteArray data ;
-        Arduino A;
+        Arduino A  ;
+       Arduino A2 ;
+
     Ui::MainWindow *ui;
     vehicule V;
     Equipements E;
@@ -423,6 +425,7 @@ private:
     int counthistory;
     QString password;
     QString username;
+    QString code_pad;
 
     //Calcul create_newwindow( Calcul calcul);
       //  vehicule_modifier_window calcul;

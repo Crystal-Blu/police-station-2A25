@@ -7,13 +7,15 @@
 class Arduino
 {
 public:
-    Arduino();
+    Arduino(){};
     int connect_arduino();
     int close_arduino();
     int write_to_arduino(QByteArray);
     QByteArray read_from_arduino();
     QSerialPort* getserial();
     QString getarduino_port_name();
+    void setserial();
+    QString port_chosen;
 private:
     QSerialPort  serial ;
     static const quint16 arduino_uno_vendor_id=9025;
@@ -21,6 +23,7 @@ private:
     QString arduino_port_name   ;
     bool arduino_is_available = false;
     QByteArray data ;
+
 };
 
 #endif // ARDUINO_H

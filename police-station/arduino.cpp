@@ -2,14 +2,11 @@
 #include <QtDebug>
 
 
-Arduino::Arduino()
-{
 
-}
 
 int Arduino::connect_arduino()
 {
-
+int AVA=0;
 
     foreach (const QSerialPortInfo &serial_port_info, QSerialPortInfo::availablePorts())
     {
@@ -18,7 +15,11 @@ int Arduino::connect_arduino()
           if( serial_port_info.vendorIdentifier() == arduino_uno_vendor_id && serial_port_info.productIdentifier() == arduino_uno_producy_id )
           {
            arduino_is_available= true ;
-           arduino_port_name=serial_port_info.portName();
+           if (serial_port_info.portName()==port_chosen)
+           {
+               arduino_port_name=serial_port_info.portName();
+               AVA=1;
+           }
           }
         }
     }
@@ -35,10 +36,11 @@ int Arduino::connect_arduino()
             serial.setFlowControl(QSerialPort::NoFlowControl);
             return 0 ;
     }
-return 1;
+
+
 
 }
-    if  (arduino_is_available != true)
+    if  (AVA==0)
     return -1;
 
 }
@@ -79,3 +81,4 @@ QSerialPort* Arduino::getserial()
 {
     return &serial;
 }
+

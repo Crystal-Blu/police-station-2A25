@@ -50,7 +50,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->setupUi(this);
-
+    A.port_chosen="COM3";
+     A2.port_chosen="COM4";
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
     //QString username = ui->le_username->text();
     //if(ui->le_username=="test" )
@@ -63,21 +64,40 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->label_4->setText(QString::number(volume)+"%");
     int ret=A.connect_arduino();
+    int ret2=A2.connect_arduino();
             switch (ret)
             {
-            case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
-                ui->label_24->setText("Arduino is available and connected");
+            case(0): qDebug() << "arduino 1 is available and connected to :" <<A.getarduino_port_name();
+                ui->label_24->setText("Arduino 1 is available and connected");
                 ui->label_24->setStyleSheet("QLabel {color : green; }");
                 arduino_connected=1;
             break ;
-            case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
+            case(1): qDebug() << "arduino 1 is available and not connected to :" <<A.getarduino_port_name();
                 if (arduino_connected==0)
-               { ui->label_24->setText("Arduino is available and not connected");
+               { ui->label_24->setText("Arduino 1 is available and not connected");
                 ui->label_24->setStyleSheet("QLabel {color : yellow; }");}
             break ;
-            case(-1): qDebug() << "arduino is not available";
-                ui->label_24->setText("Arduino is not available");
+            case(-1): qDebug() << "arduino 1 is not available";
+                ui->label_24->setText("Arduino 1 is not available");
                 ui->label_24->setStyleSheet("QLabel {color : red; }");
+                arduino_connected=0;
+                }
+            switch (ret2)
+            {
+            case(0): qDebug() << "arduino 2 is available and connected to :" <<A2.getarduino_port_name();
+                ui->label_ard23->setText("Arduino 2 is available and connected");
+                ui->label_ard23->setStyleSheet("QLabel {color : green; }");
+                arduino_connected=1;
+
+            break ;
+            case(1): qDebug() << "arduino 2 is available and not connected to :" <<A2.getarduino_port_name();
+                if (arduino_connected==0)
+               { ui->label_ard23->setText("Arduino 2 is available and not connected");
+                ui->label_ard23->setStyleSheet("QLabel {color : yellow; }");}
+            break ;
+            case(-1): qDebug() << "arduino 2 is not available";
+                ui->label_ard23->setText("Arduino 2 is not available");
+                ui->label_ard23->setStyleSheet("QLabel {color : red; }");
                 arduino_connected=0;
                 }
         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
@@ -1016,9 +1036,65 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::update_label()
 {
-    QString Message;
-    int job;
+    int nombre_det=0;
+    QByteArray choice;
     data=A.read_from_arduino();
+    if (data=="0" ||data=="1" ||data=="2" ||data=="3"||data=="4" ||data=="5" ||data=="6" ||data=="7" ||data=="8" || data=="9")
+        {
+             code_pad=code_pad+data;
+        }
+   else  if (data=="*")
+    {
+        code_pad="";
+    }
+    else if (data=="#")
+    {
+        QString Message="";
+        QSqlQuery qry;
+        qry.prepare( " select * from cellules where idcel =:code");
+        qry.bindValue(":code",code_pad);
+        if(qry.exec( ))
+        {
+            int count =0;
+            while(qry.next())
+
+        {
+                count++;
+            if ((qry.value(2).toInt()+1)>=qry.value(3).toInt())
+            {
+                mySystemTrayIcon ->showMessage(tr("Alerte"),tr("cellule pleine !"));
+            }
+            else
+            {
+                 nombre_det=qry.value(2).toInt()+1;
+                  Message="Un nouvel individu a été ajouté à la Cellule ID= "+qry.value(0).toString()+" NB_det="+ qry.value(2).toString()+" !";
+            }
+        }
+            if (count==0)
+            {
+                mySystemTrayIcon ->showMessage(tr("Alerte"),tr("Cellule introuvable !"));
+                code_pad="";
+            }
+            if (nombre_det!=0 && count!=0)
+            {
+                QSqlQuery qry;
+                qry.prepare( " UPDATE cellules set nombre_det=:det where idcel =:code");
+                qry.bindValue(":code",code_pad);
+                qry.bindValue(":det",nombre_det);
+                qry.exec( );
+                mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
+                code_pad="";
+
+            }
+
+        }
+
+    }
+    else
+   { QString Message;
+        qDebug()<<"oui";
+    int job;
+
     for (int i=0;i<data.length();i++)
     {
         code=code+data[i];
@@ -1059,6 +1135,10 @@ void MainWindow::update_label()
         mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
         code="";
     }
+    }
+    qDebug()<<code_pad;
+
+
 }
 
 void MainWindow::on_rechercher_vehicule_edit_textChanged(const QString &arg1)
@@ -1331,23 +1411,42 @@ void MainWindow::on_test_clicked()
 {    player->play();
 
     int ret=A.connect_arduino();
-            switch (ret)
-            {
-            case(0): qDebug() << "arduino is available and connected to :" <<A.getarduino_port_name();
-                ui->label_24->setText("Arduino is available and connected");
-                ui->label_24->setStyleSheet("QLabel {color : green; }");
-                arduino_connected=1;
-            break ;
-            case(1): qDebug() << "arduino is available and not connected to :" <<A.getarduino_port_name();
-                if (arduino_connected==0)
-               { ui->label_24->setText("Arduino is available and not connected");
-                ui->label_24->setStyleSheet("QLabel {color : yellow; }");}
-            break ;
-            case(-1): qDebug() << "arduino is not available";
-                ui->label_24->setText("Arduino is not available");
-                ui->label_24->setStyleSheet("QLabel {color : red; }");
-                arduino_connected=0;
-                }
+     int ret2=A2.connect_arduino();
+     switch (ret)
+     {
+     case(0): qDebug() << "arduino 1 is available and connected to :" <<A.getarduino_port_name();
+         ui->label_24->setText("Arduino 1 is available and connected");
+         ui->label_24->setStyleSheet("QLabel {color : green; }");
+         arduino_connected=1;
+     break ;
+     case(1): qDebug() << "arduino 1 is available and not connected to :" <<A.getarduino_port_name();
+         if (arduino_connected==0)
+        { ui->label_24->setText("Arduino 1 is available and not connected");
+         ui->label_24->setStyleSheet("QLabel {color : yellow; }");}
+     break ;
+     case(-1): qDebug() << "arduino 1 is not available";
+         ui->label_24->setText("Arduino 1 is not available");
+         ui->label_24->setStyleSheet("QLabel {color : red; }");
+         arduino_connected=0;
+         }
+     switch (ret2)
+     {
+     case(0): qDebug() << "arduino 2 is available and connected to :" <<A2.getarduino_port_name();
+         ui->label_ard23->setText("Arduino 2 is available and connected");
+         ui->label_ard23->setStyleSheet("QLabel {color : green; }");
+         arduino_connected=1;
+
+     break ;
+     case(1): qDebug() << "arduino 2 is available and not connected to :" <<A2.getarduino_port_name();
+         if (arduino_connected==0)
+        { ui->label_ard23->setText("Arduino 2 is available and not connected");
+         ui->label_ard23->setStyleSheet("QLabel {color : yellow; }");}
+     break ;
+     case(-1): qDebug() << "arduino 2 is not available";
+         ui->label_ard23->setText("Arduino 2 is not available");
+         ui->label_ard23->setStyleSheet("QLabel {color : red; }");
+         arduino_connected=0;
+         }
             QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
             {
 

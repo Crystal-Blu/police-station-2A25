@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>12</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -6452,7 +6452,7 @@ border-color: rgb(0, 0, 0);
       <property name="geometry">
        <rect>
         <x>530</x>
-        <y>100</y>
+        <y>120</y>
         <width>80</width>
         <height>25</height>
        </rect>
@@ -6711,6 +6711,19 @@ border-color: rgb(0, 0, 0);
       </property>
       <property name="text">
        <string>Code RFID</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_ard23">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>90</y>
+        <width>231</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
