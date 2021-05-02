@@ -3749,11 +3749,11 @@ void MainWindow::on_Refresh_demande_clicked()
 {
     player->play();
 
-    ui->tab_citoyen->setModel(C.afficher());
+    ui->tab_citoyen->setModel(Ci.afficher());
      ui->comboBox->setModel(d.afficher_combo());
       ui->comboBox_cin->setModel(d.afficher_combo_2());
-    ui->tab_citoyen_modifier->setModel(C.afficher());
-    ui->tab_citoyen_2->setModel(C.afficher());
+    ui->tab_citoyen_modifier->setModel(Ci.afficher());
+    ui->tab_citoyen_2->setModel(Ci.afficher());
     ui->tab_demande->setModel(d.afficher());
      ui->tab_demande_2->setModel(d.afficher());
       ui->tableView->setModel(d.afficher());
