@@ -39,10 +39,12 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     missions.cpp \
+    movieplayer.cpp \
     policier.cpp \
     reparations.cpp \
     vehicule.cpp \
-    vehicule_modifier_window.cpp
+    vehicule_modifier_window.cpp \
+    window.cpp
 
 HEADERS += \
     ajout_reparation.h \
@@ -76,10 +78,12 @@ HEADERS += \
     mailing/smtpexports.h \
     mainwindow.h \
     missions.h \
+    movieplayer.h \
     policier.h \
     reparations.h \
     vehicule.h \
-    vehicule_modifier_window.h
+    vehicule_modifier_window.h \
+    window.h
 
 FORMS += \
     ajout_reparation.ui \

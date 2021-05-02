@@ -37,7 +37,7 @@
 #include "Calculer.h"
 #include <QProcess>
 
-
+#include "window.h"
 
 
 
@@ -3941,4 +3941,17 @@ void MainWindow::on_pb_disconnect_clicked()
 {
     qApp->quit();
     QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+}
+
+void MainWindow::on_calendar_clicked()
+{
+  cale.show();
+}
+
+
+
+
+void MainWindow::on_pb_movie_clicked()
+{
+    movie.show();
 }
