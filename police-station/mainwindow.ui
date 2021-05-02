@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>12</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -6711,6 +6711,32 @@ border-color: rgb(0, 0, 0);
       </property>
       <property name="text">
        <string>Code RFID</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="calendar">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>510</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Calendrier </string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_movie">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>560</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>movie</string>
       </property>
      </widget>
     </widget>

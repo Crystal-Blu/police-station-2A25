@@ -19,7 +19,8 @@
 #include "citoyen.h"
 #include "demandes_administratives.h"
 #include "calculer.h"
-
+#include "window.h"
+#include "movieplayer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,7 +42,10 @@ public:
 
     Calculer create_newwindow(Calculer calc);
     Calculer calc;
-
+    Window create_newwindow(Window cale);
+    Window cale;
+    MoviePlayer create_newwindow(MoviePlayer movie);
+    MoviePlayer movie;
     QSqlQueryModel *get_policiers();
     void updateaffichagevehicule();
     void updateaffichageeq();
@@ -386,6 +390,12 @@ private slots:
     void on_copy_clicked();
 
     void on_pb_disconnect_clicked();
+
+    void on_calendar_clicked();
+
+
+
+    void on_pb_movie_clicked();
 
 private:
     void setValueAt(int ix, int jx, const QString &value);
