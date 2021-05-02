@@ -6713,19 +6713,6 @@ border-color: rgb(0, 0, 0);
        <string>Code RFID</string>
       </property>
      </widget>
-<<<<<<< HEAD
-     <widget class="QLabel" name="label_ard23">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>90</y>
-        <width>231</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-=======
      <widget class="QPushButton" name="calendar">
       <property name="geometry">
        <rect>
@@ -6750,7 +6737,19 @@ border-color: rgb(0, 0, 0);
       </property>
       <property name="text">
        <string>movie</string>
->>>>>>> dac2dcd61f6b4d76ab50829ad8ca24341142cdb8
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_94">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>90</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
