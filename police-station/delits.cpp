@@ -58,7 +58,7 @@ bool Delits::ajouter()
 QSqlQueryModel * Delits::afficher()
 {
     QSqlQueryModel * model=new QSqlQueryModel();
-       model->setQuery("SELECT * FROM DELITS");
+       model->setQuery("SELECT * FROM DELITS NATURAL JOIN CRIMINELS");
        model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID_DELIT"));
        model->setHeaderData(1,Qt::Horizontal,QObject::tr("DATE_DELIT"));
        model->setHeaderData(2,Qt::Horizontal,QObject::tr("TYPE_DELIT"));

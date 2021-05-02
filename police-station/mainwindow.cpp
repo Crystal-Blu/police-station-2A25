@@ -2673,7 +2673,7 @@ void MainWindow::on_pushButton_trierdelitdate_clicked()
 
 
     QSqlQuery query;
-    query.exec("SELECT * FROM DELITS ORDER BY DATE_DELIT");
+    query.exec("SELECT * FROM DELITS NATURAL JOIN CRIMINELS ORDER BY DELITS.DATE_DELIT ");
 
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery(query);
@@ -2688,7 +2688,7 @@ void MainWindow::on_pushButton_trierdelittype_clicked()
      player->play();
 
     QSqlQuery query;
-    query.exec("SELECT * FROM DELITS ORDER BY TYPE_DELIT");
+    query.exec("SELECT * FROM DELITS NATURAL JOIN CRIMINELS ORDER BY DELITS.TYPE_DELIT");
 
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery(query);
