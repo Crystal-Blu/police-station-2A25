@@ -29,6 +29,13 @@ QT_END_NAMESPACE
 
 class QStandardItemModel;
 
+class QCamera ;
+class QCameraViewfinder;
+class QCameraImageCapture;
+class QVBoxLayout;
+class QMenu;
+class QAction;
+
 
 class MainWindow : public QMainWindow
 {
@@ -436,6 +443,15 @@ private:
     QString password;
     QString username;
     QString code_pad;
+
+    QCamera *mCamera;
+    QCameraViewfinder *mCameraViewfinder;
+    QCameraImageCapture *mCameraImageCapture;
+    QVBoxLayout *mLayout;
+    QMenu *mOptionMenu;
+    QAction *mAllumerAction;
+    QAction *mEteindreAction;
+    QAction *mCapturerAction;
 
     //Calcul create_newwindow( Calcul calcul);
       //  vehicule_modifier_window calcul;

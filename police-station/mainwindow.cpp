@@ -36,6 +36,13 @@
 #include "mailing/SmtpMime"
 #include "Calculer.h"
 #include <QProcess>
+#include <QCamera>
+#include <QCameraViewfinder>
+#include <QCameraImageCapture>
+#include <QVBoxLayout>
+#include<QMenu>
+#include <QAction>
+
 
 #include "window.h"
 
@@ -50,6 +57,52 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->setupUi(this);
+    mCamera =new QCamera(this);
+    mCameraViewfinder =new QCameraViewfinder(this);
+    mCameraImageCapture =new QCameraImageCapture(mCamera,this);
+    mLayout =new QVBoxLayout;
+
+    mOptionMenu = new QMenu("option",this);
+    mAllumerAction= new QAction("allumer",this);
+    mEteindreAction= new QAction("pause",this);
+    mCapturerAction= new QAction("capturer",this);
+
+     mOptionMenu->addActions({mAllumerAction,mEteindreAction,
+                                 mCapturerAction  });
+      ui->option_cam->setMenu(mOptionMenu);
+      mCamera->setViewfinder(mCameraViewfinder);
+      mLayout->addWidget(mCameraViewfinder);
+      mLayout->setMargin(0);
+      ui->scrollArea_cam->setLayout(mLayout);
+
+
+        connect(mAllumerAction,&QAction::triggered  , [&](){
+            mCamera->start();
+        });
+        connect(mEteindreAction,&QAction::triggered, [&](){
+           mCamera->stop();
+            ;
+        });
+        connect(mCapturerAction,&QAction::triggered, [&](){
+            auto filename =QFileDialog::getSaveFileName(this,"Capturer","/",
+                                         "Imagen (.jpg;.jpeg)");
+            if(filename.isEmpty()){
+               return;
+            }
+            mCameraImageCapture->setCaptureDestination(
+                        QCameraImageCapture::CaptureToFile);
+            QImageEncoderSettings imageEncoderSettings;
+            imageEncoderSettings.setCodec("image/jpeg");
+            imageEncoderSettings.setResolution(1600,1200);
+            mCameraImageCapture->setEncodingSettings(imageEncoderSettings);
+            mCamera->setCaptureMode(QCamera::CaptureStillImage);
+            mCamera->start();
+            mCamera->searchAndLock();
+            mCameraImageCapture->capture(filename);
+            mCamera->unlock();
+        });
+
+
     A.port_chosen="COM3";
      A2.port_chosen="COM4";
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));

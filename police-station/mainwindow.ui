@@ -6752,6 +6752,42 @@ border-color: rgb(0, 0, 0);
        <string/>
       </property>
      </widget>
+     <widget class="QPushButton" name="option_cam">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>400</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Camera</string>
+      </property>
+     </widget>
+     <widget class="QScrollArea" name="scrollArea_cam">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>440</y>
+        <width>401</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>399</width>
+         <height>139</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_32">
      <attribute name="title">
@@ -7006,7 +7042,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1301</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
