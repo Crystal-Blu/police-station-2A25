@@ -6739,7 +6739,7 @@ border-color: rgb(0, 0, 0);
        <string>movie</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_94">
+     <widget class="QLabel" name="label_ard23">
       <property name="geometry">
        <rect>
         <x>530</x>
