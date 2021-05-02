@@ -3768,8 +3768,9 @@ void MainWindow::on_refreshmap_clicked()
 
 
 void MainWindow::on_ouvrir_excel_clicked()
-{
-  auto filename = QFileDialog::getOpenFileName(this,"ouvrir",QDir::rootPath(),"CSV File(*.csv)");
+{  player->play();
+
+    auto filename = QFileDialog::getOpenFileName(this,"ouvrir",QDir::rootPath(),"CSV File(*.csv)");
  if (filename.isEmpty()) {
      return;
  }
@@ -3801,6 +3802,7 @@ void MainWindow::on_ouvrir_excel_clicked()
 
 void MainWindow::on_nouveau_excel_clicked()
 {
+    player->play();
     excel d(this);
     if ( d.exec() == QDialog::Rejected)
     {
@@ -3814,7 +3816,8 @@ void MainWindow::on_nouveau_excel_clicked()
 
 void MainWindow::on_enregistrer_sous_excel_clicked()
 {
-  auto filename= QFileDialog::getSaveFileName(this,"enregister",QDir::rootPath(),"CSV File (*.csv)");
+  player->play();
+    auto filename= QFileDialog::getSaveFileName(this,"enregister",QDir::rootPath(),"CSV File (*.csv)");
 if (filename.isEmpty())
 {
  return;
@@ -4008,3 +4011,5 @@ void MainWindow::on_pb_movie_clicked()
 {
     movie.show();
 }
+
+

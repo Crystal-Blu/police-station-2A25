@@ -404,6 +404,8 @@ private slots:
 
     void on_pb_movie_clicked();
 
+    void on_option_cam_clicked();
+
 private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);
