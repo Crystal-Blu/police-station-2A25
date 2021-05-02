@@ -64,12 +64,16 @@
      <item>
       <widget class="QLabel" name="label_41">
        <property name="text">
-        <string>Password</string>
+        <string>Password </string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="le_loginpassword"/>
+      <widget class="QLineEdit" name="le_loginpassword">
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -86,7 +90,7 @@
      <item>
       <widget class="QLabel" name="label_42">
        <property name="text">
-        <string>USERNAME</string>
+        <string>Username</string>
        </property>
       </widget>
      </item>
