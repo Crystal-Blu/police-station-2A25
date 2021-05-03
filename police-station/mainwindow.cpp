@@ -42,6 +42,7 @@
 #include <QVBoxLayout>
 #include<QMenu>
 #include <QAction>
+#include<QTranslator>
 
 
 #include "window.h"
@@ -357,6 +358,10 @@ void MainWindow::on_pushButton_clicked()
     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-2);
 
 }
+
+
+
+
 
 void MainWindow::on_ajouter_clicked()
 {
@@ -4011,5 +4016,10 @@ void MainWindow::on_pb_movie_clicked()
 {
     movie.show();
 }
+
+
+
+
+
 
 

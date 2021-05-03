@@ -2,8 +2,4 @@
     <qresource prefix="/">
         <file>english.qm</file>
     </qresource>
-    <qresource prefix="/sound">
-        <file>light/style.qrc</file>
-    </qresource>
-    <qresource prefix="/theme"/>
 </RCC>

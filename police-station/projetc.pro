@@ -106,10 +106,10 @@ CONFIG += console
 
 
 RESOURCES += light/style.qrc \
+    Translation.qrc \
     darktheme.qrc \
     images.qrc \
-    qml.qrc \
-    translation.qrc
+    qml.qrc
 RESOURCES += res.qrc
 
 
@@ -130,7 +130,6 @@ RC_ICONS = Police.ico
 DISTFILES += \
     Police.png \
     english.qm \
-    english.ts \
     map.qml
 
 QMAKE_CXXFLAGS += -std=gnu++14
