@@ -86,6 +86,7 @@ private slots:
     
     void on_pushButton_15_clicked();
 
+    void update_label2();
 
     void on_ajouter_2_clicked();
 
@@ -410,6 +411,7 @@ private:
     void setValueAt(int ix, int jx, const QString &value);
     QString getValueAt(int ix, int jx);
     QByteArray data ;
+    QByteArray data2 ;
         Arduino A  ;
        Arduino A2 ;
 

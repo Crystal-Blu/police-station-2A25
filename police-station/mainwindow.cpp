@@ -104,8 +104,8 @@ MainWindow::MainWindow(QWidget *parent)
         });
 
 
-    A.port_chosen="COM3";
-     A2.port_chosen="COM4";
+    A.port_chosen="COM4";
+     A2.port_chosen="COM3";
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
     //QString username = ui->le_username->text();
     //if(ui->le_username=="test" )
@@ -117,8 +117,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->label_4->setText(QString::number(volume)+"%");
-    int ret=A.connect_arduino();
+
     int ret2=A2.connect_arduino();
+    int ret=A.connect_arduino();
             switch (ret)
             {
             case(0): qDebug() << "arduino 1 is available and connected to :" <<A.getarduino_port_name();
@@ -158,9 +159,13 @@ MainWindow::MainWindow(QWidget *parent)
         {
 
         }
+        QObject::connect(A2.getserial(),SIGNAL(readyRead()),this,SLOT(update_label2()));
+        {
+
+        }
     QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(check_history()));
-        timer->start(1000);
+        timer->start(5000);
 
     remplir_equipements();
     remplir_vehi();
@@ -1094,64 +1099,16 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::update_label()
 {
-    int nombre_det=0;
+
     QByteArray choice;
     data=A.read_from_arduino();
-    if (data=="0" ||data=="1" ||data=="2" ||data=="3"||data=="4" ||data=="5" ||data=="6" ||data=="7" ||data=="8" || data=="9")
-        {
-             code_pad=code_pad+data;
-        }
-   else  if (data=="*")
-    {
-        code_pad="";
-    }
-    else if (data=="#")
-    {
-        QString Message="";
-        QSqlQuery qry;
-        qry.prepare( " select * from cellules where idcel =:code");
-        qry.bindValue(":code",code_pad);
-        if(qry.exec( ))
-        {
-            int count =0;
-            while(qry.next())
 
-        {
-                count++;
-            if ((qry.value(2).toInt()+1)>=qry.value(3).toInt())
-            {
-                mySystemTrayIcon ->showMessage(tr("Alerte"),tr("cellule pleine !"));
-            }
-            else
-            {
-                 nombre_det=qry.value(2).toInt()+1;
-                  Message="Un nouvel individu a été ajouté à la Cellule ID= "+qry.value(0).toString()+" NB_det="+ qry.value(2).toString()+" !";
-            }
-        }
-            if (count==0)
-            {
-                mySystemTrayIcon ->showMessage(tr("Alerte"),tr("Cellule introuvable !"));
-                code_pad="";
-            }
-            if (nombre_det!=0 && count!=0)
-            {
-                QSqlQuery qry;
-                qry.prepare( " UPDATE cellules set nombre_det=:det where idcel =:code");
-                qry.bindValue(":code",code_pad);
-                qry.bindValue(":det",nombre_det);
-                qry.exec( );
-                mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
-                code_pad="";
 
-            }
 
-        }
-
-    }
-    else
-   { QString Message;
+    QString Message;
         qDebug()<<"oui";
     int job;
+    int confirm=0;
 
     for (int i=0;i<data.length();i++)
     {
@@ -1181,6 +1138,7 @@ void MainWindow::update_label()
                  A.write_to_arduino("1");
                  Message="Le Policier : "+qry.value(1).toString()+" "+qry.value(2).toString()+" ID = "+qry.value(0).toString()+" Grade: "+qry.value(3).toString()+" vient de rentrer !";
                 }
+                confirm=1;
 
         }
         }
@@ -1191,12 +1149,85 @@ void MainWindow::update_label()
         qry.bindValue(":code",code);
         qry.exec( );
         mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
+
         code="";
-    }
+
     }
     qDebug()<<code_pad;
 
 
+}
+
+
+void MainWindow::update_label2()
+{
+    int nombre_det=0;
+    data2=A2.read_from_arduino();
+    qDebug()<<data2;
+    if (data2=="B")
+    {
+        ui->label_etat_lumiere->setText("Lumières éteintes");
+        ui->label_etat_lumiere->setStyleSheet("QLabel {color : yellow; }");
+    }
+    if (data2=="A")
+    {
+        ui->label_etat_lumiere->setText("Lumières Allumé");
+        ui->label_etat_lumiere->setStyleSheet("QLabel {color : Green; }");
+    }
+    if (data2=="0" ||data2=="1" ||data2=="2" ||data2=="3"||data2=="4" ||data2=="5" ||data2=="6" ||data2=="7" ||data2=="8" || data2=="9")
+        {
+             code_pad=code_pad+data2;
+        }
+   else  if (data2=="*")
+    {
+        code_pad="";
+    }
+    else if (data2=="#")
+    {
+        QString Message="";
+        QSqlQuery qry;
+        qry.prepare( " select * from cellules where idcel =:code");
+        qry.bindValue(":code",code_pad);
+        if(qry.exec( ))
+        {
+            int count =0;
+            while(qry.next())
+
+        {
+                count++;
+            if ((qry.value(2).toInt()+1)>=qry.value(3).toInt())
+            {
+                mySystemTrayIcon ->showMessage(tr("Alerte"),tr("cellule pleine !"));
+                A2.write_to_arduino("0");
+            }
+            else
+            {
+                 nombre_det=qry.value(2).toInt()+1;
+                  Message="Un nouvel individu a été ajouté à la Cellule ID= "+qry.value(0).toString()+" NB_det="+ qry.value(2).toString()+" !";
+                  A2.write_to_arduino("1");
+
+            }
+        }
+            if (count==0)
+            {
+                code_pad="";
+            }
+            if (nombre_det!=0 && count!=0)
+            {
+                QSqlQuery qry;
+                qry.prepare( " UPDATE cellules set nombre_det=:det where idcel =:code");
+                qry.bindValue(":code",code_pad);
+                qry.bindValue(":det",nombre_det);
+                qry.exec( );
+                mySystemTrayIcon ->showMessage(tr("Alerte"),tr(Message.toStdString().c_str()));
+                code_pad="";
+
+            }
+
+        }
+
+    }
+    ui->code_pad->setText(code_pad);
 }
 
 void MainWindow::on_rechercher_vehicule_edit_textChanged(const QString &arg1)
@@ -2748,7 +2779,9 @@ void MainWindow::on_pushButton_maya_6_clicked()
 void MainWindow::on_pushButton_lumiere_act_clicked() //activer systeme lumière
 {
     player->play();
-    A.write_to_arduino("1");
+    A2.write_to_arduino("3");
+
+
 }
 
 
@@ -2756,7 +2789,10 @@ void MainWindow::on_pushButton_lumiere_act_clicked() //activer systeme lumière
 void MainWindow::on_pushButton_lumiere_desact_clicked() //desactiver systeme lumière
 {
    player->play();
-    A.write_to_arduino("0");
+    A2.write_to_arduino("2");
+        ui->label_etat_lumiere->setText("Détecteur lumieres eteint");
+        ui->label_etat_lumiere->setStyleSheet("QLabel {color : red; }");
+
 }
 
 void MainWindow::update_label_lumiere()
