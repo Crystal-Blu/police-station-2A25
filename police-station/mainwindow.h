@@ -404,7 +404,6 @@ private slots:
 
     void on_pb_movie_clicked();
 
-    void on_option_cam_clicked();
 
 
 private:

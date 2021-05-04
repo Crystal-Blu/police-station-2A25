@@ -3170,7 +3170,14 @@ void MainWindow::on_pushButton_ilyes_cri_clicked()
          player->play();
     ui->tab_criminel1->setModel(Cr1.afficher_c());
     ui->tab_criminel2->setModel(Cr1.afficher_c());
+    QSqlQuery query;
+       int numRows= 0;
+       query.exec("SELECT COUNT(*) FROM CRIMINELS  ");
+       if(query.first())
+           numRows = query.value(0).toInt();
+       QString numRowsstr=QString::number(numRows);
 
+ui->lineEdit_nombre_criminel->setText(numRowsstr);
 }
 
 
