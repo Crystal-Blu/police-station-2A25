@@ -4,43 +4,31 @@
  
 #define SS_PIN 10
 #define RST_PIN 9
+#define Led_red 4
+#define Led_Green 6
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 const int ROW_NUM = 4; //four rows
 const int COLUMN_NUM = 3; //three columns
- 
-char keys[ROW_NUM][COLUMN_NUM] = {
-  {'1','2','3'},
-  {'4','5','6'},
-  {'7','8','9'},
-  {'*','0','#'}
-};
- 
-byte pin_rows[ROW_NUM] = {8, 7, 6 ,5}; //connect to the row pinouts of the keypad
-byte pin_column[COLUMN_NUM] = { 4,3,2}; //connect to the column pinouts of the keypad
- 
-Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );
- 
-const String password_1 = "1234"; // change your password here
-const String password_2 = "5642"; // change your password here
-const String password_3 = "4545"; // change your password here
-String input_password;
+ char data;
+
+
  
 void setup(){
   Serial.begin(9600);
-  input_password.reserve(32); // maximum input characters is 33, change if needed
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
+  pinMode(Led_red,OUTPUT);
+  pinMode(Led_Green,OUTPUT);
+  digitalWrite(Led_red,LOW);
+  digitalWrite(Led_Green,LOW);
 }
  
 void loop(){
-  char key = keypad.getKey();
- 
-  if (key){
-
-    Serial.write(key);
-    delay(500);
-   
-  }
+  data=Serial.read();
+  if (data=='0')
+  digitalWrite(Led_red, HIGH); 
+  if (data=='1')
+  digitalWrite(Led_Green, HIGH); 
   String code;
   // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) 
@@ -66,4 +54,6 @@ void loop(){
   String C(content);
   Serial.println(content.substring(1));
   delay(3000);
+  digitalWrite(Led_red, LOW); 
+  digitalWrite(Led_Green, LOW); 
 }
