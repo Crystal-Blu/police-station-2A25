@@ -977,11 +977,13 @@ void MainWindow::on_idpedit_textChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_27_clicked()
 {
+    player->play();
     mySystemTrayIcon ->showMessage(tr("bruh"),tr("bruh"));
 }
 
 void MainWindow::check_voiture_repare()
 {
+
     int check=0;
     QSqlQuery query;
     query.prepare("select count(D.id_demande) from demande_reparation D natural join vehicules V where V.IDP=:id AND D.repare='OUI'");
@@ -3809,6 +3811,7 @@ void MainWindow::on_Refresh_demande_clicked()
 
 void MainWindow::on_refreshmap_clicked()
 {
+    player->play();
     ui->quickWidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
    ui->quickWidget->show();
 }
@@ -4043,12 +4046,14 @@ void MainWindow::on_copy_clicked()
 
 void MainWindow::on_pb_disconnect_clicked()
 {
+    player->play();
     qApp->quit();
     QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }
 
 void MainWindow::on_calendar_clicked()
 {
+    player->play();
   cale.show();
 }
 
@@ -4057,6 +4062,7 @@ void MainWindow::on_calendar_clicked()
 
 void MainWindow::on_pb_movie_clicked()
 {
+    player->play();
     movie.show();
 }
 
