@@ -58,6 +58,16 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->setupUi(this);
+    QFile f(":/new/prefix1/themes/Darkeum.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
     mCamera =new QCamera(this);
     mCameraViewfinder =new QCameraViewfinder(this);
     mCameraImageCapture =new QCameraImageCapture(mCamera,this);
@@ -1632,7 +1642,7 @@ int idpchef = ui->le_chefidmodifier->text().toInt();
 QString res=QString::number(idp);
 QString resss=QString::number(idpchef);
 QSqlQuery query;
-query.prepare("update  POLICIER set  nom= '"+nom+"', prenom='"+prenom+"', grade='"+grade+"'  , idpchef= '"+resss+"' where idp= :idp ");
+query.prepare("update  POLICIER set  nom= '"+nom+"', prenom='"+prenom+"', grade='"+grade+"'  , idp_chef= '"+resss+"' where idp= :idp ");
 query.bindValue(":idp", res);
 query.bindValue(":idpchef", resss);
 

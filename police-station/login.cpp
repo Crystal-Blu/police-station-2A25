@@ -3,12 +3,25 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include<QIntValidator>
+#include<QFile>
+#include<QTextStream>
+
 
 login::login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::login)
 {
     ui->setupUi(this);
+    QFile f(":/new/prefix1/themes/Darkeum.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        setStyleSheet(ts.readAll());
+    }
     setWindowTitle("Login");
     //setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
     setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint );

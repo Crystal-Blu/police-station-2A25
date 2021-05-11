@@ -84,7 +84,7 @@ bool policier::ajouter()
     QSqlQuery query;
     QString res= QString::number(idp);
     QString resss= QString::number(idpchef);
-    query.prepare("INSERT INTO POLICIER (idp, nom, prenom , grade ,idpchef) "
+    query.prepare("INSERT INTO POLICIER (idp, nom, prenom , grade ,idp_chef) "
                   "VALUES (:idp, :nom, :prenom,:grade, :idpchef)");
     query.bindValue(":idp", res);
     query.bindValue(":nom", nom);
