@@ -1,2 +1,0 @@
-badelt el login bel policier mouch user police 5ater mazal m3ndich el table w raka7t error msg w kan el database not open may5dmch w i5arj error
-w btw badelt el file connection.cpp m3dech qsqllite raja3tou qodbc w zidt dissconnect button fel home tab traj3k lil login w na7it el X button fel login window 5ater itbugi fel application w to93d ma7loula fel background

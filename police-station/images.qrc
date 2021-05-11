@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/new/prefix1">
-        <file>detention.jpg</file>
-        <file>equipements.jpg</file>
-        <file>vehicules.jpg</file>
-    </qresource>
-</RCC>
